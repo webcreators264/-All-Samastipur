@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Ride History | All Samastipur
+</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:850px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.summary-card{
+  background:#fff;
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+  text-align:center;
+}
+
+.summary-card span{
+  display:block;
+  color:#667085;
+  font-size:13px;
+  margin-bottom:8px;
+}
+
+.summary-card strong{
+  color:#0756d9;
+  font-size:22px;
+}
+
+.ride-card{
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:15px;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+  gap:10px;
+}
+
+.booking{
+  color:#0756d9;
+  font-weight:bold;
+}
+
+.status{
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.completed{
+  background:#ecfdf3;
+  color:#166534;
+}
+
+.cancelled{
+  background:#fef2f2;
+  color:#b42318;
+}
+
+.route{
+  background:#f8fafc;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.location{
+  display:flex;
+  gap:10px;
+  padding:7px 0;
+}
+
+.location-icon{
+  width:25px;
+}
+
+.details{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+}
+
+.detail{
+  background:#f8fafc;
+  padding:12px;
+  border-radius:9px;
+}
+
+.detail span{
+  display:block;
+  color:#667085;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.detail strong{
+  font-size:14px;
+}
+
+.rating{
+  margin-top:15px;
+  padding-top:15px;
+  border-top:1px solid #e4e7ec;
+}
+
+.stars{
+  color:#f59e0b;
+  font-size:20px;
+  letter-spacing:2px;
+}
+
+.empty{
+  display:none;
+  text-align:center;
+  background:#fff;
+  padding:40px 20px;
+  border-radius:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.empty-icon{
+  font-size:55px;
+  margin-bottom:12px;
+}
+
+.btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#0756d9;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+.clear{
+  background:#dc2626;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#667085;
+}
+
+@media(max-width:650px){
+
+  .summary{
+    grid-template-columns:1fr;
+  }
+
+  .details{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .top{
+    align-items:flex-start;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    📋 Ride History
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      📋 My Ride History
+    </h1>
+
+    <p>
+      आपकी सभी previous rides यहाँ दिखेंगी।
+    </p>
+
+  </div>
+
+
+  <!-- SUMMARY -->
+
+  <div class="summary">
+
+
+    <div class="summary-card">
+
+      <span>
+        Total Rides
+      </span>
+
+      <strong id="totalRides">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <span>
+        Completed
+      </span>
+
+      <strong id="completedRides">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <span>
+        Total Spent
+      </span>
+
+      <strong id="totalSpent">
+        ₹0
+      </strong>
+
+    </div>
+
+
+  </div>
+
+
+  <!-- HISTORY LIST -->
+
+  <div id="historyList">
+  </div>
+
+
+  <!-- EMPTY -->
+
+  <div
+    class="empty"
+    id="emptyState"
+  >
+
+    <div class="empty-icon">
+      🛺
+    </div>
+
+    <h2>
+      अभी कोई Ride नहीं है
+    </h2>
+
+    <p style="color:#667085;margin-top:8px;">
+      आपकी booked rides यहाँ दिखाई देंगी।
+    </p>
+
+    <button
+      class="btn"
+      onclick="goToBooking()"
+    >
+      🛺 Book New Ride
+    </button>
+
+  </div>
+
+
+  <button
+    class="btn clear"
+    onclick="clearHistory()"
+  >
+    🗑️ Clear Demo History
+  </button>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Your Local Ride History
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+DEMO RIDE DATA
+=========================================
+*/
+
+let rides = [
+
+  {
+    id:"ASM102451",
+    date:"21 Aug 2026",
+    time:"10:30 AM",
+    pickup:"Samastipur Station",
+    drop:"Tajpur",
+    distance:"8 KM",
+    fare:126,
+    payment:"UPI",
+    status:"Completed",
+    rating:5
+  },
+
+  {
+    id:"ASM102387",
+    date:"19 Aug 2026",
+    time:"04:15 PM",
+    pickup:"Samastipur City",
+    drop:"Warisnagar",
+    distance:"6 KM",
+    fare:102,
+    payment:"Cash",
+    status:"Completed",
+    rating:4
+  },
+
+  {
+    id:"ASM102105",
+    date:"15 Aug 2026",
+    time:"09:20 AM",
+    pickup:"Samastipur Station",
+    drop:"Pusa",
+    distance:"12 KM",
+    fare:174,
+    payment:"UPI",
+    status:"Completed",
+    rating:5
+  },
+
+  {
+    id:"ASM101889",
+    date:"10 Aug 2026",
+    time:"07:45 PM",
+    pickup:"Tajpur",
+    drop:"Samastipur City",
+    distance:"9 KM",
+    fare:138,
+    payment:"Cash",
+    status:"Cancelled",
+    rating:0
+  }
+
+];
+
+
+/*
+=========================================
+LOAD SAVED HISTORY
+=========================================
+*/
+
+const savedHistory =
+  localStorage.getItem(
+    "allSamastipurRideHistory"
+  );
+
+
+if(savedHistory){
+
+  try{
+
+    rides =
+      JSON.parse(savedHistory);
+
+  }catch(error){
+
+    console.log(
+      "History unavailable"
+    );
+
+  }
+
+}else{
+
+  localStorage.setItem(
+
+    "allSamastipurRideHistory",
+
+    JSON.stringify(rides)
+
+  );
+
+}
+
+
+/*
+=========================================
+DISPLAY HISTORY
+=========================================
+*/
+
+function displayHistory(){
+
+
+  const list =
+    document.getElementById(
+      "historyList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  /*
+  Empty check
+  */
+
+  if(rides.length === 0){
+
+    document.getElementById(
+      "emptyState"
+    ).style.display =
+      "block";
+
+    updateSummary();
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "emptyState"
+  ).style.display =
+    "none";
+
+
+  /*
+  Create cards
+  */
+
+  rides.forEach(function(ride){
+
+
+    const card =
+      document.createElement(
+        "div"
+      );
+
+
+    card.className =
+      "ride-card";
+
+
+    const statusClass =
+      ride.status === "Completed"
+      ? "completed"
+      : "cancelled";
+
+
+    let ratingHTML = "";
+
+
+    if(
+      ride.status === "Completed"
+    ){
+
+      const stars =
+        "★".repeat(
+          ride.rating || 0
+        ) +
+        "☆".repeat(
+          5 - (ride.rating || 0)
+        );
+
+
+      ratingHTML = `
+
+        <div class="rating">
+
+          <span style="color:#667085;">
+            Your Rating:
+          </span>
+
+          <div class="stars">
+            ${stars}
+          </div>
+
+        </div>
+
+      `;
+
+    }
+
+
+    card.innerHTML = `
+
+      <div class="top">
+
+        <div>
+
+          <div class="booking">
+            ${ride.id}
+          </div>
+
+          <small style="color:#667085;">
+            ${ride.date} • ${ride.time}
+          </small>
+
+        </div>
+
+
+        <div class="status ${statusClass}">
+          ${ride.status}
+        </div>
+
+      </div>
+
+
+      <div class="route">
+
+        <div class="location">
+
+          <div class="location-icon">
+            📍
+          </div>
+
+          <div>
+
+            <span style="color:#667085;font-size:12px;">
+              Pickup
+            </span>
+
+            <strong>
+              ${ride.pickup}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="location">
+
+          <div class="location-icon">
+            🏁
+          </div>
+
+          <div>
+
+            <span style="color:#667085;font-size:12px;">
+              Drop
+            </span>
+
+            <strong>
+              ${ride.drop}
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="details">
+
+
+        <div class="detail">
+
+          <span>
+            Distance
+          </span>
+
+          <strong>
+            ${ride.distance}
+          </strong>
+
+        </div>
+
+
+        <div class="detail">
+
+          <span>
+            Fare
+          </span>
+
+          <strong>
+            ₹${ride.fare}
+          </strong>
+
+        </div>
+
+
+        <div class="detail">
+
+          <span>
+            Payment
+          </span>
+
+          <strong>
+            ${ride.payment}
+          </strong>
+
+        </div>
+
+
+      </div>
+
+
+      ${ratingHTML}
+
+    `;
+
+
+    list.appendChild(
+      card
+    );
+
+  });
+
+
+  updateSummary();
+
+}
+
+
+/*
+=========================================
+UPDATE SUMMARY
+=========================================
+*/
+
+function updateSummary(){
+
+
+  const total =
+    rides.length;
+
+
+  const completed =
+    rides.filter(
+      function(ride){
+
+        return ride.status ===
+          "Completed";
+
+      }
+    ).length;
+
+
+  const spent =
+    rides.reduce(
+      function(sum,ride){
+
+        if(
+          ride.status ===
+          "Completed"
+        ){
+
+          return sum + ride.fare;
+
+        }
+
+        return sum;
+
+      },
+      0
+    );
+
+
+  document.getElementById(
+    "totalRides"
+  ).innerText =
+    total;
+
+
+  document.getElementById(
+    "completedRides"
+  ).innerText =
+    completed;
+
+
+  document.getElementById(
+    "totalSpent"
+  ).innerText =
+    "₹" + spent;
+
+}
+
+
+/*
+=========================================
+ADD CURRENT RIDE TO HISTORY
+=========================================
+*/
+
+function addCurrentRide(){
+
+
+  const savedRide =
+    localStorage.getItem(
+      "allSamastipurCurrentRide"
+    );
+
+
+  const savedFare =
+    localStorage.getItem(
+      "allSamastipurFare"
+    );
+
+
+  if(!savedRide){
+
+    return;
+
+  }
+
+
+  try{
+
+    const ride =
+      JSON.parse(savedRide);
+
+
+    let fareData = null;
+
+
+    if(savedFare){
+
+      fareData =
+        JSON.parse(savedFare);
+
+    }
+
+
+    const alreadyExists =
+      rides.some(
+        function(item){
+
+          return item.id ===
+            ride.id;
+
+        }
+      );
+
+
+    if(alreadyExists){
+
+      return;
+
+    }
+
+
+    const newRide = {
+
+      id:
+        ride.id ||
+        "ASM" +
+        Math.floor(
+          100000 +
+          Math.random() *
+          900000
+        ),
+
+      date:
+        new Date()
+          .toLocaleDateString(
+            "en-IN"
+          ),
+
+      time:
+        new Date()
+          .toLocaleTimeString(
+            "en-IN",
+            {
+              hour:"2-digit",
+              minute:"2-digit"
+            }
+          ),
+
+      pickup:
+        ride.pickup ||
+        "Samastipur",
+
+      drop:
+        ride.drop ||
+        "Tajpur",
+
+      distance:
+        fareData
+        ? fareData.distance + " KM"
+        : "Demo",
+
+      fare:
+        fareData
+        ? Math.round(
+            fareData.totalFare
+          )
+        : 90,
+
+      payment:"Pending",
+
+      status:"Completed",
+
+      rating:0
+
+    };
+
+
+    rides.unshift(
+      newRide
+    );
+
+
+    localStorage.setItem(
+
+      "allSamastipurRideHistory",
+
+      JSON.stringify(rides)
+
+    );
+
+
+  }catch(error){
+
+    console.log(
+      "Unable to add ride"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+CLEAR DEMO HISTORY
+=========================================
+*/
+
+function clearHistory(){
+
+
+  const confirmDelete =
+    confirm(
+      "क्या आप Demo Ride History हटाना चाहते हैं?"
+    );
+
+
+  if(!confirmDelete){
+
+    return;
+
+  }
+
+
+  rides = [];
+
+
+  localStorage.setItem(
+
+    "allSamastipurRideHistory",
+
+    JSON.stringify(rides)
+
+  );
+
+
+  displayHistory();
+
+}
+
+
+/*
+=========================================
+BOOK NEW RIDE
+=========================================
+*/
+
+function goToBooking(){
+
+  window.location.href =
+    "customer.html";
+
+}
+
+
+/*
+=========================================
+START
+=========================================
+*/
+
+addCurrentRide();
+
+displayHistory();
+
+</script>
+
+
+</body>
+
+</html>
