@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Payment | All Samastipur
+</title>
+
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:700px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.card{
+  background:#fff;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+.booking{
+  background:#f8fafc;
+  border-radius:12px;
+  padding:15px;
+  margin-bottom:20px;
+}
+
+.booking-row{
+  display:flex;
+  justify-content:space-between;
+  padding:8px 0;
+  gap:15px;
+}
+
+.booking-row span{
+  color:#667085;
+}
+
+.amount{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:18px;
+  border-radius:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.amount strong{
+  font-size:28px;
+}
+
+.methods{
+  display:grid;
+  gap:12px;
+}
+
+.method{
+  border:2px solid #e4e7ec;
+  border-radius:12px;
+  padding:16px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  transition:.2s;
+}
+
+.method:hover{
+  border-color:#0756d9;
+}
+
+.method.selected{
+  border-color:#0756d9;
+  background:#eef6ff;
+}
+
+.method-icon{
+  font-size:28px;
+}
+
+.method-text strong{
+  display:block;
+  margin-bottom:4px;
+}
+
+.method-text span{
+  color:#667085;
+  font-size:13px;
+}
+
+.section{
+  display:none;
+  margin-top:18px;
+  padding:18px;
+  background:#f8fafc;
+  border-radius:12px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid #d9dee8;
+  border-radius:9px;
+  font-size:15px;
+  margin-bottom:14px;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#0756d9;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.qr{
+  width:180px;
+  height:180px;
+  margin:10px auto 15px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #111 0,
+      #111 4px,
+      #fff 4px,
+      #fff 8px
+    );
+  border:10px solid #fff;
+  box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+
+.success{
+  display:none;
+  text-align:center;
+  background:#ecfdf3;
+  color:#166534;
+  padding:20px;
+  border-radius:12px;
+  line-height:1.7;
+}
+
+.success-icon{
+  font-size:55px;
+  margin-bottom:8px;
+}
+
+.note{
+  background:#fff8e1;
+  color:#7a5b00;
+  padding:14px;
+  border-radius:9px;
+  font-size:13px;
+  line-height:1.5;
+  margin-top:15px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#667085;
+}
+
+@media(max-width:600px){
+
+  .title h1{
+    font-size:25px;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .amount strong{
+    font-size:24px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    💳 Payment
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      💳 Ride Payment
+    </h1>
+
+    <p>
+      अपनी Ride का payment करें।
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+
+    <!-- BOOKING DETAILS -->
+
+    <div class="booking">
+
+      <div class="booking-row">
+
+        <span>
+          Booking ID
+        </span>
+
+        <strong id="bookingId">
+          ASM-DEMO
+        </strong>
+
+      </div>
+
+
+      <div class="booking-row">
+
+        <span>
+          Pickup
+        </span>
+
+        <strong id="pickup">
+          Samastipur Station
+        </strong>
+
+      </div>
+
+
+      <div class="booking-row">
+
+        <span>
+          Drop
+        </span>
+
+        <strong id="drop">
+          Tajpur
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <!-- AMOUNT -->
+
+    <div class="amount">
+
+      <span>
+        Total Fare
+      </span>
+
+      <strong id="amount">
+        ₹90
+      </strong>
+
+    </div>
+
+
+    <h2 style="margin-bottom:15px;">
+      Payment Method
+    </h2>
+
+
+    <div class="methods">
+
+
+      <!-- UPI -->
+
+      <div
+        class="method"
+        id="upiMethod"
+        onclick="selectMethod('upi')"
+      >
+
+        <div class="method-icon">
+          📱
+        </div>
+
+        <div class="method-text">
+
+          <strong>
+            UPI
+          </strong>
+
+          <span>
+            Google Pay / PhonePe / Paytm
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- CARD -->
+
+      <div
+        class="method"
+        id="cardMethod"
+        onclick="selectMethod('card')"
+      >
+
+        <div class="method-icon">
+          💳
+        </div>
+
+        <div class="method-text">
+
+          <strong>
+            Debit / Credit Card
+          </strong>
+
+          <span>
+            Secure card payment
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- CASH -->
+
+      <div
+        class="method"
+        id="cashMethod"
+        onclick="selectMethod('cash')"
+      >
+
+        <div class="method-icon">
+          💵
+        </div>
+
+        <div class="method-text">
+
+          <strong>
+            Cash
+          </strong>
+
+          <span>
+            Driver को cash payment करें
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- UPI SECTION -->
+
+    <div
+      class="section"
+      id="upiSection"
+    >
+
+      <h3>
+        📱 UPI Payment
+      </h3>
+
+      <br>
+
+      <label>
+        UPI ID
+      </label>
+
+      <input
+        type="text"
+        id="upiId"
+        placeholder="example@upi"
+      >
+
+      <button
+        class="btn"
+        onclick="payWithUPI()"
+      >
+        Pay Now
+      </button>
+
+    </div>
+
+
+    <!-- CARD SECTION -->
+
+    <div
+      class="section"
+      id="cardSection"
+    >
+
+      <h3>
+        💳 Card Payment
+      </h3>
+
+      <br>
+
+      <label>
+        Card Number
+      </label>
+
+      <input
+        type="text"
+        id="cardNumber"
+        maxlength="19"
+        placeholder="1234 5678 9012 3456"
+      >
+
+
+      <label>
+        Card Holder Name
+      </label>
+
+      <input
+        type="text"
+        id="cardName"
+        placeholder="Name on Card"
+      >
+
+
+      <label>
+        Expiry
+      </label>
+
+      <input
+        type="text"
+        id="expiry"
+        placeholder="MM/YY"
+      >
+
+
+      <label>
+        CVV
+      </label>
+
+      <input
+        type="password"
+        id="cvv"
+        maxlength="3"
+        placeholder="CVV"
+      >
+
+
+      <button
+        class="btn"
+        onclick="payWithCard()"
+      >
+        Pay Now
+      </button>
+
+    </div>
+
+
+    <!-- CASH SECTION -->
+
+    <div
+      class="section"
+      id="cashSection"
+    >
+
+      <h3>
+        💵 Cash Payment
+      </h3>
+
+      <p style="margin-top:10px;color:#667085;line-height:1.6;">
+
+        Ride complete होने के बाद
+        Driver को cash payment करें।
+
+      </p>
+
+
+      <button
+        class="btn"
+        onclick="confirmCash()"
+      >
+        Confirm Cash Payment
+      </button>
+
+    </div>
+
+
+    <!-- SUCCESS -->
+
+    <div
+      class="success"
+      id="success"
+    >
+
+      <div class="success-icon">
+        ✅
+      </div>
+
+      <h2>
+        Payment Successful
+      </h2>
+
+      <p>
+        आपका payment successfully process हो गया।
+      </p>
+
+      <strong>
+        Transaction ID:
+      </strong>
+
+      <span id="transactionId">
+        ASM-TXN-000000
+      </span>
+
+      <br>
+
+      <strong>
+        Paid Amount:
+      </strong>
+
+      <span id="paidAmount">
+        ₹90
+      </span>
+
+    </div>
+
+
+    <div class="note">
+
+      ⚠️ अभी यह Demo Payment System है।
+      असली payment के लिए secure payment
+      gateway और backend integration जरूरी है।
+      Card details इस demo में कहीं save नहीं
+      की जाती हैं।
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Safe • Simple • Local Ride
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+LOAD RIDE / FARE DATA
+=========================================
+*/
+
+let rideAmount = 90;
+
+
+const savedFare =
+  localStorage.getItem(
+    "allSamastipurFare"
+  );
+
+
+if(savedFare){
+
+  try{
+
+    const data =
+      JSON.parse(savedFare);
+
+
+    if(data.totalFare){
+
+      rideAmount =
+        Math.round(data.totalFare);
+
+    }
+
+
+    if(data.pickup){
+
+      document.getElementById(
+        "pickup"
+      ).innerText =
+        data.pickup;
+
+    }
+
+
+    if(data.drop){
+
+      document.getElementById(
+        "drop"
+      ).innerText =
+        data.drop;
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "Fare data unavailable"
+    );
+
+  }
+
+}
+
+
+document.getElementById(
+  "amount"
+).innerText =
+  "₹" + rideAmount;
+
+
+/*
+=========================================
+LOAD BOOKING ID
+=========================================
+*/
+
+const savedRide =
+  localStorage.getItem(
+    "allSamastipurCurrentRide"
+  );
+
+
+if(savedRide){
+
+  try{
+
+    const ride =
+      JSON.parse(savedRide);
+
+
+    if(ride.id){
+
+      document.getElementById(
+        "bookingId"
+      ).innerText =
+        ride.id;
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "Booking unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+SELECT PAYMENT METHOD
+=========================================
+*/
+
+function selectMethod(method){
+
+
+  /*
+  Remove selected
+  */
+
+  document
+    .querySelectorAll(".method")
+    .forEach(function(item){
+
+      item.classList.remove(
+        "selected"
+      );
+
+    });
+
+
+  /*
+  Hide all sections
+  */
+
+  document
+    .querySelectorAll(".section")
+    .forEach(function(section){
+
+      section.style.display =
+        "none";
+
+    });
+
+
+  /*
+  Show selected
+  */
+
+  document.getElementById(
+    method + "Method"
+  ).classList.add(
+    "selected"
+  );
+
+
+  document.getElementById(
+    method + "Section"
+  ).style.display =
+    "block";
+
+}
+
+
+/*
+=========================================
+UPI PAYMENT
+=========================================
+*/
+
+function payWithUPI(){
+
+
+  const upi =
+    document.getElementById(
+      "upiId"
+    ).value.trim();
+
+
+  if(!upi){
+
+    alert(
+      "UPI ID डालें।"
+    );
+
+    return;
+
+  }
+
+
+  /*
+  Demo validation
+  */
+
+  if(!upi.includes("@")){
+
+    alert(
+      "Valid UPI ID डालें।"
+    );
+
+    return;
+
+  }
+
+
+  paymentSuccess();
+
+}
+
+
+/*
+=========================================
+CARD PAYMENT
+=========================================
+*/
+
+function payWithCard(){
+
+
+  const number =
+    document.getElementById(
+      "cardNumber"
+    ).value.trim();
+
+
+  const name =
+    document.getElementById(
+      "cardName"
+    ).value.trim();
+
+
+  const expiry =
+    document.getElementById(
+      "expiry"
+    ).value.trim();
+
+
+  const cvv =
+    document.getElementById(
+      "cvv"
+    ).value.trim();
+
+
+  if(!number){
+
+    alert(
+      "Card Number डालें।"
+    );
+
+    return;
+
+  }
+
+
+  if(!name){
+
+    alert(
+      "Card Holder Name डालें।"
+    );
+
+    return;
+
+  }
+
+
+  if(!expiry){
+
+    alert(
+      "Expiry डालें।"
+    );
+
+    return;
+
+  }
+
+
+  if(!cvv){
+
+    alert(
+      "CVV डालें।"
+    );
+
+    return;
+
+  }
+
+
+  /*
+  Demo payment only.
+  Card details save नहीं होते।
+  */
+
+  paymentSuccess();
+
+}
+
+
+/*
+=========================================
+CASH PAYMENT
+=========================================
+*/
+
+function confirmCash(){
+
+  paymentSuccess();
+
+}
+
+
+/*
+=========================================
+PAYMENT SUCCESS
+=========================================
+*/
+
+function paymentSuccess(){
+
+
+  const transactionId =
+    "ASM-TXN-" +
+    Math.floor(
+      100000 +
+      Math.random() * 900000
+    );
+
+
+  document.getElementById(
+    "transactionId"
+  ).innerText =
+    transactionId;
+
+
+  document.getElementById(
+    "paidAmount"
+  ).innerText =
+    "₹" + rideAmount;
+
+
+  document.getElementById(
+    "success"
+  ).style.display =
+    "block";
+
+
+  /*
+  Save demo payment status
+  */
+
+  localStorage.setItem(
+
+    "allSamastipurPayment",
+
+    JSON.stringify({
+
+      bookingId:
+        document.getElementById(
+          "bookingId"
+        ).innerText,
+
+      amount:rideAmount,
+
+      transactionId:
+        transactionId,
+
+      status:"paid",
+
+      time:
+        new Date().toISOString()
+
+    })
+
+  );
+
+
+  document.getElementById(
+    "success"
+  ).scrollIntoView({
+
+    behavior:"smooth"
+
+  });
+
+}
+
+</script>
+
+
+</body>
+
+</html>
