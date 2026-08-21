@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#dc2626">
+
+<title>
+SOS & Safety | All Samastipur
+</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#fef2f2;
+  color:#dc2626;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:850px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.sos-card{
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 7px 25px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+.sos-circle{
+  width:150px;
+  height:150px;
+  margin:10px auto 20px;
+  border-radius:50%;
+  background:#dc2626;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:38px;
+  font-weight:900;
+  cursor:pointer;
+  border:10px solid #fee2e2;
+  box-shadow:0 0 0 10px #fef2f2;
+  transition:.2s;
+}
+
+.sos-circle:hover{
+  transform:scale(1.04);
+}
+
+.sos-circle:active{
+  transform:scale(.96);
+}
+
+.sos-card p{
+  color:#667085;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-bottom:18px;
+}
+
+.ride-box{
+  background:#f8fafc;
+  padding:16px;
+  border-radius:12px;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:9px 0;
+  border-bottom:1px solid #e4e7ec;
+  font-size:14px;
+}
+
+.row:last-child{
+  border-bottom:0;
+}
+
+.row span{
+  color:#667085;
+}
+
+.contact{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:15px;
+  background:#f8fafc;
+  border-radius:12px;
+  margin-bottom:10px;
+}
+
+.contact-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.contact-icon{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#eaf3ff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:22px;
+}
+
+.contact-name{
+  font-weight:bold;
+  margin-bottom:4px;
+}
+
+.contact-number{
+  color:#667085;
+  font-size:12px;
+}
+
+.call-btn{
+  background:#16a34a;
+  color:#fff;
+  border:0;
+  padding:10px 13px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.share-btn{
+  width:100%;
+  border:1px solid #0756d9;
+  background:#fff;
+  color:#0756d9;
+  padding:13px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.tip{
+  display:flex;
+  gap:12px;
+  padding:14px;
+  background:#f8fafc;
+  border-radius:10px;
+  margin-bottom:10px;
+}
+
+.tip-icon{
+  font-size:23px;
+}
+
+.tip p{
+  color:#667085;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.message{
+  display:none;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:18px;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+.success{
+  background:#ecfdf3;
+  color:#166534;
+}
+
+.warning{
+  background:#fff8e1;
+  color:#7a5b00;
+}
+
+.danger{
+  background:#fef2f2;
+  color:#991b1b;
+}
+
+.location-box{
+  background:#eef6ff;
+  padding:15px;
+  border-radius:10px;
+  font-size:13px;
+  color:#0756d9;
+  line-height:1.6;
+}
+
+.note{
+  background:#fff8e1;
+  color:#7a5b00;
+  padding:14px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.6;
+}
+
+footer{
+  text-align:center;
+  color:#667085;
+  padding:30px;
+}
+
+@media(max-width:550px){
+
+  .sos-circle{
+    width:130px;
+    height:130px;
+    font-size:32px;
+  }
+
+  .contact{
+    align-items:flex-start;
+  }
+
+  .call-btn{
+    padding:9px 10px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    🆘 Safety Center
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      🛡️ Ride Safety Center
+    </h1>
+
+    <p>
+      आपकी safety हमारी priority है।
+    </p>
+
+  </div>
+
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- SOS -->
+
+  <div class="sos-card">
+
+    <div
+      class="sos-circle"
+      onclick="startSOS()"
+    >
+      SOS
+    </div>
+
+    <h2>
+      Emergency SOS
+    </h2>
+
+    <p>
+      अगर आप किसी emergency में हैं,
+      SOS button दबाकर अपने emergency
+      contacts को alert कर सकते हैं।
+    </p>
+
+  </div>
+
+
+  <!-- CURRENT RIDE -->
+
+  <div class="card">
+
+    <h2>
+      🚕 Current Ride
+    </h2>
+
+
+    <div class="ride-box">
+
+      <div class="row">
+
+        <span>
+          Booking ID
+        </span>
+
+        <strong id="bookingId">
+          ASM203581
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          Driver
+        </span>
+
+        <strong id="driverName">
+          Raj Kumar
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          Vehicle
+        </span>
+
+        <strong>
+          Auto Rickshaw
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          Pickup
+        </span>
+
+        <strong id="pickup">
+          Samastipur Station
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          Drop
+        </span>
+
+        <strong id="drop">
+          Tajpur
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="share-btn"
+      onclick="shareRide()"
+    >
+      📤 Share Ride Details
+    </button>
+
+  </div>
+
+
+  <!-- EMERGENCY CONTACTS -->
+
+  <div class="card">
+
+    <h2>
+      📞 Emergency Contacts
+    </h2>
+
+
+    <div class="contact">
+
+      <div class="contact-left">
+
+        <div class="contact-icon">
+          👨
+        </div>
+
+        <div>
+
+          <div class="contact-name">
+            Family Contact
+          </div>
+
+          <div class="contact-number">
+            +91 XXXXX XXXXX
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="call-btn"
+        onclick="callContact('family')"
+      >
+        📞 Call
+      </button>
+
+    </div>
+
+
+    <div class="contact">
+
+      <div class="contact-left">
+
+        <div class="contact-icon">
+          👩
+        </div>
+
+        <div>
+
+          <div class="contact-name">
+            Trusted Contact
+          </div>
+
+          <div class="contact-number">
+            +91 XXXXX XXXXX
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="call-btn"
+        onclick="callContact('trusted')"
+      >
+        📞 Call
+      </button>
+
+    </div>
+
+
+    <button
+      class="share-btn"
+      onclick="setupContact()"
+    >
+      ➕ Add Emergency Contact
+    </button>
+
+  </div>
+
+
+  <!-- LOCATION -->
+
+  <div class="card">
+
+    <h2>
+      📍 Current Location
+    </h2>
+
+
+    <div
+      class="location-box"
+      id="locationBox"
+    >
+
+      Location check करने के लिए
+      नीचे button दबाएँ।
+
+    </div>
+
+
+    <button
+      class="share-btn"
+      onclick="getLocation()"
+    >
+      📍 Get My Current Location
+    </button>
+
+  </div>
+
+
+  <!-- SAFETY TIPS -->
+
+  <div class="card">
+
+    <h2>
+      🛡️ Safety Tips
+    </h2>
+
+
+    <div class="tip">
+
+      <div class="tip-icon">
+        👀
+      </div>
+
+      <p>
+        Ride शुरू होने से पहले driver और vehicle
+        details app में verify करें।
+      </p>
+
+    </div>
+
+
+    <div class="tip">
+
+      <div class="tip-icon">
+        📤
+      </div>
+
+      <p>
+        अपनी ride details trusted family member
+        या friend के साथ share करें।
+      </p>
+
+    </div>
+
+
+    <div class="tip">
+
+      <div class="tip-icon">
+        📱
+      </div>
+
+      <p>
+        Emergency में phone charged रखें और
+        local emergency services से संपर्क करें।
+      </p>
+
+    </div>
+
+
+    <div class="tip">
+
+      <div class="tip-icon">
+        🚫
+      </div>
+
+      <p>
+        किसी भी suspicious activity की जानकारी
+        तुरंत platform support को दें।
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="note">
+
+    ⚠️ <strong>Important:</strong>
+    यह अभी demo SOS system है। Real emergency
+    service के लिए verified emergency contacts,
+    secure backend, location sharing और appropriate
+    emergency-service integration जरूरी होगी।
+    Demo SOS को वास्तविक emergency response service
+    न मानें।
+
+  </div>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Safe Ride • Safe Journey
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+LOAD CURRENT RIDE
+=========================================
+*/
+
+const savedRide =
+  localStorage.getItem(
+    "allSamastipurCurrentRide"
+  );
+
+
+if(savedRide){
+
+  try{
+
+    const ride =
+      JSON.parse(savedRide);
+
+
+    if(ride.id){
+
+      document.getElementById(
+        "bookingId"
+      ).innerText =
+        ride.id;
+
+    }
+
+
+    if(ride.pickup){
+
+      document.getElementById(
+        "pickup"
+      ).innerText =
+        ride.pickup;
+
+    }
+
+
+    if(ride.drop){
+
+      document.getElementById(
+        "drop"
+      ).innerText =
+        ride.drop;
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "Ride data unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+SOS
+=========================================
+*/
+
+function startSOS(){
+
+
+  const confirmSOS =
+    confirm(
+
+      "क्या यह Emergency है?\n\n" +
+      "SOS alert शुरू करने के लिए OK दबाएँ।"
+
+    );
+
+
+  if(!confirmSOS){
+
+    return;
+
+  }
+
+
+  /*
+  Demo alert
+  */
+
+  showMessage(
+
+    "🆘 SOS Alert तैयार है। Demo mode में emergency contacts को real alert नहीं भेजा गया।",
+
+    "danger"
+
+  );
+
+
+  /*
+  Try getting location
+  */
+
+  if(
+    navigator.geolocation
+  ){
+
+    navigator.geolocation.getCurrentPosition(
+
+      function(position){
+
+        const latitude =
+          position.coords.latitude;
+
+        const longitude =
+          position.coords.longitude;
+
+
+        localStorage.setItem(
+
+          "allSamastipurSOS",
+
+          JSON.stringify({
+
+            bookingId:
+              document.getElementById(
+                "bookingId"
+              ).innerText,
+
+            latitude:
+              latitude,
+
+            longitude:
+              longitude,
+
+            time:
+              new Date().toISOString()
+
+          })
+
+        );
+
+
+        showMessage(
+
+          "🆘 SOS Demo Alert तैयार है। Current location भी capture की गई है।",
+
+          "danger"
+
+        );
+
+      },
+
+      function(){
+
+        showMessage(
+
+          "🆘 SOS Demo Alert तैयार है, लेकिन location नहीं मिली।",
+
+          "warning"
+
+        );
+
+      },
+
+      {
+
+        enableHighAccuracy:true,
+
+        timeout:10000,
+
+        maximumAge:5000
+
+      }
+
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+CALL CONTACT
+=========================================
+*/
+
+function callContact(type){
+
+
+  /*
+  Demo only.
+  Real number user/backend से आएगा.
+  */
+
+  if(type === "family"){
+
+    showMessage(
+
+      "📞 Family contact के लिए पहले अपना real emergency number add करें।",
+
+      "warning"
+
+    );
+
+  }else{
+
+    showMessage(
+
+      "📞 Trusted contact के लिए पहले अपना real emergency number add करें।",
+
+      "warning"
+
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+ADD CONTACT
+=========================================
+*/
+
+function setupContact(){
+
+
+  const name =
+    prompt(
+      "Emergency contact का नाम:"
+    );
+
+
+  if(!name){
+
+    return;
+
+  }
+
+
+  const number =
+    prompt(
+      "Emergency contact का mobile number:"
+    );
+
+
+  if(!number){
+
+    return;
+
+  }
+
+
+  localStorage.setItem(
+
+    "allSamastipurEmergencyContact",
+
+    JSON.stringify({
+
+      name:name,
+
+      number:number
+
+    })
+
+  );
+
+
+  showMessage(
+
+    "✅ Emergency contact demo में save हो गया।",
+
+    "success"
+
+  );
+
+}
+
+
+/*
+=========================================
+GET LOCATION
+=========================================
+*/
+
+function getLocation(){
+
+
+  const box =
+    document.getElementById(
+      "locationBox"
+    );
+
+
+  if(
+    !navigator.geolocation
+  ){
+
+    box.innerText =
+      "❌ आपके browser में location support नहीं है।";
+
+    return;
+
+  }
+
+
+  box.innerText =
+    "📍 Location प्राप्त की जा रही है...";
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+
+      const latitude =
+        position.coords.latitude;
+
+
+      const longitude =
+        position.coords.longitude;
+
+
+      const accuracy =
+        Math.round(
+          position.coords.accuracy
+        );
+
+
+      box.innerHTML =
+
+        "<strong>Location Found</strong><br>" +
+
+        "Latitude: " +
+        latitude.toFixed(6) +
+
+        "<br>" +
+
+        "Longitude: " +
+        longitude.toFixed(6) +
+
+        "<br>" +
+
+        "Accuracy: लगभग " +
+        accuracy +
+        " meters";
+
+
+      localStorage.setItem(
+
+        "allSamastipurSafetyLocation",
+
+        JSON.stringify({
+
+          latitude:
+            latitude,
+
+          longitude:
+            longitude,
+
+          accuracy:
+            accuracy,
+
+          timestamp:
+            new Date().toISOString()
+
+        })
+
+      );
+
+    },
+
+
+    function(error){
+
+      box.innerText =
+        "❌ Location permission नहीं मिली। Browser location permission allow करें।";
+
+    },
+
+
+    {
+
+      enableHighAccuracy:true,
+
+      timeout:10000,
+
+      maximumAge:5000
+
+    }
+
+  );
+
+}
+
+
+/*
+=========================================
+SHARE RIDE
+=========================================
+*/
+
+function shareRide(){
+
+
+  const booking =
+    document.getElementById(
+      "bookingId"
+    ).innerText;
+
+
+  const driver =
+    document.getElementById(
+      "driverName"
+    ).innerText;
+
+
+  const pickup =
+    document.getElementById(
+      "pickup"
+    ).innerText;
+
+
+  const drop =
+    document.getElementById(
+      "drop"
+    ).innerText;
+
+
+  const text =
+
+    "All Samastipur Ride Details\n\n" +
+
+    "Booking: " +
+    booking +
+
+    "\nDriver: " +
+    driver +
+
+    "\nPickup: " +
+    pickup +
+
+    "\nDrop: " +
+    drop;
+
+
+  if(
+    navigator.share
+  ){
+
+    navigator.share({
+
+      title:
+        "All Samastipur Ride",
+
+      text:
+        text
+
+    }).catch(
+      function(){}
+    );
+
+  }else{
+
+    copyText(text);
+
+  }
+
+}
+
+
+/*
+=========================================
+COPY TEXT
+=========================================
+*/
+
+function copyText(text){
+
+
+  if(
+    navigator.clipboard &&
+    window.isSecureContext
+  ){
+
+    navigator.clipboard
+      .writeText(text)
+      .then(
+        function(){
+
+          showMessage(
+            "📋 Ride details copied।",
+            "success"
+          );
+
+        }
+      );
+
+  }else{
+
+    const input =
+      document.createElement(
+        "textarea"
+      );
+
+
+    input.value =
+      text;
+
+
+    document.body.appendChild(
+      input
+    );
+
+
+    input.select();
+
+
+    document.execCommand(
+      "copy"
+    );
+
+
+    input.remove();
+
+
+    showMessage(
+      "📋 Ride details copied।",
+      "success"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+MESSAGE
+=========================================
+*/
+
+function showMessage(
+  text,
+  type="success"
+){
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.innerText =
+    text;
+
+
+  message.className =
+    "message " +
+    type;
+
+
+  message.style.display =
+    "block";
+
+
+  setTimeout(
+
+    function(){
+
+      message.style.display =
+        "none";
+
+    },
+
+    5000
+
+  );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
