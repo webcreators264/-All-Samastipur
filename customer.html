@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0756d9">
+
+<title>Book Ride | All Samastipur</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.user{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:35px 18px;
+}
+
+.welcome{
+  margin-bottom:25px;
+}
+
+.welcome h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.welcome p{
+  color:#667085;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+}
+
+.card{
+  background:#fff;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.card h2{
+  margin-bottom:18px;
+  font-size:22px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+  color:#344054;
+}
+
+.input,
+select{
+  width:100%;
+  padding:14px;
+  border:1px solid #d9dee8;
+  border-radius:10px;
+  margin-bottom:15px;
+  font-size:15px;
+  outline:none;
+  background:#fff;
+}
+
+.input:focus,
+select:focus{
+  border-color:#0756d9;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#0756d9;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn:hover{
+  opacity:.9;
+}
+
+.fare-box{
+  background:#eaf3ff;
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:15px;
+}
+
+.fare-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.fare-total{
+  border-top:1px solid #cbd5e1;
+  padding-top:12px;
+  margin-top:10px;
+  font-size:20px;
+  font-weight:bold;
+  color:#0756d9;
+}
+
+.status{
+  margin-top:20px;
+  padding:18px;
+  background:#fff8e1;
+  border:1px solid #f5d36b;
+  border-radius:12px;
+  display:none;
+}
+
+.status strong{
+  color:#9a6700;
+}
+
+.ride-card{
+  display:none;
+  margin-top:20px;
+  background:#f0fff4;
+  border:1px solid #a7e8ba;
+  padding:18px;
+  border-radius:12px;
+}
+
+.ride-card h3{
+  color:#16803c;
+  margin-bottom:10px;
+}
+
+.info{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin:8px 0;
+  color:#475467;
+}
+
+.quick{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:25px;
+}
+
+.quick div{
+  background:#fff;
+  padding:18px;
+  text-align:center;
+  border-radius:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.quick b{
+  display:block;
+  margin-top:7px;
+}
+
+footer{
+  text-align:center;
+  padding:30px 15px;
+  color:#667085;
+}
+
+@media(max-width:750px){
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  .welcome h1{
+    font-size:25px;
+  }
+
+  .quick{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="user">
+    👤 Customer
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <!-- WELCOME -->
+
+  <div class="welcome">
+
+    <h1>
+      नमस्ते 👋, Ride Book करें
+    </h1>
+
+    <p>
+      अपना Pickup और Drop Location डालें
+      और अपनी Rickshaw Ride Request भेजें।
+    </p>
+
+  </div>
+
+
+  <div class="grid">
+
+
+    <!-- BOOKING FORM -->
+
+    <div class="card">
+
+      <h2>🛺 Book Your Ride</h2>
+
+
+      <label>
+        Pickup Location
+      </label>
+
+      <input
+        type="text"
+        id="pickup"
+        class="input"
+        placeholder="जैसे: Samastipur Station"
+      >
+
+
+      <label>
+        Drop Location
+      </label>
+
+      <input
+        type="text"
+        id="drop"
+        class="input"
+        placeholder="जैसे: Tajpur"
+      >
+
+
+      <label>
+        Ride Type
+      </label>
+
+      <select id="rideType">
+
+        <option value="Auto Rickshaw">
+          🛺 Auto Rickshaw
+        </option>
+
+        <option value="E-Rickshaw">
+          🔋 E-Rickshaw
+        </option>
+
+      </select>
+
+
+      <label>
+        Passenger
+      </label>
+
+      <select id="passenger">
+
+        <option value="1">
+          1 Passenger
+        </option>
+
+        <option value="2">
+          2 Passengers
+        </option>
+
+        <option value="3">
+          3 Passengers
+        </option>
+
+        <option value="4">
+          4 Passengers
+        </option>
+
+      </select>
+
+
+      <button
+        class="btn"
+        onclick="calculateFare()"
+      >
+        💰 Calculate Fare
+      </button>
+
+    </div>
+
+
+    <!-- FARE -->
+
+    <div class="card">
+
+      <h2>💰 Fare Estimate</h2>
+
+      <div class="fare-box">
+
+        <div class="fare-row">
+
+          <span>Base Fare</span>
+
+          <strong>₹30</strong>
+
+        </div>
+
+
+        <div class="fare-row">
+
+          <span>Estimated Distance</span>
+
+          <strong id="distance">
+            -- km
+          </strong>
+
+        </div>
+
+
+        <div class="fare-row">
+
+          <span>Ride Type</span>
+
+          <strong id="selectedRide">
+            Auto Rickshaw
+          </strong>
+
+        </div>
+
+
+        <div class="fare-total">
+
+          Estimated Fare:
+          <span id="fare">
+            ₹30
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="btn"
+        onclick="bookRide()"
+      >
+        🛺 Confirm Ride Request
+      </button>
+
+
+      <!-- STATUS -->
+
+      <div
+        class="status"
+        id="status"
+      >
+
+        <strong>
+          🔔 Ride Request Sent
+        </strong>
+
+        <p style="margin-top:8px;">
+          नजदीकी Driver को आपकी Ride Request
+          भेजी जा रही है।
+        </p>
+
+      </div>
+
+
+      <!-- RIDE CARD -->
+
+      <div
+        class="ride-card"
+        id="rideCard"
+      >
+
+        <h3>
+          ✅ Booking Created
+        </h3>
+
+        <div class="info">
+          <span>Booking ID</span>
+          <strong id="bookingId">--</strong>
+        </div>
+
+        <div class="info">
+          <span>Pickup</span>
+          <strong id="showPickup">--</strong>
+        </div>
+
+        <div class="info">
+          <span>Drop</span>
+          <strong id="showDrop">--</strong>
+        </div>
+
+        <div class="info">
+          <span>Status</span>
+          <strong>
+            Searching Driver
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- QUICK FEATURES -->
+
+  <div class="quick">
+
+    <div>
+      📍
+      <b>Live Location</b>
+      <small>Coming Soon</small>
+    </div>
+
+    <div>
+      ⭐
+      <b>Driver Rating</b>
+      <small>Coming Soon</small>
+    </div>
+
+    <div>
+      🏆
+      <b>Reward Points</b>
+      <small>Coming Soon</small>
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Your Local Ride Booking Platform
+  </small>
+
+</footer>
+
+
+<script>
+
+
+let estimatedFare = 30;
+
+
+/* =========================
+   FARE CALCULATION
+========================= */
+
+function calculateFare(){
+
+  const pickup =
+    document.getElementById("pickup").value.trim();
+
+  const drop =
+    document.getElementById("drop").value.trim();
+
+  const rideType =
+    document.getElementById("rideType").value;
+
+
+  if(!pickup || !drop){
+
+    alert(
+      "पहले Pickup और Drop Location डालें।"
+    );
+
+    return;
+  }
+
+
+  /*
+    अभी Demo Distance है।
+    आगे Google Maps API जोड़कर
+    Real Distance निकाली जाएगी।
+  */
+
+  const distance =
+    Math.floor(Math.random()*6)+2;
+
+
+  let perKm = 12;
+
+
+  if(rideType === "E-Rickshaw"){
+
+    perKm = 10;
+
+  }
+
+
+  estimatedFare =
+    30 + (distance * perKm);
+
+
+  document.getElementById("distance").innerText =
+    distance + " km";
+
+
+  document.getElementById("fare").innerText =
+    "₹" + estimatedFare;
+
+
+  document.getElementById("selectedRide").innerText =
+    rideType;
+
+}
+
+
+/* =========================
+   BOOK RIDE
+========================= */
+
+function bookRide(){
+
+  const pickup =
+    document.getElementById("pickup").value.trim();
+
+  const drop =
+    document.getElementById("drop").value.trim();
+
+
+  if(!pickup || !drop){
+
+    alert(
+      "कृपया Pickup और Drop Location भरें।"
+    );
+
+    return;
+  }
+
+
+  const bookingId =
+    "ASM" +
+    Math.floor(
+      100000 + Math.random()*900000
+    );
+
+
+  document.getElementById("bookingId").innerText =
+    bookingId;
+
+
+  document.getElementById("showPickup").innerText =
+    pickup;
+
+
+  document.getElementById("showDrop").innerText =
+    drop;
+
+
+  document.getElementById("status").style.display =
+    "block";
+
+
+  document.getElementById("rideCard").style.display =
+    "block";
+
+
+  /*
+    Booking को browser में save कर रहे हैं।
+    आगे इसे Firebase/Backend database
+    से connect किया जाएगा।
+  */
+
+  const booking = {
+
+    id: bookingId,
+
+    pickup: pickup,
+
+    drop: drop,
+
+    rideType:
+      document.getElementById("rideType").value,
+
+    fare: estimatedFare,
+
+    status: "Searching Driver",
+
+    time: new Date().toLocaleString()
+
+  };
+
+
+  localStorage.setItem(
+    "allSamastipurCurrentRide",
+    JSON.stringify(booking)
+  );
+
+
+  alert(
+    "✅ Ride Request भेज दी गई!\n\n" +
+    "Booking ID: " + bookingId
+  );
+
+}
+
+</script>
+
+</body>
+</html>
