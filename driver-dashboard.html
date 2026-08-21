@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Driver Dashboard | All Samastipur
+</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:25px 18px;
+}
+
+.welcome{
+  margin-bottom:20px;
+}
+
+.welcome h1{
+  font-size:28px;
+  margin-bottom:7px;
+}
+
+.welcome p{
+  color:#667085;
+}
+
+.online-card{
+  background:#fff;
+  padding:18px;
+  border-radius:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.online-info strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.online-info span{
+  color:#667085;
+  font-size:13px;
+}
+
+.toggle{
+  width:65px;
+  height:34px;
+  background:#98a2b3;
+  border-radius:30px;
+  padding:4px;
+  cursor:pointer;
+}
+
+.toggle-circle{
+  width:26px;
+  height:26px;
+  background:#fff;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.toggle.active{
+  background:#16a34a;
+}
+
+.toggle.active .toggle-circle{
+  transform:translateX(31px);
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.stat{
+  background:#fff;
+  padding:18px;
+  border-radius:14px;
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.stat-icon{
+  font-size:25px;
+  margin-bottom:10px;
+}
+
+.stat span{
+  display:block;
+  color:#667085;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.stat strong{
+  font-size:22px;
+  color:#0756d9;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-bottom:16px;
+}
+
+.request{
+  border:2px solid #0756d9;
+  border-radius:14px;
+  padding:18px;
+}
+
+.request-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:15px;
+}
+
+.new{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.location{
+  background:#f8fafc;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+
+.location-row{
+  display:flex;
+  gap:10px;
+  padding:7px 0;
+}
+
+.location-row span{
+  color:#667085;
+  font-size:12px;
+  display:block;
+}
+
+.fare{
+  background:#ecfdf3;
+  color:#166534;
+  padding:15px;
+  border-radius:10px;
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:15px;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.btn{
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  color:#fff;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.accept{
+  background:#16a34a;
+}
+
+.reject{
+  background:#dc2626;
+}
+
+.location-btn{
+  width:100%;
+  background:#0756d9;
+  margin-top:12px;
+}
+
+.active-ride{
+  display:none;
+  background:#ecfdf3;
+  border:2px solid #16a34a;
+  padding:18px;
+  border-radius:14px;
+}
+
+.active-ride h3{
+  color:#166534;
+  margin-bottom:10px;
+}
+
+.progress{
+  margin:15px 0;
+}
+
+.progress-step{
+  padding:9px 0;
+  color:#667085;
+}
+
+.progress-step.active{
+  color:#166534;
+  font-weight:bold;
+}
+
+.profile{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.profile-box{
+  background:#f8fafc;
+  padding:15px;
+  border-radius:10px;
+}
+
+.profile-box span{
+  display:block;
+  color:#667085;
+  font-size:12px;
+  margin-bottom:5px;
+}
+
+.profile-box strong{
+  font-size:15px;
+}
+
+.menu{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+
+.menu button{
+  border:1px solid #e4e7ec;
+  background:#fff;
+  padding:15px 8px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  color:#344054;
+}
+
+.menu button:hover{
+  background:#eef6ff;
+  color:#0756d9;
+}
+
+.message{
+  display:none;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+  background:#ecfdf3;
+  color:#166534;
+  font-weight:bold;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#667085;
+}
+
+@media(max-width:750px){
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .menu{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .online-card{
+    align-items:center;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .profile{
+    grid-template-columns:1fr;
+  }
+
+  .buttons{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    👨‍✈️ Driver Panel
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <!-- WELCOME -->
+
+  <div class="welcome">
+
+    <h1>
+      नमस्ते, Driver 👋
+    </h1>
+
+    <p>
+      अपनी rides और earnings manage करें।
+    </p>
+
+  </div>
+
+
+  <!-- ONLINE OFFLINE -->
+
+  <div class="online-card">
+
+    <div class="online-info">
+
+      <strong id="onlineText">
+        🔴 You are Offline
+      </strong>
+
+      <span id="onlineSubtext">
+        Ride requests पाने के लिए Online हों।
+      </span>
+
+    </div>
+
+
+    <div
+      class="toggle"
+      id="toggle"
+      onclick="toggleOnline()"
+    >
+
+      <div class="toggle-circle"></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MESSAGE -->
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- STATS -->
+
+  <div class="stats">
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        💰
+      </div>
+
+      <span>
+        Today's Earnings
+      </span>
+
+      <strong id="earnings">
+        ₹0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        🚕
+      </div>
+
+      <span>
+        Completed Rides
+      </span>
+
+      <strong id="completed">
+        0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        ⭐
+      </div>
+
+      <span>
+        Rating
+      </span>
+
+      <strong>
+        5.0
+      </strong>
+
+    </div>
+
+
+    <div class="stat">
+
+      <div class="stat-icon">
+        🏆
+      </div>
+
+      <span>
+        Reward Points
+      </span>
+
+      <strong id="points">
+        0
+      </strong>
+
+    </div>
+
+  </div>
+
+
+  <!-- NEW REQUEST -->
+
+  <div
+    class="card"
+    id="requestCard"
+  >
+
+    <h2>
+      🔔 New Ride Request
+    </h2>
+
+
+    <div class="request">
+
+
+      <div class="request-top">
+
+        <strong>
+          Booking #ASM203581
+        </strong>
+
+        <div class="new">
+          NEW REQUEST
+        </div>
+
+      </div>
+
+
+      <div class="location">
+
+
+        <div class="location-row">
+
+          <div>
+            📍
+          </div>
+
+          <div>
+
+            <span>
+              Pickup
+            </span>
+
+            <strong>
+              Samastipur Station
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="location-row">
+
+          <div>
+            🏁
+          </div>
+
+          <div>
+
+            <span>
+              Drop
+            </span>
+
+            <strong>
+              Tajpur
+            </strong>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="fare">
+
+        <span>
+          💰 Estimated Fare
+        </span>
+
+        <strong>
+          ₹126
+        </strong>
+
+      </div>
+
+
+      <div class="buttons">
+
+
+        <button
+          class="btn accept"
+          onclick="acceptRide()"
+        >
+          ✅ Accept Ride
+        </button>
+
+
+        <button
+          class="btn reject"
+          onclick="rejectRide()"
+        >
+          ❌ Reject
+        </button>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ACTIVE RIDE -->
+
+  <div
+    class="card"
+    id="activeCard"
+    style="display:none;"
+  >
+
+    <h2>
+      🚕 Active Ride
+    </h2>
+
+
+    <div class="active-ride"
+         style="display:block;">
+
+
+      <h3>
+        🟢 Ride Accepted
+      </h3>
+
+
+      <p>
+        Customer को pickup करने जाएँ।
+      </p>
+
+
+      <div class="progress">
+
+
+        <div
+          class="progress-step active"
+          id="step1"
+        >
+          ✅ Ride Accepted
+        </div>
+
+
+        <div
+          class="progress-step"
+          id="step2"
+        >
+          ⭕ Driver Arriving
+        </div>
+
+
+        <div
+          class="progress-step"
+          id="step3"
+        >
+          ⭕ Ride Started
+        </div>
+
+
+        <div
+          class="progress-step"
+          id="step4"
+        >
+          ⭕ Ride Completed
+        </div>
+
+      </div>
+
+
+      <button
+        class="btn location-btn"
+        onclick="startLocation()"
+      >
+        📍 Start Live Location
+      </button>
+
+
+      <button
+        class="btn location-btn"
+        style="background:#16a34a;"
+        onclick="startRide()"
+      >
+        🚕 Start Ride
+      </button>
+
+
+      <button
+        class="btn location-btn"
+        style="background:#7c3aed;"
+        onclick="completeRide()"
+      >
+        ✅ Complete Ride
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- DRIVER PROFILE -->
+
+  <div class="card">
+
+    <h2>
+      👤 Driver Profile
+    </h2>
+
+
+    <div class="profile">
+
+
+      <div class="profile-box">
+
+        <span>
+          Driver Name
+        </span>
+
+        <strong>
+          Raj Kumar
+        </strong>
+
+      </div>
+
+
+      <div class="profile-box">
+
+        <span>
+          Vehicle
+        </span>
+
+        <strong>
+          Auto Rickshaw
+        </strong>
+
+      </div>
+
+
+      <div class="profile-box">
+
+        <span>
+          Vehicle Number
+        </span>
+
+        <strong>
+          BR-XX-0000
+        </strong>
+
+      </div>
+
+
+      <div class="profile-box">
+
+        <span>
+          Driver Rating
+        </span>
+
+        <strong>
+          ⭐ 5.0
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- MENU -->
+
+  <div class="card">
+
+    <h2>
+      ⚙️ Driver Menu
+    </h2>
+
+
+    <div class="menu">
+
+
+      <button onclick="showMenu('Ride History')">
+        📋<br>
+        Ride History
+      </button>
+
+
+      <button onclick="showMenu('Earnings')">
+        💰<br>
+        Earnings
+      </button>
+
+
+      <button onclick="showMenu('Rewards')">
+        🏆<br>
+        Rewards
+      </button>
+
+
+      <button onclick="showMenu('KYC')">
+        📄<br>
+        Driver KYC
+      </button>
+
+
+      <button onclick="showMenu('Profile')">
+        👤<br>
+        My Profile
+      </button>
+
+
+      <button onclick="showMenu('Support')">
+        ☎️<br>
+        Support
+      </button>
+
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Driver Partner Dashboard
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+DRIVER DATA
+=========================================
+*/
+
+let driverData = {
+
+  online:false,
+
+  earnings:0,
+
+  completed:0,
+
+  points:0
+
+};
+
+
+/*
+=========================================
+LOAD SAVED DRIVER DATA
+=========================================
+*/
+
+const savedDriver =
+  localStorage.getItem(
+    "allSamastipurDriverData"
+  );
+
+
+if(savedDriver){
+
+  try{
+
+    driverData =
+      JSON.parse(savedDriver);
+
+  }catch(error){
+
+    console.log(
+      "Driver data unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+UPDATE DASHBOARD
+=========================================
+*/
+
+function updateDashboard(){
+
+
+  document.getElementById(
+    "earnings"
+  ).innerText =
+    "₹" +
+    driverData.earnings;
+
+
+  document.getElementById(
+    "completed"
+  ).innerText =
+    driverData.completed;
+
+
+  document.getElementById(
+    "points"
+  ).innerText =
+    driverData.points;
+
+
+  if(driverData.online){
+
+    document.getElementById(
+      "toggle"
+    ).classList.add(
+      "active"
+    );
+
+
+    document.getElementById(
+      "onlineText"
+    ).innerText =
+      "🟢 You are Online";
+
+
+    document.getElementById(
+      "onlineSubtext"
+    ).innerText =
+      "Nearby ride requests मिलेंगे।";
+
+  }else{
+
+    document.getElementById(
+      "toggle"
+    ).classList.remove(
+      "active"
+    );
+
+
+    document.getElementById(
+      "onlineText"
+    ).innerText =
+      "🔴 You are Offline";
+
+
+    document.getElementById(
+      "onlineSubtext"
+    ).innerText =
+      "Ride requests पाने के लिए Online हों।";
+
+  }
+
+}
+
+
+/*
+=========================================
+SAVE DRIVER DATA
+=========================================
+*/
+
+function saveDriverData(){
+
+  localStorage.setItem(
+
+    "allSamastipurDriverData",
+
+    JSON.stringify(
+      driverData
+    )
+
+  );
+
+}
+
+
+/*
+=========================================
+ONLINE / OFFLINE
+=========================================
+*/
+
+function toggleOnline(){
+
+
+  driverData.online =
+    !driverData.online;
+
+
+  saveDriverData();
+
+  updateDashboard();
+
+
+  if(driverData.online){
+
+    showMessage(
+      "🟢 Driver Online हो गया। अब आपको ride requests मिल सकती हैं।"
+    );
+
+  }else{
+
+    showMessage(
+      "🔴 Driver Offline हो गया।"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+ACCEPT RIDE
+=========================================
+*/
+
+function acceptRide(){
+
+
+  if(!driverData.online){
+
+    alert(
+      "पहले Driver को Online करें।"
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "requestCard"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "activeCard"
+  ).style.display =
+    "block";
+
+
+  /*
+  Save ride status
+  */
+
+  localStorage.setItem(
+
+    "allSamastipurDriverRide",
+
+    JSON.stringify({
+
+      status:"accepted",
+
+      bookingId:
+        "ASM203581",
+
+      pickup:
+        "Samastipur Station",
+
+      drop:
+        "Tajpur",
+
+      fare:126
+
+    })
+
+  );
+
+
+  showMessage(
+    "✅ Ride Accept हो गई। Customer को notification भेजा जाएगा।"
+  );
+
+}
+
+
+/*
+=========================================
+REJECT RIDE
+=========================================
+*/
+
+function rejectRide(){
+
+
+  document.getElementById(
+    "requestCard"
+  ).style.display =
+    "none";
+
+
+  showMessage(
+    "❌ Ride Request Reject कर दी गई।"
+  );
+
+}
+
+
+/*
+=========================================
+START LIVE LOCATION
+=========================================
+*/
+
+function startLocation(){
+
+
+  if(
+    !navigator.geolocation
+  ){
+
+    alert(
+      "आपके device में GPS उपलब्ध नहीं है।"
+    );
+
+    return;
+
+  }
+
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+      const location = {
+
+        latitude:
+          position.coords.latitude,
+
+        longitude:
+          position.coords.longitude,
+
+        accuracy:
+          position.coords.accuracy,
+
+        time:
+          new Date().toISOString()
+
+      };
+
+
+      localStorage.setItem(
+
+        "allSamastipurDriverLocation",
+
+        JSON.stringify(
+          location
+        )
+
+      );
+
+
+      document.getElementById(
+        "step2"
+      ).classList.add(
+        "active"
+      );
+
+
+      showMessage(
+        "📍 Driver की current location मिल गई।"
+      );
+
+    },
+
+    function(){
+
+      alert(
+        "Location permission allow करें।"
+      );
+
+    },
+
+    {
+
+      enableHighAccuracy:true,
+
+      timeout:10000
+
+    }
+
+  );
+
+}
+
+
+/*
+=========================================
+START RIDE
+=========================================
+*/
+
+function startRide(){
+
+
+  document.getElementById(
+    "step3"
+  ).classList.add(
+    "active"
+  );
+
+
+  localStorage.setItem(
+
+    "allSamastipurDriverRideStatus",
+
+    "started"
+
+  );
+
+
+  showMessage(
+    "🚕 Ride Started!"
+  );
+
+}
+
+
+/*
+=========================================
+COMPLETE RIDE
+=========================================
+*/
+
+function completeRide(){
+
+
+  driverData.earnings += 126;
+
+  driverData.completed += 1;
+
+  driverData.points += 10;
+
+
+  saveDriverData();
+
+  updateDashboard();
+
+
+  document.getElementById(
+    "step4"
+  ).classList.add(
+    "active"
+  );
+
+
+  localStorage.setItem(
+
+    "allSamastipurDriverRideStatus",
+
+    "completed"
+
+  );
+
+
+  showMessage(
+    "🎉 Ride Completed! ₹126 earnings और 10 reward points मिले।"
+  );
+
+
+  setTimeout(
+
+    function(){
+
+      document.getElementById(
+        "activeCard"
+      ).style.display =
+        "none";
+
+    },
+
+    2000
+
+  );
+
+}
+
+
+/*
+=========================================
+MENU
+=========================================
+*/
+
+function showMenu(name){
+
+  alert(
+    name +
+    " section अगली update में आएगा।"
+  );
+
+}
+
+
+/*
+=========================================
+MESSAGE
+=========================================
+*/
+
+function showMessage(text){
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.innerText =
+    text;
+
+
+  message.style.display =
+    "block";
+
+
+  setTimeout(
+
+    function(){
+
+      message.style.display =
+        "none";
+
+    },
+
+    3500
+
+  );
+
+}
+
+
+/*
+=========================================
+START
+=========================================
+*/
+
+updateDashboard();
+
+</script>
+
+
+</body>
+
+</html>
