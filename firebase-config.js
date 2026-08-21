@@ -1,10 +1,11 @@
 // ==========================================
-// ALL SAMASTIPUR - FIREBASE CONFIG
-// Code 19 - Backend Connection
+// ALL SAMASTIPUR
+// FIREBASE CONFIG
 // ==========================================
 
-import { initializeApp } from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 
 import {
   getDatabase,
@@ -14,15 +15,13 @@ import {
   update,
   onValue,
   push
-} from
-"https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-database.js";
 
-
-// Firebase Configuration
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyCcaADTLXm-UEIjQlgsq3zntpXcZZ3h4v8",
+  apiKey:
+    "AIzaSyCcaADTLXm-UEIjQlgsq3zntpXcZZ3h4v8",
 
   authDomain:
     "all-samastipur.firebaseapp.com",
@@ -41,44 +40,37 @@ const firebaseConfig = {
 
   measurementId:
     "G-13W0M5QYHJ"
+
 };
 
 
-// Initialize Firebase
+// Firebase App
 
 const app =
   initializeApp(firebaseConfig);
 
 
-// Initialize Realtime Database
+// Realtime Database
 
 const database =
   getDatabase(app);
 
 
-// Make Firebase available to other HTML files
+// IMPORTANT:
+// Export database and Firebase functions
 
-window.AllSamastipurFirebase = {
-
-  app: app,
-
-  database: database,
-
-  ref: ref,
-
-  set: set,
-
-  get: get,
-
-  update: update,
-
-  onValue: onValue,
-
-  push: push
-
+export {
+  app,
+  database,
+  ref,
+  set,
+  get,
+  update,
+  onValue,
+  push
 };
 
 
 console.log(
-  "All Samastipur Firebase Connected!"
+  "✅ All Samastipur Firebase Connected!"
 );
