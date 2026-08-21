@@ -14,7 +14,215 @@
   padding:0;
   box-sizing:border-box;
 }
+<!-- ==========================================
+     ALL SAMASTIPUR
+     CODE 23 - FIREBASE RIDE CONNECTION
+========================================== -->
 
+<script type="module">
+
+import { bookRide }
+from "./ride-booking.js";
+
+
+// ------------------------------------------
+// Firebase Ride Booking
+// ------------------------------------------
+
+async function firebaseBookRide() {
+
+  try {
+
+    const pickupInput =
+      document.getElementById("pickup");
+
+    const dropInput =
+      document.getElementById("drop");
+
+    const rideTypeInput =
+      document.getElementById("rideType");
+
+    const passengerInput =
+      document.getElementById("passengers");
+
+    const fareInput =
+      document.getElementById("fare");
+
+
+    const pickup =
+      pickupInput
+      ? pickupInput.value.trim()
+      : "";
+
+    const drop =
+      dropInput
+      ? dropInput.value.trim()
+      : "";
+
+    const rideType =
+      rideTypeInput
+      ? rideTypeInput.value
+      : "Auto Rickshaw";
+
+    const passengers =
+      passengerInput
+      ? passengerInput.value
+      : 1;
+
+    const fare =
+      fareInput
+      ? fareInput.value
+      : 0;
+
+
+    // Validation
+
+    if (!pickup) {
+
+      alert(
+        "कृपया Pickup Location डालें।"
+      );
+
+      return;
+
+    }
+
+
+    if (!drop) {
+
+      alert(
+        "कृपया Drop Location डालें।"
+      );
+
+      return;
+
+    }
+
+
+    // Customer mobile
+
+    const customerMobile =
+      localStorage.getItem(
+        "customerMobile"
+      ) || "";
+
+
+    // Create Firebase ride
+
+    const ride =
+      await bookRide({
+
+        customerName:
+          "Customer",
+
+        customerMobile:
+          customerMobile,
+
+        pickup:
+          pickup,
+
+        drop:
+          drop,
+
+        rideType:
+          rideType,
+
+        passengers:
+          passengers,
+
+        fare:
+          fare
+
+      });
+
+
+    // Success
+
+    alert(
+
+      "✅ Ride Request Successfully Sent!\n\n" +
+
+      "Booking ID: " +
+      ride.bookingId
+
+    );
+
+
+    // Open status page
+
+    window.location.href =
+      "ride-status.html";
+
+
+  } catch (error) {
+
+    console.error(
+      "Firebase Booking Error:",
+      error
+    );
+
+
+    alert(
+
+      "❌ Ride booking failed.\n\n" +
+
+      "Please try again."
+
+    );
+
+  }
+
+}
+
+
+// ------------------------------------------
+// Find Confirm Ride button
+// ------------------------------------------
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    const buttons =
+      document.querySelectorAll("button");
+
+
+    buttons.forEach(function(button) {
+
+      const text =
+        button.innerText
+        .toLowerCase();
+
+
+      if (
+
+        text.includes("confirm") ||
+
+        text.includes("ride request") ||
+
+        text.includes("book ride")
+
+      ) {
+
+        button.addEventListener(
+          "click",
+          function(event) {
+
+            event.preventDefault();
+
+            firebaseBookRide();
+
+          }
+        );
+
+      }
+
+    });
+
+  }
+);
+
+</script>
 body{
   font-family:Arial,sans-serif;
   background:#f4f7fb;
