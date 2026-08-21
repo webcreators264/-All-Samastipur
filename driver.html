@@ -14,7 +14,240 @@
   padding:0;
   box-sizing:border-box;
 }
+<!-- ==========================================
+     ALL SAMASTIPUR
+     CODE 31 - DRIVER FIREBASE CONNECTION
+========================================== -->
 
+<script type="module">
+
+  import {
+    listenForRideRequests
+  } from "./driver-rides.js";
+
+  import {
+    acceptRide,
+    rejectRide
+  } from "./driver-ride-action.js";
+
+
+  // ------------------------------------------
+  // Driver Ride Container
+  // ------------------------------------------
+
+  let container =
+    document.getElementById(
+      "firebaseRideRequests"
+    );
+
+
+  if (!container) {
+
+    container =
+      document.createElement("div");
+
+    container.id =
+      "firebaseRideRequests";
+
+    container.style.padding =
+      "15px";
+
+    document.body.appendChild(
+      container
+    );
+
+  }
+
+
+  // ------------------------------------------
+  // Show Rides
+  // ------------------------------------------
+
+  function displayRides(rides) {
+
+    container.innerHTML = "";
+
+
+    if (!rides.length) {
+
+      container.innerHTML =
+        "<p>No new ride requests right now.</p>";
+
+      return;
+
+    }
+
+
+    rides.forEach(function(ride) {
+
+      const card =
+        document.createElement("div");
+
+
+      card.style.border =
+        "1px solid #ddd";
+
+      card.style.borderRadius =
+        "12px";
+
+      card.style.padding =
+        "15px";
+
+      card.style.marginBottom =
+        "15px";
+
+
+      card.innerHTML = `
+
+        <h3>🚕 New Ride Request</h3>
+
+        <p>
+          <strong>Pickup:</strong>
+          ${ride.pickup || "-"}
+        </p>
+
+        <p>
+          <strong>Drop:</strong>
+          ${ride.drop || "-"}
+        </p>
+
+        <p>
+          <strong>Passengers:</strong>
+          ${ride.passengers || 1}
+        </p>
+
+        <p>
+          <strong>Fare:</strong>
+          ₹${ride.fare || 0}
+        </p>
+
+        <p>
+          <strong>Booking ID:</strong>
+          ${ride.bookingId || "-"}
+        </p>
+
+        <button
+          class="acceptRide31"
+          data-id="${ride.rideId}"
+        >
+          ✅ Accept Ride
+        </button>
+
+        <button
+          class="rejectRide31"
+          data-id="${ride.rideId}"
+        >
+          ❌ Reject
+        </button>
+
+      `;
+
+
+      container.appendChild(card);
+
+    });
+
+  }
+
+
+  // ------------------------------------------
+  // Firebase Live Listener
+  // ------------------------------------------
+
+  listenForRideRequests(
+    displayRides
+  );
+
+
+  // ------------------------------------------
+  // Accept / Reject
+  // ------------------------------------------
+
+  document.addEventListener(
+    "click",
+    async function(event) {
+
+
+      // ACCEPT
+
+      if (
+        event.target.classList.contains(
+          "acceptRide31"
+        )
+      ) {
+
+        const rideId =
+          event.target.dataset.id;
+
+
+        try {
+
+          await acceptRide(
+            rideId
+          );
+
+
+          alert(
+            "✅ Ride Accepted Successfully!"
+          );
+
+
+        } catch (error) {
+
+          alert(
+            "❌ Accept Error: " +
+            error.message
+          );
+
+        }
+
+      }
+
+
+      // REJECT
+
+      if (
+        event.target.classList.contains(
+          "rejectRide31"
+        )
+      ) {
+
+        const rideId =
+          event.target.dataset.id;
+
+
+        try {
+
+          await rejectRide(
+            rideId
+          );
+
+
+          alert(
+            "Ride Rejected"
+          );
+
+
+        } catch (error) {
+
+          alert(
+            "❌ Reject Error: " +
+            error.message
+          );
+
+        }
+
+      }
+
+    }
+  );
+
+
+  console.log(
+    "✅ Driver Dashboard Firebase Connected!"
+  );
+
+</script>
 body{
   font-family:Arial,sans-serif;
   background:#f4f7fb;
