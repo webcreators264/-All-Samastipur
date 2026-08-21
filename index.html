@@ -1,568 +1,873 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b63f6">
 
-<title>All Samastipur - Rickshaw Ride</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+content="#0756d9">
+
+<title>
+All Samastipur - Rickshaw Ride
+</title>
 
 <style>
+
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
 html{
-  scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 body{
-  font-family:Arial, sans-serif;
-  background:#f5f7fb;
-  color:#172033;
-}
-
-a{
-  text-decoration:none;
+font-family:Arial,sans-serif;
+background:#f5f7fb;
+color:#172033;
 }
 
 header{
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:#fff;
-  padding:15px 6%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  box-shadow:0 2px 12px rgba(0,0,0,.08);
+background:#fff;
+padding:15px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 2px 12px rgba(0,0,0,.08);
+position:sticky;
+top:0;
+z-index:1000;
 }
 
 .logo{
-  font-size:23px;
-  font-weight:800;
-  color:#0756d9;
+font-size:22px;
+font-weight:800;
+color:#0756d9;
 }
 
-.logo span{
-  color:#111827;
+nav{
+display:flex;
+gap:18px;
+align-items:center;
 }
 
 nav a{
-  color:#172033;
-  font-weight:600;
-  margin-left:22px;
+text-decoration:none;
+color:#344054;
+font-size:14px;
+font-weight:bold;
+}
+
+.login-btn{
+background:#0756d9;
+color:#fff !important;
+padding:10px 15px;
+border-radius:8px;
 }
 
 .hero{
-  background:linear-gradient(135deg,#0756d9,#14a5ff);
-  color:#fff;
-  padding:70px 6%;
+background:linear-gradient(135deg,#0756d9,#1976f3);
+color:#fff;
+padding:65px 6%;
 }
 
-.hero-wrap{
-  max-width:1200px;
-  margin:auto;
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:45px;
-  align-items:center;
-}
-
-.badge{
-  display:inline-block;
-  background:rgba(255,255,255,.16);
-  padding:8px 14px;
-  border-radius:30px;
-  margin-bottom:18px;
+.hero-content{
+max-width:1100px;
+margin:auto;
+display:grid;
+grid-template-columns:1.2fr .8fr;
+gap:35px;
+align-items:center;
 }
 
 .hero h1{
-  font-size:52px;
-  line-height:1.08;
-  margin-bottom:18px;
-}
-
-.hero h1 span{
-  color:#ffe600;
+font-size:42px;
+margin-bottom:15px;
 }
 
 .hero p{
-  font-size:18px;
-  line-height:1.7;
-  margin-bottom:25px;
+font-size:18px;
+line-height:1.6;
+margin-bottom:25px;
 }
 
 .btn{
-  display:inline-block;
-  border:0;
-  cursor:pointer;
-  padding:14px 22px;
-  border-radius:10px;
-  font-weight:700;
-  font-size:15px;
+display:inline-block;
+padding:13px 20px;
+border-radius:9px;
+text-decoration:none;
+font-weight:bold;
+border:none;
+cursor:pointer;
 }
 
 .btn-white{
-  background:#fff;
-  color:#0756d9;
+background:#fff;
+color:#0756d9;
 }
 
 .btn-blue{
-  background:#0756d9;
-  color:#fff;
-  width:100%;
-}
-
-.btn-green{
-  background:#16a34a;
-  color:#fff;
+background:#0756d9;
+color:#fff;
 }
 
 .booking-card{
-  background:#fff;
-  color:#172033;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 18px 45px rgba(0,0,0,.2);
+background:#fff;
+color:#172033;
+padding:24px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,.15);
 }
 
 .booking-card h2{
-  margin-bottom:8px;
+margin-bottom:18px;
 }
 
-.booking-card p{
-  color:#667085;
-  font-size:14px;
-  margin-bottom:18px;
+input{
+width:100%;
+padding:13px;
+margin-bottom:12px;
+border:1px solid #d0d5dd;
+border-radius:8px;
+font-size:14px;
 }
 
-.input{
-  width:100%;
-  padding:14px;
-  border:1px solid #d9dee8;
-  border-radius:9px;
-  margin-bottom:12px;
-  font-size:15px;
-  outline:none;
+.booking-card .btn{
+width:100%;
+text-align:center;
 }
 
-.input:focus{
-  border-color:#0756d9;
+.section{
+padding:55px 6%;
+max-width:1200px;
+margin:auto;
 }
 
-section{
-  padding:60px 6%;
+.section-title{
+text-align:center;
+margin-bottom:30px;
 }
 
-.container{
-  max-width:1200px;
-  margin:auto;
+.section-title h2{
+font-size:30px;
+margin-bottom:8px;
 }
 
-.title{
-  text-align:center;
-  margin-bottom:35px;
-}
-
-.title h2{
-  font-size:32px;
-  margin-bottom:8px;
-}
-
-.title p{
-  color:#667085;
+.section-title p{
+color:#667085;
 }
 
 .features{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px;
 }
 
 .feature{
-  background:#fff;
-  padding:25px 20px;
-  border-radius:15px;
-  text-align:center;
-  box-shadow:0 5px 20px rgba(0,0,0,.06);
+background:#fff;
+padding:24px;
+border-radius:16px;
+box-shadow:0 5px 18px rgba(0,0,0,.06);
+text-align:center;
 }
 
-.icon{
-  font-size:38px;
-  margin-bottom:13px;
+.feature-icon{
+font-size:38px;
+margin-bottom:12px;
 }
 
 .feature h3{
-  margin-bottom:8px;
+margin-bottom:8px;
 }
 
 .feature p{
-  color:#667085;
-  line-height:1.5;
-  font-size:14px;
+font-size:13px;
+color:#667085;
+line-height:1.5;
+margin-bottom:15px;
+}
+
+.feature a{
+color:#0756d9;
+font-weight:bold;
+text-decoration:none;
+}
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
+}
+
+.menu-item{
+background:#fff;
+padding:20px;
+border-radius:14px;
+text-align:center;
+box-shadow:0 4px 15px rgba(0,0,0,.05);
+text-decoration:none;
+color:#172033;
+font-weight:bold;
+}
+
+.menu-item div{
+font-size:30px;
+margin-bottom:8px;
 }
 
 .areas{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:10px;
 }
 
 .area{
-  background:#fff;
-  padding:17px;
-  border-radius:10px;
-  text-align:center;
-  font-weight:600;
-  border:1px solid #e5e7eb;
-}
-
-.driver-section{
-  background:#eaf3ff;
+background:#eaf3ff;
+color:#0756d9;
+padding:10px 15px;
+border-radius:20px;
+font-size:13px;
+font-weight:bold;
 }
 
 .driver-box{
-  max-width:850px;
-  margin:auto;
-  background:#fff;
-  padding:38px 25px;
-  border-radius:20px;
-  text-align:center;
-  box-shadow:0 5px 20px rgba(0,0,0,.06);
-}
-
-.driver-box h2{
-  font-size:30px;
-  margin-bottom:12px;
+background:#fff;
+padding:30px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 5px 20px rgba(0,0,0,.06);
 }
 
 .driver-box p{
-  color:#667085;
-  line-height:1.6;
-  margin-bottom:20px;
+color:#667085;
+margin:10px 0 20px;
 }
 
 .contact{
-  text-align:center;
+background:#172033;
+color:#fff;
+text-align:center;
+padding:45px 20px;
 }
 
-.contact-box{
-  background:#fff;
-  max-width:600px;
-  margin:auto;
-  padding:30px;
-  border-radius:18px;
-}
-
-.contact-box p{
-  margin:10px 0;
-  color:#667085;
-}
-
-footer{
-  background:#07111f;
-  color:#fff;
-  text-align:center;
-  padding:35px 15px;
-}
-
-footer p{
-  color:#b8c2d1;
-  margin-top:8px;
+.contact p{
+margin:10px 0 20px;
+color:#d0d5dd;
 }
 
 .whatsapp{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  width:58px;
-  height:58px;
-  background:#25d366;
-  color:#fff;
-  border-radius:50%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:28px;
-  box-shadow:0 5px 20px rgba(0,0,0,.25);
-  z-index:2000;
+display:inline-block;
+background:#16a34a;
+color:#fff;
+padding:13px 20px;
+border-radius:9px;
+text-decoration:none;
+font-weight:bold;
 }
 
-@media(max-width:850px){
+footer{
+background:#101828;
+color:#98a2b3;
+text-align:center;
+padding:25px;
+font-size:13px;
+}
 
-  nav{
-    display:none;
-  }
+.mobile-menu{
+display:none;
+font-size:25px;
+cursor:pointer;
+}
 
-  .hero-wrap{
-    grid-template-columns:1fr;
-  }
+@media(max-width:800px){
 
-  .hero h1{
-    font-size:40px;
-  }
+nav{
+display:none;
+position:absolute;
+top:65px;
+left:0;
+width:100%;
+background:#fff;
+padding:20px;
+flex-direction:column;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+}
 
-  .features{
-    grid-template-columns:1fr 1fr;
-  }
+nav.show{
+display:flex;
+}
 
-  .areas{
-    grid-template-columns:1fr 1fr;
-  }
+.mobile-menu{
+display:block;
+}
+
+.hero-content{
+grid-template-columns:1fr;
+}
+
+.hero h1{
+font-size:32px;
+}
+
+.features{
+grid-template-columns:1fr 1fr;
+}
+
+.menu-grid{
+grid-template-columns:1fr 1fr;
+}
+
 }
 
 @media(max-width:500px){
 
-  .hero{
-    padding:48px 5%;
-  }
-
-  .hero h1{
-    font-size:34px;
-  }
-
-  section{
-    padding:48px 5%;
-  }
-
-  .features,
-  .areas{
-    grid-template-columns:1fr;
-  }
-
-  .logo{
-    font-size:19px;
-  }
+.features{
+grid-template-columns:1fr;
 }
+
+.menu-grid{
+grid-template-columns:1fr 1fr;
+}
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- HEADER -->
 
 <header>
 
-  <div class="logo">
-    🛺 All <span>Samastipur</span>
-  </div>
+<div class="logo">
+🛺 All Samastipur
+</div>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#booking">Book Ride</a>
-    <a href="#features">Features</a>
-    <a href="#areas">Areas</a>
-    <a href="#driver">Driver Join</a>
-  </nav>
+<div
+class="mobile-menu"
+onclick="toggleMenu()"
+>
+☰
+</div>
+
+<nav id="nav">
+
+<a href="index.html">
+Home
+</a>
+
+<a href="customer.html">
+Book Ride
+</a>
+
+<a href="#features">
+Features
+</a>
+
+<a href="#areas">
+Areas
+</a>
+
+<a href="driver-kyc.html">
+Driver Join
+</a>
+
+<a
+href="login.html"
+class="login-btn"
+>
+Customer Login
+</a>
+
+</nav>
 
 </header>
 
 
 <!-- HERO -->
 
-<section class="hero" id="home">
+<section class="hero">
 
-  <div class="hero-wrap">
-
-    <div>
-
-      <div class="badge">
-        🛺 Samastipur Local Ride Service
-      </div>
-
-      <h1>
-        आपकी Ride,<br>
-        <span>आपके Samastipur</span> में!
-      </h1>
-
-      <p>
-        घर बैठे ऑटो/रिक्शा बुक करें।
-        Pickup और Drop डालें और अपनी Ride
-        के लिए Request भेजें।
-      </p>
-
-      <a href="#booking" class="btn btn-white">
-        🛺 Ride Now
-      </a>
-
-    </div>
+<div class="hero-content">
 
 
-    <!-- QUICK BOOKING -->
+<div>
 
-    <div class="booking-card" id="booking">
+<h1>
+आपकी Ride,<br>
+आपके Samastipur में! 🛺
+</h1>
 
-      <h2>🛺 Quick Ride Booking</h2>
+<p>
+Samastipur में Auto Rickshaw और
+E-Rickshaw booking का आसान और
+smart platform.
+</p>
 
-      <p>
-        अभी Pickup और Drop डालकर शुरुआत करें।
-      </p>
+<a
+href="customer.html"
+class="btn btn-white"
+>
+🚕 Ride Now
+</a>
 
-      <input
-        type="text"
-        id="pickup"
-        class="input"
-        placeholder="📍 Pickup Location"
-      >
+</div>
 
-      <input
-        type="text"
-        id="drop"
-        class="input"
-        placeholder="📍 Drop Location"
-      >
 
-      <button
-        class="btn btn-blue"
-        onclick="bookRide()"
-      >
-        Find Ride
-      </button>
+<div class="booking-card">
 
-    </div>
+<h2>
+📍 Quick Booking
+</h2>
 
-  </div>
+<input
+type="text"
+placeholder="Pickup Location"
+id="pickup"
+>
+
+<input
+type="text"
+placeholder="Drop Location"
+id="drop"
+>
+
+<a
+href="customer.html"
+class="btn btn-blue"
+>
+Book Your Ride
+</a>
+
+</div>
+
+
+</div>
 
 </section>
 
 
-<!-- FOUR FEATURES -->
+<!-- FEATURES -->
 
-<section id="features">
+<section
+class="section"
+id="features"
+>
 
-  <div class="container">
+<div class="section-title">
 
-    <div class="title">
+<h2>
+Our Features
+</h2>
 
-      <h2>हमारे मुख्य फीचर्स</h2>
+<p>
+आपकी ride के लिए जरूरी सुविधाएँ
+</p>
 
-      <p>
-        आगे हम इन सभी फीचर्स को Live System से जोड़ेंगे
-      </p>
-
-    </div>
-
-
-    <div class="features">
-
-      <div class="feature">
-
-        <div class="icon">🛺</div>
-
-        <h3>Ride Booking</h3>
-
-        <p>
-          Customer अपने मोबाइल से Ride Request भेज सकेगा।
-        </p>
-
-      </div>
+</div>
 
 
-      <div class="feature">
-
-        <div class="icon">📍</div>
-
-        <h3>Live Tracking</h3>
-
-        <p>
-          Driver की Live Location Customer देख सकेगा।
-        </p>
-
-      </div>
+<div class="features">
 
 
-      <div class="feature">
+<div class="feature">
 
-        <div class="icon">💰</div>
+<div class="feature-icon">
+🚕
+</div>
 
-        <h3>Fare Estimate</h3>
+<h3>
+Ride Booking
+</h3>
 
-        <p>
-          Ride शुरू करने से पहले अनुमानित किराया दिखाई देगा।
-        </p>
+<p>
+Online Auto और E-Rickshaw
+ride book करें।
+</p>
 
-      </div>
+<a href="customer.html">
+Book Now →
+</a>
+
+</div>
 
 
-      <div class="feature">
+<div class="feature">
 
-        <div class="icon">⭐</div>
+<div class="feature-icon">
+📍
+</div>
 
-        <h3>Rating & Review</h3>
+<h3>
+Live Tracking
+</h3>
 
-        <p>
-          Ride के बाद Customer Driver को Rating दे सकेगा।
-        </p>
+<p>
+Driver की live location track करें।
+</p>
 
-      </div>
+<a href="live-tracking.html">
+Track Ride →
+</a>
 
-    </div>
+</div>
 
-  </div>
+
+<div class="feature">
+
+<div class="feature-icon">
+💰
+</div>
+
+<h3>
+Fare Estimate
+</h3>
+
+<p>
+Ride शुरू करने से पहले fare
+calculate करें।
+</p>
+
+<a href="fare.html">
+Calculate →
+</a>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+⭐
+</div>
+
+<h3>
+Rating & Review
+</h3>
+
+<p>
+Driver को rating और review दें।
+</p>
+
+<a href="rating.html">
+Rate Driver →
+</a>
+
+</div>
+
+
+</div>
 
 </section>
 
 
-<!-- SERVICE AREAS -->
+<!-- ALL SERVICES -->
 
-<section id="areas">
+<section class="section">
 
-  <div class="container">
+<div class="section-title">
 
-    <div class="title">
+<h2>
+All Samastipur Services
+</h2>
 
-      <h2>📍 Service Areas</h2>
+<p>
+एक ही जगह पर आपके सारे ride features
+</p>
 
-      <p>
-        शुरुआत Samastipur से होगी
-      </p>
-
-    </div>
+</div>
 
 
-    <div class="areas">
+<div class="menu-grid">
 
-      <div class="area">Samastipur City</div>
-      <div class="area">Samastipur Station</div>
-      <div class="area">Tajpur</div>
-      <div class="area">Rosera</div>
-      <div class="area">Dalsinghsarai</div>
-      <div class="area">Warisnagar</div>
-      <div class="area">Morwa</div>
-      <div class="area">Pusa</div>
 
-    </div>
+<a
+href="login.html"
+class="menu-item"
+>
 
-  </div>
+<div>👤</div>
+
+Customer Login
+
+</a>
+
+
+<a
+href="customer.html"
+class="menu-item"
+>
+
+<div>🚕</div>
+
+Book Ride
+
+</a>
+
+
+<a
+href="map.html"
+class="menu-item"
+>
+
+<div>🗺️</div>
+
+Google Map
+
+</a>
+
+
+<a
+href="live-tracking.html"
+class="menu-item"
+>
+
+<div>📍</div>
+
+Live Tracking
+
+</a>
+
+
+<a
+href="fare.html"
+class="menu-item"
+>
+
+<div>💰</div>
+
+Fare Calculator
+
+</a>
+
+
+<a
+href="payment.html"
+class="menu-item"
+>
+
+<div>💳</div>
+
+Payment
+
+</a>
+
+
+<a
+href="history.html"
+class="menu-item"
+>
+
+<div>📋</div>
+
+Ride History
+
+</a>
+
+
+<a
+href="rewards.html"
+class="menu-item"
+>
+
+<div>🎁</div>
+
+Rewards
+
+</a>
+
+
+<a
+href="rating.html"
+class="menu-item"
+>
+
+<div>⭐</div>
+
+Rating & Review
+
+</a>
+
+
+<a
+href="notifications.html"
+class="menu-item"
+>
+
+<div>🔔</div>
+
+Notifications
+
+</a>
+
+
+<a
+href="promo.html"
+class="menu-item"
+>
+
+<div>🏷️</div>
+
+Promo & Referral
+
+</a>
+
+
+<a
+href="safety.html"
+class="menu-item"
+>
+
+<div>🆘</div>
+
+SOS & Safety
+
+</a>
+
+
+<a
+href="driver.html"
+class="menu-item"
+>
+
+<div>🚖</div>
+
+Driver Panel
+
+</a>
+
+
+<a
+href="driver-dashboard.html"
+class="menu-item"
+>
+
+<div>📊</div>
+
+Driver Dashboard
+
+</a>
+
+
+<a
+href="driver-kyc.html"
+class="menu-item"
+>
+
+<div>🛡️</div>
+
+Driver KYC
+
+</a>
+
+
+<a
+href="admin.html"
+class="menu-item"
+>
+
+<div>⚙️</div>
+
+Admin Panel
+
+</a>
+
+
+</div>
+
+</section>
+
+
+<!-- AREAS -->
+
+<section
+class="section"
+id="areas"
+>
+
+<div class="section-title">
+
+<h2>
+Service Areas
+</h2>
+
+<p>
+Samastipur और आसपास के क्षेत्रों में
+</p>
+
+</div>
+
+
+<div class="areas">
+
+<span class="area">
+Samastipur City
+</span>
+
+<span class="area">
+Samastipur Station
+</span>
+
+<span class="area">
+Tajpur
+</span>
+
+<span class="area">
+Rosera
+</span>
+
+<span class="area">
+Dalsinghsarai
+</span>
+
+<span class="area">
+Warisnagar
+</span>
+
+<span class="area">
+Morwa
+</span>
+
+<span class="area">
+Pusa
+</span>
+
+</div>
 
 </section>
 
 
 <!-- DRIVER JOIN -->
 
-<section class="driver-section" id="driver">
+<section class="section">
 
-  <div class="driver-box">
+<div class="driver-box">
 
-    <h2>👨‍✈️ Driver बनकर जुड़ें</h2>
+<h2>
+🛺 Driver बनकर जुड़ें
+</h2>
 
-    <p>
-      All Samastipur के साथ जुड़ें।
-      Customer की Ride Request प्राप्त करें,
-      Ride पूरी करें और Reward Points कमाएँ।
-    </p>
+<p>
+All Samastipur के साथ जुड़ें और
+rides करके earning तथा reward points कमाएँ।
+</p>
 
-    <button
-      class="btn btn-green"
-      onclick="driverJoin()"
-    >
-      Join as Driver
-    </button>
+<a
+href="driver-kyc.html"
+class="btn btn-blue"
+>
+Join as Driver
+</a>
 
-  </div>
+</div>
 
 </section>
 
@@ -571,108 +876,93 @@ footer p{
 
 <section class="contact">
 
-  <div class="container">
+<h2>
+📞 Need Help?
+</h2>
 
-    <div class="title">
+<p>
+Ride booking या support के लिए हमसे संपर्क करें।
+</p>
 
-      <h2>📞 Contact</h2>
-
-      <p>
-        Ride या Driver Registration के लिए संपर्क करें
-      </p>
-
-    </div>
-
-    <div class="contact-box">
-
-      <p>🛺 <b>All Samastipur</b></p>
-
-      <p>📱 Customer Support Available</p>
-
-      <a
-        href="https://wa.me/917494005371"
-        target="_blank"
-        class="btn btn-green"
-      >
-        WhatsApp Support
-      </a>
-
-    </div>
-
-  </div>
+<a
+href="https://wa.me/917494005371"
+class="whatsapp"
+target="_blank"
+>
+💬 WhatsApp Support
+</a>
 
 </section>
 
 
-<!-- FOOTER -->
-
 <footer>
 
-  <h3>🛺 All Samastipur</h3>
+🛺 <b>All Samastipur</b>
 
-  <p>
-    Samastipur का अपना Local Ride Booking Platform
-  </p>
+<br><br>
 
-  <p>
-    © 2026 All Samastipur • All Rights Reserved
-  </p>
+© 2026 All Samastipur
+<br>
+Safe Ride • Smart Booking • Happy Journey
 
 </footer>
 
 
-<!-- FLOATING WHATSAPP -->
-
-<a
-  href="https://wa.me/917494005371"
-  target="_blank"
-  class="whatsapp"
->
-  💬
-</a>
-
-
 <script>
 
-function bookRide(){
+function toggleMenu(){
 
-  const pickup =
-    document.getElementById("pickup").value.trim();
+const nav =
+document.getElementById("nav");
 
-  const drop =
-    document.getElementById("drop").value.trim();
-
-
-  if(pickup === "" || drop === ""){
-
-    alert(
-      "कृपया Pickup और Drop Location भरें।"
-    );
-
-    return;
-  }
-
-
-  alert(
-    "Ride Request तैयार है!\n\n" +
-    "Pickup: " + pickup +
-    "\nDrop: " + drop +
-    "\n\n" +
-    "अगले चरण में इसे Customer + Driver Live Booking System से जोड़ा जाएगा।"
-  );
+nav.classList.toggle("show");
 
 }
 
 
-function driverJoin(){
+function bookQuickRide(){
 
-  alert(
-    "Driver Registration जल्द जोड़ा जाएगा।"
-  );
+const pickup =
+document.getElementById("pickup").value;
+
+const drop =
+document.getElementById("drop").value;
+
+
+if(!pickup || !drop){
+
+alert(
+"कृपया Pickup और Drop दोनों भरें।"
+);
+
+return;
+
+}
+
+
+localStorage.setItem(
+
+"allSamastipurQuickBooking",
+
+JSON.stringify({
+
+pickup:pickup,
+
+drop:drop
+
+})
+
+);
+
+
+window.location.href =
+"customer.html";
 
 }
 
 </script>
 
+
 </body>
+
 </html>
