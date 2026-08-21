@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Referral & Promo | All Samastipur
+</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:850px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-bottom:16px;
+}
+
+.referral-card{
+  background:linear-gradient(
+    135deg,
+    #0756d9,
+    #2563eb
+  );
+  color:#fff;
+  padding:28px;
+  border-radius:20px;
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.referral-icon{
+  font-size:45px;
+  margin-bottom:8px;
+}
+
+.referral-card p{
+  opacity:.9;
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+.code-box{
+  background:#fff;
+  color:#0756d9;
+  padding:14px;
+  border-radius:10px;
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:2px;
+  margin-bottom:12px;
+}
+
+.btn{
+  border:0;
+  background:#0756d9;
+  color:#fff;
+  padding:13px 16px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.referral-card .btn{
+  background:#fff;
+  color:#0756d9;
+}
+
+.btn-full{
+  width:100%;
+}
+
+.input-group{
+  display:flex;
+  gap:8px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid #d0d5dd;
+  border-radius:9px;
+  outline:none;
+  font-size:15px;
+  text-transform:uppercase;
+}
+
+input:focus{
+  border-color:#0756d9;
+}
+
+.message{
+  display:none;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:18px;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+.success{
+  background:#ecfdf3;
+  color:#166534;
+}
+
+.error{
+  background:#fef2f2;
+  color:#991b1b;
+}
+
+.promo-list{
+  display:grid;
+  gap:12px;
+}
+
+.promo{
+  border:1px solid #e4e7ec;
+  border-radius:12px;
+  padding:17px;
+}
+
+.promo-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
+
+.promo-code{
+  color:#0756d9;
+  font-weight:800;
+  font-size:17px;
+}
+
+.discount{
+  background:#ecfdf3;
+  color:#166534;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:bold;
+}
+
+.promo p{
+  color:#667085;
+  font-size:13px;
+  line-height:1.5;
+  margin-bottom:10px;
+}
+
+.small-btn{
+  padding:8px 12px;
+  font-size:12px;
+}
+
+.history{
+  display:grid;
+  gap:10px;
+}
+
+.history-row{
+  background:#f8fafc;
+  padding:14px;
+  border-radius:10px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.history-row span{
+  color:#667085;
+  font-size:13px;
+}
+
+.history-row strong{
+  color:#16a34a;
+}
+
+.benefits{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.benefit{
+  background:#f8fafc;
+  padding:18px;
+  text-align:center;
+  border-radius:12px;
+}
+
+.benefit-icon{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.benefit h3{
+  font-size:15px;
+  margin-bottom:5px;
+}
+
+.benefit p{
+  color:#667085;
+  font-size:12px;
+  line-height:1.4;
+}
+
+.note{
+  background:#fff8e1;
+  color:#7a5b00;
+  padding:14px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+footer{
+  text-align:center;
+  color:#667085;
+  padding:30px;
+}
+
+@media(max-width:600px){
+
+  .input-group{
+    flex-direction:column;
+  }
+
+  .benefits{
+    grid-template-columns:1fr;
+  }
+
+  .promo-top{
+    flex-direction:column;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    🎁 Referral & Promo
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      🎁 Refer & Save
+    </h1>
+
+    <p>
+      Friends को invite करें और दोनों reward पाएं।
+    </p>
+
+  </div>
+
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- REFERRAL -->
+
+  <div class="referral-card">
+
+    <div class="referral-icon">
+      👥
+    </div>
+
+    <h2>
+      अपना Friend Invite करें
+    </h2>
+
+    <p>
+      आपका friend पहली ride पर discount पाएगा
+      और आपको referral bonus मिलेगा।
+    </p>
+
+
+    <div class="code-box"
+         id="referralCode">
+      ASMFRIEND50
+    </div>
+
+
+    <button
+      class="btn"
+      onclick="copyReferral()"
+    >
+      📋 Copy Referral Code
+    </button>
+
+
+    <button
+      class="btn"
+      onclick="shareReferral()"
+      style="margin-left:5px;"
+    >
+      📤 Share
+    </button>
+
+  </div>
+
+
+  <!-- PROMO -->
+
+  <div class="card">
+
+    <h2>
+      🏷️ Promo Code
+    </h2>
+
+    <p
+      style="
+        color:#667085;
+        font-size:13px;
+        margin-bottom:14px;
+      "
+    >
+      अपनी ride booking पर promo code apply करें।
+    </p>
+
+
+    <div class="input-group">
+
+      <input
+        type="text"
+        id="promoInput"
+        placeholder="PROMO CODE"
+        maxlength="20"
+      >
+
+      <button
+        class="btn"
+        onclick="applyPromo()"
+      >
+        Apply
+      </button>
+
+    </div>
+
+
+    <div
+      id="promoResult"
+      style="
+        display:none;
+        margin-top:15px;
+        padding:14px;
+        background:#ecfdf3;
+        color:#166534;
+        border-radius:10px;
+        font-weight:bold;
+      "
+    ></div>
+
+  </div>
+
+
+  <!-- AVAILABLE PROMOS -->
+
+  <div class="card">
+
+    <h2>
+      🔥 Available Offers
+    </h2>
+
+
+    <div class="promo-list">
+
+
+      <div class="promo">
+
+        <div class="promo-top">
+
+          <div class="promo-code">
+            FIRST50
+          </div>
+
+          <div class="discount">
+            ₹50 OFF
+          </div>
+
+        </div>
+
+        <p>
+          New customers के लिए first ride पर ₹50 तक discount।
+          Minimum fare ₹100.
+        </p>
+
+        <button
+          class="btn small-btn"
+          onclick="usePromo('FIRST50')"
+        >
+          Use Code
+        </button>
+
+      </div>
+
+
+      <div class="promo">
+
+        <div class="promo-top">
+
+          <div class="promo-code">
+            RIDE20
+          </div>
+
+          <div class="discount">
+            20% OFF
+          </div>
+
+        </div>
+
+        <p>
+          Selected rides पर 20% discount।
+          Maximum discount ₹40.
+        </p>
+
+        <button
+          class="btn small-btn"
+          onclick="usePromo('RIDE20')"
+        >
+          Use Code
+        </button>
+
+      </div>
+
+
+      <div class="promo">
+
+        <div class="promo-top">
+
+          <div class="promo-code">
+            SAMASTIPUR10
+          </div>
+
+          <div class="discount">
+            ₹10 OFF
+          </div>
+
+        </div>
+
+        <p>
+          Samastipur local rides पर ₹10 discount।
+        </p>
+
+        <button
+          class="btn small-btn"
+          onclick="usePromo('SAMASTIPUR10')"
+        >
+          Use Code
+        </button>
+
+      </div>
+
+
+      <div class="promo">
+
+        <div class="promo-top">
+
+          <div class="promo-code">
+            WELCOME25
+          </div>
+
+          <div class="discount">
+            ₹25 OFF
+          </div>
+
+        </div>
+
+        <p>
+          New account users के लिए welcome offer।
+        </p>
+
+        <button
+          class="btn small-btn"
+          onclick="usePromo('WELCOME25')"
+        >
+          Use Code
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- BENEFITS -->
+
+  <div class="card">
+
+    <h2>
+      💎 Referral Benefits
+    </h2>
+
+    <div class="benefits">
+
+
+      <div class="benefit">
+
+        <div class="benefit-icon">
+          🎁
+        </div>
+
+        <h3>
+          Friend को Discount
+        </h3>
+
+        <p>
+          First ride पर special discount।
+        </p>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <div class="benefit-icon">
+          🏆
+        </div>
+
+        <h3>
+          आपको Points
+        </h3>
+
+        <p>
+          Successful referral पर 50 reward points।
+        </p>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <div class="benefit-icon">
+          💰
+        </div>
+
+        <h3>
+          Extra Savings
+        </h3>
+
+        <p>
+          Rewards और promo दोनों से saving।
+        </p>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- HISTORY -->
+
+  <div class="card">
+
+    <h2>
+      📋 Referral History
+    </h2>
+
+    <div
+      class="history"
+      id="history"
+    ></div>
+
+  </div>
+
+
+  <div class="note">
+
+    ⚠️ यह Demo Referral & Promo System है।
+    Real promo validation, expiry, usage limit,
+    referral fraud protection और discount calculation
+    backend/server पर होना चाहिए। Client-side code को
+    अकेले भरोसेमंद payment/discount authority नहीं
+    मानना चाहिए।
+
+  </div>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Invite Friends • Save More
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+PROMO DATA
+=========================================
+*/
+
+const promoCodes = {
+
+  FIRST50:{
+    type:"fixed",
+    value:50,
+    max:50,
+    minFare:100,
+    title:"₹50 OFF"
+  },
+
+  RIDE20:{
+    type:"percent",
+    value:20,
+    max:40,
+    minFare:0,
+    title:"20% OFF"
+  },
+
+  SAMASTIPUR10:{
+    type:"fixed",
+    value:10,
+    max:10,
+    minFare:50,
+    title:"₹10 OFF"
+  },
+
+  WELCOME25:{
+    type:"fixed",
+    value:25,
+    max:25,
+    minFare:80,
+    title:"₹25 OFF"
+  }
+
+};
+
+
+/*
+=========================================
+REFERRAL HISTORY
+=========================================
+*/
+
+let referralHistory = [
+
+  {
+    friend:"Demo Friend",
+    status:"Completed",
+    reward:50
+  }
+
+];
+
+
+const savedHistory =
+  localStorage.getItem(
+    "allSamastipurReferralHistory"
+  );
+
+
+if(savedHistory){
+
+  try{
+
+    referralHistory =
+      JSON.parse(savedHistory);
+
+  }catch(error){
+
+    console.log(
+      "Referral history unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+SAVE HISTORY
+=========================================
+*/
+
+function saveHistory(){
+
+  localStorage.setItem(
+
+    "allSamastipurReferralHistory",
+
+    JSON.stringify(
+      referralHistory
+    )
+
+  );
+
+}
+
+
+/*
+=========================================
+COPY REFERRAL
+=========================================
+*/
+
+function copyReferral(){
+
+
+  const code =
+    document.getElementById(
+      "referralCode"
+    ).innerText;
+
+
+  if(
+    navigator.clipboard &&
+    window.isSecureContext
+  ){
+
+    navigator.clipboard
+      .writeText(code)
+      .then(
+        function(){
+
+          showMessage(
+            "📋 Referral code copied: " +
+            code
+          );
+
+        }
+      )
+      .catch(
+        function(){
+
+          fallbackCopy(code);
+
+        }
+      );
+
+  }else{
+
+    fallbackCopy(code);
+
+  }
+
+}
+
+
+/*
+=========================================
+FALLBACK COPY
+=========================================
+*/
+
+function fallbackCopy(text){
+
+  const input =
+    document.createElement(
+      "input"
+    );
+
+
+  input.value =
+    text;
+
+
+  document.body.appendChild(
+    input
+  );
+
+
+  input.select();
+
+
+  document.execCommand(
+    "copy"
+  );
+
+
+  input.remove();
+
+
+  showMessage(
+    "📋 Referral code copied: " +
+    text
+  );
+
+}
+
+
+/*
+=========================================
+SHARE
+=========================================
+*/
+
+function shareReferral(){
+
+
+  const code =
+    document.getElementById(
+      "referralCode"
+    ).innerText;
+
+
+  const text =
+    "All Samastipur पर ride book करें और मेरा referral code " +
+    code +
+    " use करके discount पाएं!";
+
+
+  if(
+    navigator.share
+  ){
+
+    navigator.share({
+
+      title:
+        "All Samastipur Referral",
+
+      text:
+        text
+
+    }).catch(
+      function(){}
+    );
+
+  }else{
+
+    copyReferral();
+
+  }
+
+}
+
+
+/*
+=========================================
+USE PROMO
+=========================================
+*/
+
+function usePromo(code){
+
+  document.getElementById(
+    "promoInput"
+  ).value =
+    code;
+
+
+  applyPromo();
+
+}
+
+
+/*
+=========================================
+APPLY PROMO
+=========================================
+*/
+
+function applyPromo(){
+
+
+  const input =
+    document.getElementById(
+      "promoInput"
+    );
+
+
+  const code =
+    input.value
+      .trim()
+      .toUpperCase();
+
+
+  if(!code){
+
+    showMessage(
+      "⚠️ Promo code enter करें।",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const promo =
+    promoCodes[code];
+
+
+  if(!promo){
+
+    showMessage(
+      "❌ Invalid Promo Code.",
+      true
+    );
+
+    document.getElementById(
+      "promoResult"
+    ).style.display =
+      "none";
+
+    return;
+
+  }
+
+
+  /*
+  Demo fare
+  */
+
+  const demoFare =
+    126;
+
+
+  if(
+    demoFare <
+    promo.minFare
+  ){
+
+    showMessage(
+
+      "⚠️ यह promo minimum ₹" +
+      promo.minFare +
+      " fare पर लागू होगा।",
+
+      true
+
+    );
+
+    return;
+
+  }
+
+
+  let discount = 0;
+
+
+  if(
+    promo.type ===
+    "fixed"
+  ){
+
+    discount =
+      promo.value;
+
+  }
+
+
+  if(
+    promo.type ===
+    "percent"
+  ){
+
+    discount =
+      Math.round(
+        demoFare *
+        promo.value /
+        100
+      );
+
+  }
+
+
+  discount =
+    Math.min(
+      discount,
+      promo.max
+    );
+
+
+  const finalFare =
+    Math.max(
+      0,
+      demoFare -
+      discount
+    );
+
+
+  const result =
+    document.getElementById(
+      "promoResult"
+    );
+
+
+  result.innerHTML =
+
+    "🎉 Promo Applied!<br><br>" +
+
+    "Original Fare: ₹" +
+    demoFare +
+
+    "<br>" +
+
+    "Discount: ₹" +
+    discount +
+
+    "<br>" +
+
+    "<strong>Final Fare: ₹" +
+    finalFare +
+    "</strong>";
+
+
+  result.style.display =
+    "block";
+
+
+  /*
+  Save promo
+  */
+
+  localStorage.setItem(
+
+    "allSamastipurAppliedPromo",
+
+    JSON.stringify({
+
+      code:code,
+
+      discount:discount,
+
+      originalFare:demoFare,
+
+      finalFare:finalFare
+
+    })
+
+  );
+
+
+  showMessage(
+    "✅ " +
+    code +
+    " successfully applied!"
+  );
+
+}
+
+
+/*
+=========================================
+DISPLAY REFERRAL HISTORY
+=========================================
+*/
+
+function displayHistory(){
+
+
+  const box =
+    document.getElementById(
+      "history"
+    );
+
+
+  box.innerHTML = "";
+
+
+  if(
+    referralHistory.length === 0
+  ){
+
+    box.innerHTML = `
+
+      <p
+        style="
+          color:#667085;
+          text-align:center;
+          padding:15px;
+        "
+      >
+        अभी कोई referral नहीं है।
+      </p>
+
+    `;
+
+    return;
+
+  }
+
+
+  referralHistory.forEach(
+    function(item){
+
+
+      box.innerHTML += `
+
+        <div class="history-row">
+
+          <span>
+            👤 ${escapeHTML(item.friend)}
+            <br>
+            <small>
+              ${escapeHTML(item.status)}
+            </small>
+          </span>
+
+          <strong>
+            +${item.reward} Points
+          </strong>
+
+        </div>
+
+      `;
+
+    }
+  );
+
+}
+
+
+/*
+=========================================
+SECURITY HELPER
+=========================================
+*/
+
+function escapeHTML(text){
+
+  return String(text)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/*
+=========================================
+MESSAGE
+=========================================
+*/
+
+function showMessage(
+  text,
+  isError=false
+){
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.innerText =
+    text;
+
+
+  message.className =
+    "message " +
+    (
+      isError
+      ? "error"
+      : "success"
+    );
+
+
+  message.style.display =
+    "block";
+
+
+  setTimeout(
+
+    function(){
+
+      message.style.display =
+        "none";
+
+    },
+
+    3500
+
+  );
+
+}
+
+
+/*
+=========================================
+START
+=========================================
+*/
+
+saveHistory();
+
+displayHistory();
+
+</script>
+
+
+</body>
+
+</html>
