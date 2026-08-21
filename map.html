@@ -14,7 +14,233 @@
   padding:0;
   box-sizing:border-box;
 }
+<!-- ==========================================
+     ALL SAMASTIPUR
+     CODE 36 - LIVE DRIVER MAP MARKER
+========================================== -->
 
+<script type="module">
+
+import {
+  database,
+  ref,
+  onValue
+} from "./firebase-config.js";
+
+
+// ------------------------------------------
+// Current Ride
+// ------------------------------------------
+
+const savedRide =
+  localStorage.getItem(
+    "allSamastipurCurrentRide"
+  );
+
+
+if (!savedRide) {
+
+  console.log(
+    "❌ Current ride नहीं मिली."
+  );
+
+} else {
+
+  const ride =
+    JSON.parse(savedRide);
+
+  const rideId =
+    ride.rideId;
+
+
+  if (!rideId) {
+
+    console.error(
+      "❌ Ride ID missing."
+    );
+
+  } else {
+
+
+    // --------------------------------------
+    // Firebase Ride
+    // --------------------------------------
+
+    const rideRef =
+      ref(
+        database,
+        "rides/" + rideId
+      );
+
+
+    onValue(
+      rideRef,
+      function(snapshot) {
+
+        if (!snapshot.exists()) {
+
+          console.log(
+            "Ride Firebase में नहीं मिली."
+          );
+
+          return;
+
+        }
+
+
+        const data =
+          snapshot.val();
+
+
+        const location =
+          data.driverLocation;
+
+
+        if (
+          !location ||
+          location.latitude === null ||
+          location.longitude === null
+        ) {
+
+          console.log(
+            "📍 Driver location अभी available नहीं है."
+          );
+
+          return;
+
+        }
+
+
+        const latitude =
+          Number(
+            location.latitude
+          );
+
+        const longitude =
+          Number(
+            location.longitude
+          );
+
+
+        console.log(
+          "🚕 Driver Location:",
+          latitude,
+          longitude
+        );
+
+
+        // ----------------------------------
+        // Map Event
+        // ----------------------------------
+
+        window.dispatchEvent(
+
+          new CustomEvent(
+            "allSamastipurDriverMapLocation",
+            {
+
+              detail: {
+
+                latitude:
+                  latitude,
+
+                longitude:
+                  longitude
+
+              }
+
+            }
+
+          )
+
+        );
+
+
+        // ----------------------------------
+        // If Google Map Exists
+        // ----------------------------------
+
+        if (
+          typeof window.google !==
+            "undefined" &&
+          window.google.maps
+        ) {
+
+          const position = {
+
+            lat:
+              latitude,
+
+            lng:
+              longitude
+
+          };
+
+
+          // Create Marker
+
+          if (
+            !window.allSamastipurDriverMarker
+          ) {
+
+            window.allSamastipurDriverMarker =
+              new google.maps.Marker({
+
+                position:
+                  position,
+
+                map:
+                  window.allSamastipurMap,
+
+                title:
+                  "All Samastipur Driver"
+
+              });
+
+
+          } else {
+
+            // Move Existing Marker
+
+            window
+              .allSamastipurDriverMarker
+              .setPosition(
+                position
+              );
+
+          }
+
+
+          // Move map toward driver
+
+          if (
+            window.allSamastipurMap
+          ) {
+
+            window
+              .allSamastipurMap
+              .panTo(
+                position
+              );
+
+          }
+
+        }
+
+      }
+
+    );
+
+  }
+
+}
+
+
+console.log(
+  "✅ Live Driver Map Marker Connected!"
+);
+
+</script>
 body{
   font-family:Arial,sans-serif;
   background:#f4f7fb;
