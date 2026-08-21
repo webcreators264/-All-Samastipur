@@ -365,7 +365,281 @@ footer{
 
 </style>
 </head>
+<!-- ==========================================
+     ALL SAMASTIPUR
+     CODE 37 - CUSTOMER MAP CONNECTION
+========================================== -->
 
+<script>
+
+(function () {
+
+  // ------------------------------------------
+  // Check Google Maps
+  // ------------------------------------------
+
+  if (
+    typeof window.google === "undefined" ||
+    !window.google.maps
+  ) {
+
+    console.log(
+      "Google Maps अभी load नहीं हुआ."
+    );
+
+    return;
+
+  }
+
+
+  // ------------------------------------------
+  // Get Existing Map
+  // ------------------------------------------
+
+  let map =
+    window.allSamastipurMap;
+
+
+  // ------------------------------------------
+  // Create Map If Missing
+  // ------------------------------------------
+
+  if (!map) {
+
+    const mapElement =
+      document.getElementById("map");
+
+
+    if (!mapElement) {
+
+      console.error(
+        "Map container #map नहीं मिला."
+      );
+
+      return;
+
+    }
+
+
+    map =
+      new google.maps.Map(
+        mapElement,
+        {
+
+          center: {
+            lat: 25.8628,
+            lng: 85.7810
+          },
+
+          zoom: 14
+
+        }
+      );
+
+
+    window.allSamastipurMap =
+      map;
+
+  }
+
+
+  // ------------------------------------------
+  // Pickup Marker
+  // ------------------------------------------
+
+  const savedRide =
+    localStorage.getItem(
+      "allSamastipurCurrentRide"
+    );
+
+
+  if (savedRide) {
+
+    try {
+
+      const ride =
+        JSON.parse(savedRide);
+
+
+      // Pickup location अगर coordinates
+      // के रूप में available हो
+
+      if (
+        ride.pickupLatitude &&
+        ride.pickupLongitude
+      ) {
+
+        window.allSamastipurPickupMarker =
+          new google.maps.Marker({
+
+            position: {
+
+              lat:
+                Number(
+                  ride.pickupLatitude
+                ),
+
+              lng:
+                Number(
+                  ride.pickupLongitude
+                )
+
+            },
+
+            map:
+              map,
+
+            title:
+              "Pickup Location"
+
+          });
+
+      }
+
+
+      // Drop location अगर coordinates
+      // के रूप में available हो
+
+      if (
+        ride.dropLatitude &&
+        ride.dropLongitude
+      ) {
+
+        window.allSamastipurDropMarker =
+          new google.maps.Marker({
+
+            position: {
+
+              lat:
+                Number(
+                  ride.dropLatitude
+                ),
+
+              lng:
+                Number(
+                  ride.dropLongitude
+                )
+
+            },
+
+            map:
+              map,
+
+            title:
+              "Drop Location"
+
+          });
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Ride Map Error:",
+        error
+      );
+
+    }
+
+  }
+
+
+  // ------------------------------------------
+  // Driver Location Listener
+  // ------------------------------------------
+
+  window.addEventListener(
+
+    "allSamastipurDriverMapLocation",
+
+    function (event) {
+
+      const location =
+        event.detail;
+
+
+      if (
+        !location ||
+        !location.latitude ||
+        !location.longitude
+      ) {
+
+        return;
+
+      }
+
+
+      const position = {
+
+        lat:
+          Number(
+            location.latitude
+          ),
+
+        lng:
+          Number(
+            location.longitude
+          )
+
+      };
+
+
+      // --------------------------------------
+      // Create Driver Marker
+      // --------------------------------------
+
+      if (
+        !window.allSamastipurDriverMarker
+      ) {
+
+        window.allSamastipurDriverMarker =
+          new google.maps.Marker({
+
+            position:
+              position,
+
+            map:
+              map,
+
+            title:
+              "🚕 All Samastipur Driver"
+
+          });
+
+
+      } else {
+
+        // Move marker
+
+        window
+          .allSamastipurDriverMarker
+          .setPosition(
+            position
+          );
+
+      }
+
+
+      // --------------------------------------
+      // Center Map On Driver
+      // --------------------------------------
+
+      map.panTo(
+        position
+      );
+
+    }
+
+  );
+
+
+  console.log(
+    "✅ Customer Map Connected!"
+  );
+
+
+})();
+</script>
 <body>
 
 
