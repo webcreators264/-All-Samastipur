@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0756d9">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<meta
+  name="theme-color"
+  content="#0756d9"
+>
 
 <title>Live Map | All Samastipur</title>
 
@@ -14,233 +24,7 @@
   padding:0;
   box-sizing:border-box;
 }
-<!-- ==========================================
-     ALL SAMASTIPUR
-     CODE 36 - LIVE DRIVER MAP MARKER
-========================================== -->
 
-<script type="module">
-
-import {
-  database,
-  ref,
-  onValue
-} from "./firebase-config.js";
-
-
-// ------------------------------------------
-// Current Ride
-// ------------------------------------------
-
-const savedRide =
-  localStorage.getItem(
-    "allSamastipurCurrentRide"
-  );
-
-
-if (!savedRide) {
-
-  console.log(
-    "❌ Current ride नहीं मिली."
-  );
-
-} else {
-
-  const ride =
-    JSON.parse(savedRide);
-
-  const rideId =
-    ride.rideId;
-
-
-  if (!rideId) {
-
-    console.error(
-      "❌ Ride ID missing."
-    );
-
-  } else {
-
-
-    // --------------------------------------
-    // Firebase Ride
-    // --------------------------------------
-
-    const rideRef =
-      ref(
-        database,
-        "rides/" + rideId
-      );
-
-
-    onValue(
-      rideRef,
-      function(snapshot) {
-
-        if (!snapshot.exists()) {
-
-          console.log(
-            "Ride Firebase में नहीं मिली."
-          );
-
-          return;
-
-        }
-
-
-        const data =
-          snapshot.val();
-
-
-        const location =
-          data.driverLocation;
-
-
-        if (
-          !location ||
-          location.latitude === null ||
-          location.longitude === null
-        ) {
-
-          console.log(
-            "📍 Driver location अभी available नहीं है."
-          );
-
-          return;
-
-        }
-
-
-        const latitude =
-          Number(
-            location.latitude
-          );
-
-        const longitude =
-          Number(
-            location.longitude
-          );
-
-
-        console.log(
-          "🚕 Driver Location:",
-          latitude,
-          longitude
-        );
-
-
-        // ----------------------------------
-        // Map Event
-        // ----------------------------------
-
-        window.dispatchEvent(
-
-          new CustomEvent(
-            "allSamastipurDriverMapLocation",
-            {
-
-              detail: {
-
-                latitude:
-                  latitude,
-
-                longitude:
-                  longitude
-
-              }
-
-            }
-
-          )
-
-        );
-
-
-        // ----------------------------------
-        // If Google Map Exists
-        // ----------------------------------
-
-        if (
-          typeof window.google !==
-            "undefined" &&
-          window.google.maps
-        ) {
-
-          const position = {
-
-            lat:
-              latitude,
-
-            lng:
-              longitude
-
-          };
-
-
-          // Create Marker
-
-          if (
-            !window.allSamastipurDriverMarker
-          ) {
-
-            window.allSamastipurDriverMarker =
-              new google.maps.Marker({
-
-                position:
-                  position,
-
-                map:
-                  window.allSamastipurMap,
-
-                title:
-                  "All Samastipur Driver"
-
-              });
-
-
-          } else {
-
-            // Move Existing Marker
-
-            window
-              .allSamastipurDriverMarker
-              .setPosition(
-                position
-              );
-
-          }
-
-
-          // Move map toward driver
-
-          if (
-            window.allSamastipurMap
-          ) {
-
-            window
-              .allSamastipurMap
-              .panTo(
-                position
-              );
-
-          }
-
-        }
-
-      }
-
-    );
-
-  }
-
-}
-
-
-console.log(
-  "✅ Live Driver Map Marker Connected!"
-);
-
-</script>
 body{
   font-family:Arial,sans-serif;
   background:#f4f7fb;
@@ -364,284 +148,10 @@ footer{
 }
 
 </style>
+
 </head>
-<!-- ==========================================
-     ALL SAMASTIPUR
-     CODE 37 - CUSTOMER MAP CONNECTION
-========================================== -->
 
-<script>
-
-(function () {
-
-  // ------------------------------------------
-  // Check Google Maps
-  // ------------------------------------------
-
-  if (
-    typeof window.google === "undefined" ||
-    !window.google.maps
-  ) {
-
-    console.log(
-      "Google Maps अभी load नहीं हुआ."
-    );
-
-    return;
-
-  }
-
-
-  // ------------------------------------------
-  // Get Existing Map
-  // ------------------------------------------
-
-  let map =
-    window.allSamastipurMap;
-
-
-  // ------------------------------------------
-  // Create Map If Missing
-  // ------------------------------------------
-
-  if (!map) {
-
-    const mapElement =
-      document.getElementById("map");
-
-
-    if (!mapElement) {
-
-      console.error(
-        "Map container #map नहीं मिला."
-      );
-
-      return;
-
-    }
-
-
-    map =
-      new google.maps.Map(
-        mapElement,
-        {
-
-          center: {
-            lat: 25.8628,
-            lng: 85.7810
-          },
-
-          zoom: 14
-
-        }
-      );
-
-
-    window.allSamastipurMap =
-      map;
-
-  }
-
-
-  // ------------------------------------------
-  // Pickup Marker
-  // ------------------------------------------
-
-  const savedRide =
-    localStorage.getItem(
-      "allSamastipurCurrentRide"
-    );
-
-
-  if (savedRide) {
-
-    try {
-
-      const ride =
-        JSON.parse(savedRide);
-
-
-      // Pickup location अगर coordinates
-      // के रूप में available हो
-
-      if (
-        ride.pickupLatitude &&
-        ride.pickupLongitude
-      ) {
-
-        window.allSamastipurPickupMarker =
-          new google.maps.Marker({
-
-            position: {
-
-              lat:
-                Number(
-                  ride.pickupLatitude
-                ),
-
-              lng:
-                Number(
-                  ride.pickupLongitude
-                )
-
-            },
-
-            map:
-              map,
-
-            title:
-              "Pickup Location"
-
-          });
-
-      }
-
-
-      // Drop location अगर coordinates
-      // के रूप में available हो
-
-      if (
-        ride.dropLatitude &&
-        ride.dropLongitude
-      ) {
-
-        window.allSamastipurDropMarker =
-          new google.maps.Marker({
-
-            position: {
-
-              lat:
-                Number(
-                  ride.dropLatitude
-                ),
-
-              lng:
-                Number(
-                  ride.dropLongitude
-                )
-
-            },
-
-            map:
-              map,
-
-            title:
-              "Drop Location"
-
-          });
-
-      }
-
-    } catch (error) {
-
-      console.error(
-        "Ride Map Error:",
-        error
-      );
-
-    }
-
-  }
-
-
-  // ------------------------------------------
-  // Driver Location Listener
-  // ------------------------------------------
-
-  window.addEventListener(
-
-    "allSamastipurDriverMapLocation",
-
-    function (event) {
-
-      const location =
-        event.detail;
-
-
-      if (
-        !location ||
-        !location.latitude ||
-        !location.longitude
-      ) {
-
-        return;
-
-      }
-
-
-      const position = {
-
-        lat:
-          Number(
-            location.latitude
-          ),
-
-        lng:
-          Number(
-            location.longitude
-          )
-
-      };
-
-
-      // --------------------------------------
-      // Create Driver Marker
-      // --------------------------------------
-
-      if (
-        !window.allSamastipurDriverMarker
-      ) {
-
-        window.allSamastipurDriverMarker =
-          new google.maps.Marker({
-
-            position:
-              position,
-
-            map:
-              map,
-
-            title:
-              "🚕 All Samastipur Driver"
-
-          });
-
-
-      } else {
-
-        // Move marker
-
-        window
-          .allSamastipurDriverMarker
-          .setPosition(
-            position
-          );
-
-      }
-
-
-      // --------------------------------------
-      // Center Map On Driver
-      // --------------------------------------
-
-      map.panTo(
-        position
-      );
-
-    }
-
-  );
-
-
-  console.log(
-    "✅ Customer Map Connected!"
-  );
-
-
-})();
-</script>
 <body>
-
 
 <header>
 
@@ -668,7 +178,6 @@ footer{
 
 
   <div class="card">
-
 
     <div class="controls">
 
@@ -754,27 +263,11 @@ footer{
 </footer>
 
 
+<!-- ==========================================
+     GOOGLE MAPS
+========================================== -->
+
 <script>
-
-/*
-=========================================
-GOOGLE MAPS CONFIGURATION
-=========================================
-
-नीचे अपनी Google Maps API Key डालें।
-
-Example:
-
-const GOOGLE_MAPS_API_KEY =
-"YOUR_REAL_API_KEY";
-
-लेकिन API key को public GitHub repository
-में डालना सुरक्षित नहीं है।
-
-Backend आने के बाद key को सुरक्षित तरीके
-से इस्तेमाल करेंगे।
-*/
-
 
 let map;
 
@@ -791,35 +284,50 @@ let directionsRenderer;
 
 /*
 =========================================
-INITIALIZE MAP
+INITIALIZE GOOGLE MAP
 =========================================
 */
 
 function initMap(){
 
-  /*
-    Samastipur का approximate center
-  */
-
   const samastipur = {
-    lat: 25.8629,
-    lng: 85.7810
+
+    lat:25.8629,
+
+    lng:85.7810
+
   };
 
 
-  map = new google.maps.Map(
-    document.getElementById("map"),
-    {
-      center: samastipur,
-      zoom: 12,
+  map =
+    new google.maps.Map(
 
-      mapTypeControl:false,
+      document.getElementById("map"),
 
-      streetViewControl:false,
+      {
 
-      fullscreenControl:true
-    }
-  );
+        center:
+          samastipur,
+
+        zoom:
+          13,
+
+        mapTypeControl:
+          false,
+
+        streetViewControl:
+          false,
+
+        fullscreenControl:
+          true
+
+      }
+
+    );
+
+
+  window.allSamastipurMap =
+    map;
 
 
   directionsService =
@@ -828,72 +336,26 @@ function initMap(){
 
   directionsRenderer =
     new google.maps.DirectionsRenderer({
+
       map:map
+
     });
 
-
-  /*
-  Pickup Marker
-  */
 
   pickupMarker =
     new google.maps.Marker({
 
-      position:samastipur,
+      position:
+        samastipur,
 
-      map:map,
+      map:
+        map,
 
-      title:"Pickup Location",
+      title:
+        "Pickup Location",
 
-      label:"P"
-
-    });
-
-
-  /*
-  Demo Drop Location
-  */
-
-  const dropLocation = {
-    lat:25.8000,
-    lng:85.7000
-  };
-
-
-  dropMarker =
-    new google.maps.Marker({
-
-      position:dropLocation,
-
-      map:map,
-
-      title:"Drop Location",
-
-      label:"D"
-
-    });
-
-
-  /*
-  Demo Driver Location
-  */
-
-  const driverLocation = {
-    lat:25.8500,
-    lng:85.7600
-  };
-
-
-  driverMarker =
-    new google.maps.Marker({
-
-      position:driverLocation,
-
-      map:map,
-
-      title:"Driver Location",
-
-      label:"🛺"
+      label:
+        "P"
 
     });
 
@@ -901,7 +363,12 @@ function initMap(){
   document.getElementById(
     "driverStatus"
   ).innerText =
-    "Driver location available";
+    "Searching for driver...";
+
+
+  console.log(
+    "✅ Google Map Loaded"
+  );
 
 }
 
@@ -939,23 +406,20 @@ function showRoute(){
 
   document.getElementById(
     "pickupText"
-  ).innerText = pickup;
+  ).innerText =
+    pickup;
 
 
   document.getElementById(
     "dropText"
-  ).innerText = drop;
+  ).innerText =
+    drop;
 
-
-  /*
-  Google Directions API से
-  route calculate होगा।
-  */
 
   if(!directionsService){
 
     alert(
-      "Google Maps अभी configure नहीं है।"
+      "Google Maps अभी load नहीं हुआ।"
     );
 
     return;
@@ -967,9 +431,11 @@ function showRoute(){
 
     {
 
-      origin:pickup,
+      origin:
+        pickup,
 
-      destination:drop,
+      destination:
+        drop,
 
       travelMode:
         google.maps.TravelMode.DRIVING
@@ -980,7 +446,7 @@ function showRoute(){
 
       if(
         status ===
-        google.maps.DirectionsStatus.OK
+        "OK"
       ){
 
         directionsRenderer.setDirections(
@@ -1004,65 +470,260 @@ function showRoute(){
 
 /*
 =========================================
-DEMO DRIVER MOVEMENT
+FIREBASE LIVE DRIVER LOCATION
 =========================================
 */
 
-function moveDriver(){
+async function connectDriverLocation(){
 
-  if(!driverMarker){
+  try{
+
+    const module =
+      await import(
+        "./firebase-config.js"
+      );
+
+
+    const database =
+      module.database;
+
+    const ref =
+      module.ref;
+
+    const onValue =
+      module.onValue;
+
+
+    const savedRide =
+      localStorage.getItem(
+        "allSamastipurCurrentRide"
+      );
+
+
+    if(!savedRide){
+
+      console.log(
+        "Current ride नहीं मिली।"
+      );
+
+      return;
+
+    }
+
+
+    const ride =
+      JSON.parse(
+        savedRide
+      );
+
+
+    if(!ride.rideId){
+
+      console.log(
+        "Ride ID नहीं मिली।"
+      );
+
+      return;
+
+    }
+
+
+    const rideRef =
+      ref(
+
+        database,
+
+        "rides/" +
+        ride.rideId
+
+      );
+
+
+    onValue(
+
+      rideRef,
+
+      function(snapshot){
+
+        if(!snapshot.exists()){
+
+          return;
+
+        }
+
+
+        const data =
+          snapshot.val();
+
+
+        const location =
+          data.driverLocation;
+
+
+        if(
+          !location ||
+          location.latitude === null ||
+          location.longitude === null
+        ){
+
+          document.getElementById(
+            "driverStatus"
+          ).innerText =
+            "🔍 Driver location waiting...";
+
+          return;
+
+        }
+
+
+        const position = {
+
+          lat:
+            Number(
+              location.latitude
+            ),
+
+          lng:
+            Number(
+              location.longitude
+            )
+
+        };
+
+
+        /*
+        =====================================
+        CREATE DRIVER MARKER
+        =====================================
+        */
+
+        if(!driverMarker){
+
+          driverMarker =
+            new google.maps.Marker({
+
+              position:
+                position,
+
+              map:
+                map,
+
+              title:
+                "🚕 All Samastipur Driver"
+
+            });
+
+        }else{
+
+          driverMarker.setPosition(
+            position
+          );
+
+        }
+
+
+        /*
+        =====================================
+        DRIVER STATUS
+        =====================================
+        */
+
+        document.getElementById(
+          "driverStatus"
+        ).innerText =
+          "🟢 Driver location live";
+
+
+        /*
+        =====================================
+        CENTER MAP
+        =====================================
+        */
+
+        map.panTo(
+          position
+        );
+
+
+        console.log(
+          "🚕 Driver Live:",
+          position
+        );
+
+      }
+
+    );
+
+
+  }catch(error){
+
+    console.error(
+      "Firebase Map Error:",
+      error
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+START FIREBASE AFTER MAP LOAD
+=========================================
+*/
+
+function startLiveDriverTracking(){
+
+  if(
+    typeof google ===
+      "undefined" ||
+    !google.maps
+  ){
 
     return;
 
   }
 
 
-  const position =
-    driverMarker.getPosition();
-
-
-  const newLat =
-    position.lat() + 0.0005;
-
-
-  const newLng =
-    position.lng() + 0.0005;
-
-
-  driverMarker.setPosition({
-
-    lat:newLat,
-
-    lng:newLng
-
-  });
+  connectDriverLocation();
 
 }
 
 
-/*
-हर 5 सेकंड में Demo Driver
-थोड़ा move होगा।
-*/
+</script>
 
-setInterval(
-  moveDriver,
-  5000
+
+<!-- ==========================================
+     FIREBASE LIVE LOCATION START
+========================================== -->
+
+<script>
+
+window.addEventListener(
+  "load",
+  function(){
+
+    setTimeout(
+      startLiveDriverTracking,
+      1000
+    );
+
+  }
 );
 
 </script>
 
 
-<!--
-=========================================
-GOOGLE MAPS SCRIPT
+<!-- ==========================================
+     GOOGLE MAPS SCRIPT
+========================================== -->
 
+<!--
 IMPORTANT:
 
-YOUR_GOOGLE_MAPS_API_KEY को
-अपनी वास्तविक Google Maps API Key
-से replace करना होगा।
-=========================================
+YOUR_GOOGLE_MAPS_API_KEY को अपनी
+Google Maps API Key से replace करें।
 -->
 
 <script
@@ -1073,4 +734,5 @@ YOUR_GOOGLE_MAPS_API_KEY को
 
 
 </body>
+
 </html>
