@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Notifications | All Samastipur
+</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.actions{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.btn{
+  border:0;
+  background:#0756d9;
+  color:#fff;
+  padding:11px 15px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn-light{
+  background:#fff;
+  color:#0756d9;
+  border:1px solid #d0d5dd;
+}
+
+.notification{
+  background:#fff;
+  padding:18px;
+  border-radius:15px;
+  margin-bottom:12px;
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+  display:flex;
+  gap:14px;
+  position:relative;
+  border-left:4px solid #0756d9;
+}
+
+.notification.unread{
+  background:#eef6ff;
+}
+
+.icon{
+  width:48px;
+  height:48px;
+  flex-shrink:0;
+  background:#eaf3ff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:23px;
+}
+
+.content{
+  flex:1;
+}
+
+.content h3{
+  font-size:16px;
+  margin-bottom:6px;
+}
+
+.content p{
+  color:#667085;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.time{
+  color:#98a2b3;
+  font-size:11px;
+  margin-top:7px;
+}
+
+.unread-dot{
+  width:9px;
+  height:9px;
+  background:#0756d9;
+  border-radius:50%;
+  position:absolute;
+  right:14px;
+  top:14px;
+}
+
+.empty{
+  display:none;
+  text-align:center;
+  background:#fff;
+  padding:45px 20px;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+.empty-icon{
+  font-size:50px;
+  margin-bottom:10px;
+}
+
+.message{
+  display:none;
+  background:#ecfdf3;
+  color:#166534;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:15px;
+  font-weight:bold;
+}
+
+.info{
+  background:#fff8e1;
+  color:#7a5b00;
+  padding:14px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.5;
+  margin-top:20px;
+}
+
+footer{
+  text-align:center;
+  color:#667085;
+  padding:30px;
+}
+
+@media(max-width:500px){
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .notification{
+    padding:15px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    🔔 Notifications
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      🔔 Notifications
+    </h1>
+
+    <p>
+      आपकी ride और account की latest updates।
+    </p>
+
+  </div>
+
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- ACTIONS -->
+
+  <div class="actions">
+
+    <button
+      class="btn"
+      onclick="markAllRead()"
+    >
+      ✓ Mark All Read
+    </button>
+
+
+    <button
+      class="btn btn-light"
+      onclick="clearNotifications()"
+    >
+      🗑️ Clear All
+    </button>
+
+  </div>
+
+
+  <!-- NOTIFICATION LIST -->
+
+  <div id="notificationList">
+  </div>
+
+
+  <!-- EMPTY -->
+
+  <div
+    class="empty"
+    id="emptyState"
+  >
+
+    <div class="empty-icon">
+      🔕
+    </div>
+
+    <h2>
+      कोई Notification नहीं
+    </h2>
+
+    <p
+      style="
+        color:#667085;
+        margin-top:8px;
+      "
+    >
+      नई ride update आने पर यहाँ दिखाई देगी।
+    </p>
+
+  </div>
+
+
+  <div class="info">
+
+    ⚠️ यह Demo Notification System है।
+    Real-time notifications के लिए backend के साथ
+    Firebase Cloud Messaging या किसी अन्य secure
+    push-notification service की जरूरत होगी।
+
+  </div>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Ride Updates & Notifications
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+DEMO NOTIFICATIONS
+=========================================
+*/
+
+let notifications = [
+
+  {
+    id:1,
+    icon:"🚕",
+    title:"Driver ने Ride Accept कर ली",
+    text:"Raj Kumar आपकी ride accept कर चुके हैं।",
+    time:"2 मिनट पहले",
+    unread:true
+  },
+
+  {
+    id:2,
+    icon:"📍",
+    title:"Driver आपकी तरफ आ रहे हैं",
+    text:"आपके driver की live location अब available है।",
+    time:"5 मिनट पहले",
+    unread:true
+  },
+
+  {
+    id:3,
+    icon:"💰",
+    title:"Fare Updated",
+    text:"आपकी estimated ride fare ₹126 है।",
+    time:"10 मिनट पहले",
+    unread:false
+  },
+
+  {
+    id:4,
+    icon:"🏆",
+    title:"Reward Points मिले",
+    text:"आपको completed ride के लिए 10 reward points मिले।",
+    time:"आज",
+    unread:false
+  },
+
+  {
+    id:5,
+    icon:"💳",
+    title:"Payment Successful",
+    text:"आपका payment successfully receive हो गया।",
+    time:"कल",
+    unread:false
+  }
+
+];
+
+
+/*
+=========================================
+LOAD SAVED NOTIFICATIONS
+=========================================
+*/
+
+const saved =
+  localStorage.getItem(
+    "allSamastipurNotifications"
+  );
+
+
+if(saved){
+
+  try{
+
+    notifications =
+      JSON.parse(saved);
+
+  }catch(error){
+
+    console.log(
+      "Notifications unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+SAVE NOTIFICATIONS
+=========================================
+*/
+
+function saveNotifications(){
+
+  localStorage.setItem(
+
+    "allSamastipurNotifications",
+
+    JSON.stringify(
+      notifications
+    )
+
+  );
+
+}
+
+
+/*
+=========================================
+DISPLAY
+=========================================
+*/
+
+function displayNotifications(){
+
+
+  const list =
+    document.getElementById(
+      "notificationList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  if(notifications.length === 0){
+
+    document.getElementById(
+      "emptyState"
+    ).style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "emptyState"
+  ).style.display =
+    "none";
+
+
+  notifications.forEach(
+    function(item){
+
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "notification" +
+        (
+          item.unread
+          ? " unread"
+          : ""
+        );
+
+
+      div.onclick =
+        function(){
+
+          markRead(item.id);
+
+        };
+
+
+      div.innerHTML = `
+
+        <div class="icon">
+          ${item.icon}
+        </div>
+
+
+        <div class="content">
+
+          <h3>
+            ${escapeHTML(item.title)}
+          </h3>
+
+          <p>
+            ${escapeHTML(item.text)}
+          </p>
+
+          <div class="time">
+            🕐 ${escapeHTML(item.time)}
+          </div>
+
+        </div>
+
+
+        ${
+          item.unread
+          ? '<div class="unread-dot"></div>'
+          : ''
+        }
+
+      `;
+
+
+      list.appendChild(
+        div
+      );
+
+    }
+  );
+
+}
+
+
+/*
+=========================================
+MARK ONE READ
+=========================================
+*/
+
+function markRead(id){
+
+
+  const item =
+    notifications.find(
+      function(notification){
+
+        return notification.id === id;
+
+      }
+    );
+
+
+  if(item){
+
+    item.unread =
+      false;
+
+    saveNotifications();
+
+    displayNotifications();
+
+  }
+
+}
+
+
+/*
+=========================================
+MARK ALL READ
+=========================================
+*/
+
+function markAllRead(){
+
+
+  notifications.forEach(
+    function(item){
+
+      item.unread =
+        false;
+
+    }
+  );
+
+
+  saveNotifications();
+
+  displayNotifications();
+
+
+  showMessage(
+    "✅ सभी notifications read हो गईं।"
+  );
+
+}
+
+
+/*
+=========================================
+CLEAR ALL
+=========================================
+*/
+
+function clearNotifications(){
+
+
+  if(notifications.length === 0){
+
+    return;
+
+  }
+
+
+  const confirmDelete =
+    confirm(
+      "क्या आप सभी notifications delete करना चाहते हैं?"
+    );
+
+
+  if(!confirmDelete){
+
+    return;
+
+  }
+
+
+  notifications = [];
+
+
+  saveNotifications();
+
+  displayNotifications();
+
+
+  showMessage(
+    "🗑️ सभी notifications clear हो गईं।"
+  );
+
+}
+
+
+/*
+=========================================
+ADD NEW NOTIFICATION
+=========================================
+*/
+
+function addNotification(
+  icon,
+  title,
+  text
+){
+
+
+  const newNotification = {
+
+    id:
+      Date.now(),
+
+    icon:
+      icon,
+
+    title:
+      title,
+
+    text:
+      text,
+
+    time:
+      "अभी",
+
+    unread:
+      true
+
+  };
+
+
+  notifications.unshift(
+    newNotification
+  );
+
+
+  saveNotifications();
+
+  displayNotifications();
+
+}
+
+
+/*
+=========================================
+SECURITY HELPER
+=========================================
+*/
+
+function escapeHTML(text){
+
+  return String(text)
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/*
+=========================================
+MESSAGE
+=========================================
+*/
+
+function showMessage(text){
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.innerText =
+    text;
+
+
+  message.style.display =
+    "block";
+
+
+  setTimeout(
+
+    function(){
+
+      message.style.display =
+        "none";
+
+    },
+
+    3500
+
+  );
+
+}
+
+
+/*
+=========================================
+START
+=========================================
+*/
+
+saveNotifications();
+
+displayNotifications();
+
+</script>
+
+
+</body>
+
+</html>
