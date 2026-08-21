@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>All Samastipur - Firebase Test</title>
+
+</head>
+
+<body>
+
+  <h2>All Samastipur</h2>
+
+  <p>Firebase Booking Test</p>
+
+  <button id="testRide">
+    Create Test Ride
+  </button>
+
+  <p id="result"></p>
+
+
+  <script type="module">
+
+    import {
+      bookRide
+    } from "./ride-booking.js";
+
+
+    const button =
+      document.getElementById("testRide");
+
+    const result =
+      document.getElementById("result");
+
+
+    button.addEventListener(
+      "click",
+      async function () {
+
+        result.innerText =
+          "Booking...";
+
+
+        try {
+
+          const ride =
+            await bookRide({
+
+              customerName:
+                "Test Customer",
+
+              customerMobile:
+                "9999999999",
+
+              pickup:
+                "Samastipur Junction",
+
+              drop:
+                "Mithapur",
+
+              rideType:
+                "Auto Rickshaw",
+
+              passengers:
+                1,
+
+              fare:
+                50
+
+            });
+
+
+          result.innerText =
+            "✅ Booking Successful! " +
+            "Booking ID: " +
+            ride.bookingId;
+
+
+          console.log(
+            "Firebase Ride:",
+            ride
+          );
+
+
+        } catch (error) {
+
+          console.error(error);
+
+          result.innerText =
+            "❌ Booking Failed: " +
+            error.message;
+
+        }
+
+      }
+    );
+
+  </script>
+
+</body>
+
+</html>
