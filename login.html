@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0756d9">
+
+<title>Customer Login | All Samastipur</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  min-height:100vh;
+  background:linear-gradient(135deg,#0756d9,#13a8ff);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.login-box{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  border-radius:22px;
+  padding:30px 25px;
+  box-shadow:0 20px 50px rgba(0,0,0,.2);
+}
+
+.logo{
+  text-align:center;
+  font-size:25px;
+  font-weight:800;
+  color:#0756d9;
+  margin-bottom:8px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#667085;
+  margin-bottom:28px;
+  font-size:14px;
+}
+
+.ride-icon{
+  width:75px;
+  height:75px;
+  border-radius:50%;
+  background:#eaf3ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:38px;
+  margin:0 auto 18px;
+}
+
+h2{
+  text-align:center;
+  margin-bottom:8px;
+  color:#172033;
+}
+
+.description{
+  text-align:center;
+  color:#667085;
+  font-size:14px;
+  line-height:1.5;
+  margin-bottom:22px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+  color:#344054;
+}
+
+.input{
+  width:100%;
+  padding:14px;
+  border:1px solid #d9dee8;
+  border-radius:10px;
+  font-size:16px;
+  outline:none;
+  margin-bottom:15px;
+}
+
+.input:focus{
+  border-color:#0756d9;
+}
+
+.otp-input{
+  text-align:center;
+  font-size:24px;
+  letter-spacing:8px;
+  font-weight:bold;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#0756d9;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn:hover{
+  opacity:.92;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  margin-top:20px;
+  color:#0756d9;
+  font-weight:bold;
+}
+
+.terms{
+  text-align:center;
+  color:#98a2b3;
+  font-size:12px;
+  line-height:1.5;
+  margin-top:22px;
+}
+
+#otpSection{
+  display:none;
+}
+
+.success{
+  display:none;
+  text-align:center;
+}
+
+.success-icon{
+  font-size:55px;
+  margin-bottom:15px;
+}
+
+.success h2{
+  color:#16a34a;
+  margin-bottom:10px;
+}
+
+.success p{
+  color:#667085;
+  line-height:1.6;
+}
+
+@media(max-width:450px){
+
+  .login-box{
+    padding:25px 20px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+  <div class="ride-icon">
+    🛺
+  </div>
+
+  <div class="logo">
+    All Samastipur
+  </div>
+
+  <div class="subtitle">
+    Customer Ride Booking
+  </div>
+
+
+  <!-- PHONE SECTION -->
+
+  <div id="phoneSection">
+
+    <h2>Customer Login</h2>
+
+    <p class="description">
+      अपनी मोबाइल संख्या डालकर Login करें।
+    </p>
+
+    <label>Mobile Number</label>
+
+    <input
+      type="tel"
+      id="mobile"
+      class="input"
+      maxlength="10"
+      placeholder="10 Digit Mobile Number"
+    >
+
+    <button
+      class="btn"
+      onclick="sendOTP()"
+    >
+      Send OTP
+    </button>
+
+  </div>
+
+
+  <!-- OTP SECTION -->
+
+  <div id="otpSection">
+
+    <h2>OTP Verify करें</h2>
+
+    <p class="description">
+      आपके मोबाइल पर भेजे गए OTP को यहाँ डालें।
+    </p>
+
+    <label>Enter OTP</label>
+
+    <input
+      type="tel"
+      id="otp"
+      class="input otp-input"
+      maxlength="6"
+      placeholder="••••••"
+    >
+
+    <button
+      class="btn"
+      onclick="verifyOTP()"
+    >
+      Verify OTP
+    </button>
+
+    <p
+      id="resendText"
+      style="text-align:center;margin-top:15px;color:#667085;font-size:14px;"
+    >
+      OTP नहीं मिला?
+      <button
+        onclick="resendOTP()"
+        style="border:0;background:none;color:#0756d9;font-weight:bold;cursor:pointer;"
+      >
+        Resend
+      </button>
+    </p>
+
+  </div>
+
+
+  <!-- SUCCESS -->
+
+  <div id="successSection" class="success">
+
+    <div class="success-icon">
+      ✅
+    </div>
+
+    <h2>Login Successful!</h2>
+
+    <p>
+      आपका Customer Login सफल हो गया।
+      अब अगले चरण में यहाँ से Ride Booking शुरू होगी।
+    </p>
+
+  </div>
+
+
+  <a href="index.html" class="back">
+    ← Back to Home
+  </a>
+
+  <div class="terms">
+    Login करके आप All Samastipur की
+    Terms & Privacy Policy स्वीकार करते हैं।
+  </div>
+
+</div>
+
+
+<script>
+
+let demoOTP = "123456";
+
+
+function sendOTP(){
+
+  const mobile =
+    document.getElementById("mobile").value.trim();
+
+
+  if(mobile.length !== 10){
+
+    alert(
+      "कृपया सही 10 Digit Mobile Number डालें।"
+    );
+
+    return;
+  }
+
+
+  if(!/^[0-9]+$/.test(mobile)){
+
+    alert(
+      "Mobile Number में केवल अंक डालें।"
+    );
+
+    return;
+  }
+
+
+  document.getElementById("phoneSection").style.display =
+    "none";
+
+  document.getElementById("otpSection").style.display =
+    "block";
+
+
+  alert(
+    "Demo OTP: 123456\n\n" +
+    "अभी यह Demo OTP है। " +
+    "अगले चरण में Real OTP SMS System जोड़ा जाएगा।"
+  );
+
+}
+
+
+function verifyOTP(){
+
+  const otp =
+    document.getElementById("otp").value.trim();
+
+
+  if(otp === demoOTP){
+
+    document.getElementById("otpSection").style.display =
+      "none";
+
+    document.getElementById("successSection").style.display =
+      "block";
+
+
+    localStorage.setItem(
+      "allSamastipurCustomerLogin",
+      "true"
+    );
+
+    localStorage.setItem(
+      "customerMobile",
+      document.getElementById("mobile").value
+    );
+
+
+  }else{
+
+    alert(
+      "OTP गलत है। Demo में OTP 123456 है।"
+    );
+
+  }
+
+}
+
+
+function resendOTP(){
+
+  alert(
+    "नया Demo OTP: 123456\n\n" +
+    "Real SMS OTP अगले Backend चरण में जोड़ा जाएगा।"
+  );
+
+}
+
+</script>
+
+</body>
+</html>
