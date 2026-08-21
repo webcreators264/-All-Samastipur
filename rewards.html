@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Rewards | All Samastipur
+</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.points-card{
+  background:linear-gradient(
+    135deg,
+    #0756d9,
+    #2563eb
+  );
+  color:#fff;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  margin-bottom:20px;
+  box-shadow:0 8px 25px rgba(7,86,217,.25);
+}
+
+.points-icon{
+  font-size:48px;
+  margin-bottom:8px;
+}
+
+.points-label{
+  font-size:14px;
+  opacity:.9;
+}
+
+.points{
+  font-size:45px;
+  font-weight:800;
+  margin:5px 0;
+}
+
+.points-card p{
+  font-size:13px;
+  opacity:.9;
+}
+
+.progress-box{
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
+  margin-bottom:20px;
+}
+
+.progress-title{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.progress-bar{
+  height:12px;
+  background:#e4e7ec;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:60%;
+  background:#0756d9;
+  border-radius:20px;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-bottom:18px;
+}
+
+.rewards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.reward{
+  border:1px solid #e4e7ec;
+  border-radius:12px;
+  padding:18px;
+  text-align:center;
+}
+
+.reward-icon{
+  font-size:35px;
+  margin-bottom:10px;
+}
+
+.reward h3{
+  font-size:16px;
+  margin-bottom:7px;
+}
+
+.reward p{
+  color:#667085;
+  font-size:12px;
+  margin-bottom:12px;
+  line-height:1.4;
+}
+
+.reward-points{
+  color:#0756d9;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  background:#0756d9;
+  color:#fff;
+  padding:11px;
+  border-radius:8px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn:disabled{
+  background:#98a2b3;
+  cursor:not-allowed;
+}
+
+.rules{
+  display:grid;
+  gap:10px;
+}
+
+.rule{
+  background:#f8fafc;
+  padding:14px;
+  border-radius:10px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.rule span{
+  color:#667085;
+}
+
+.history{
+  display:grid;
+  gap:10px;
+}
+
+.history-row{
+  padding:13px;
+  border-bottom:1px solid #e4e7ec;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.history-row:last-child{
+  border-bottom:0;
+}
+
+.plus{
+  color:#16a34a;
+  font-weight:bold;
+}
+
+.minus{
+  color:#dc2626;
+  font-weight:bold;
+}
+
+.message{
+  display:none;
+  background:#ecfdf3;
+  color:#166534;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+  font-weight:bold;
+}
+
+.note{
+  background:#fff8e1;
+  color:#7a5b00;
+  padding:14px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+footer{
+  text-align:center;
+  color:#667085;
+  padding:30px;
+}
+
+@media(max-width:700px){
+
+  .rewards{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:500px){
+
+  .rewards{
+    grid-template-columns:1fr;
+  }
+
+  .points{
+    font-size:38px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    🏆 Rewards
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      🏆 All Samastipur Rewards
+    </h1>
+
+    <p>
+      Ride करें, points कमाएँ और rewards पाएं।
+    </p>
+
+  </div>
+
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- POINTS -->
+
+  <div class="points-card">
+
+    <div class="points-icon">
+      🏆
+    </div>
+
+    <div class="points-label">
+      आपके Reward Points
+    </div>
+
+    <div
+      class="points"
+      id="points"
+    >
+      250
+    </div>
+
+    <p>
+      100 Points = ₹10 Reward Value
+    </p>
+
+  </div>
+
+
+  <!-- NEXT REWARD -->
+
+  <div class="progress-box">
+
+    <div class="progress-title">
+
+      <strong>
+        🎁 Next Reward
+      </strong>
+
+      <span id="progressText">
+        250 / 500 Points
+      </span>
+
+    </div>
+
+    <div class="progress-bar">
+
+      <div
+        class="progress-fill"
+        id="progressFill"
+      ></div>
+
+    </div>
+
+    <p
+      style="
+        color:#667085;
+        font-size:13px;
+        margin-top:9px;
+      "
+    >
+      अगले ₹50 reward के लिए
+      <strong id="remaining">
+        250
+      </strong>
+      points और चाहिए।
+    </p>
+
+  </div>
+
+
+  <!-- REDEEM -->
+
+  <div class="card">
+
+    <h2>
+      🎁 Redeem Rewards
+    </h2>
+
+
+    <div class="rewards">
+
+
+      <div class="reward">
+
+        <div class="reward-icon">
+          🎟️
+        </div>
+
+        <h3>
+          ₹20 Ride Coupon
+        </h3>
+
+        <p>
+          अगली ride पर ₹20 तक बचाएँ।
+        </p>
+
+        <div class="reward-points">
+          200 Points
+        </div>
+
+        <button
+          class="btn"
+          onclick="redeemReward(200,20)"
+          id="reward200"
+        >
+          Redeem
+        </button>
+
+      </div>
+
+
+      <div class="reward">
+
+        <div class="reward-icon">
+          🎫
+        </div>
+
+        <h3>
+          ₹50 Ride Coupon
+        </h3>
+
+        <p>
+          अगली ride पर ₹50 तक बचाएँ।
+        </p>
+
+        <div class="reward-points">
+          500 Points
+        </div>
+
+        <button
+          class="btn"
+          onclick="redeemReward(500,50)"
+          id="reward500"
+        >
+          Redeem
+        </button>
+
+      </div>
+
+
+      <div class="reward">
+
+        <div class="reward-icon">
+          💎
+        </div>
+
+        <h3>
+          ₹100 Ride Coupon
+        </h3>
+
+        <p>
+          बड़ी saving के लिए special coupon।
+        </p>
+
+        <div class="reward-points">
+          1000 Points
+        </div>
+
+        <button
+          class="btn"
+          onclick="redeemReward(1000,100)"
+          id="reward1000"
+        >
+          Redeem
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- EARNING RULES -->
+
+  <div class="card">
+
+    <h2>
+      ⭐ Points कैसे कमाएँ?
+    </h2>
+
+
+    <div class="rules">
+
+
+      <div class="rule">
+
+        <span>
+          🚕 हर Completed Ride
+        </span>
+
+        <strong>
+          +10 Points
+        </strong>
+
+      </div>
+
+
+      <div class="rule">
+
+        <span>
+          ⭐ 5-Star Rating देने पर
+        </span>
+
+        <strong>
+          +5 Points
+        </strong>
+
+      </div>
+
+
+      <div class="rule">
+
+        <span>
+          👥 Friend Referral
+        </span>
+
+        <strong>
+          +50 Points
+        </strong>
+
+      </div>
+
+
+      <div class="rule">
+
+        <span>
+          🎉 Special Festival Bonus
+        </span>
+
+        <strong>
+          +100 Points
+        </strong>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- HISTORY -->
+
+  <div class="card">
+
+    <h2>
+      📋 Points History
+    </h2>
+
+
+    <div
+      class="history"
+      id="history"
+    >
+
+    </div>
+
+  </div>
+
+
+  <div class="note">
+
+    ⚠️ यह अभी Demo Reward System है।
+    Real customer/driver points को secure
+    database में store और server से calculate
+    करना होगा, ताकि कोई user points को manually
+    change न कर सके।
+
+  </div>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Ride • Earn • Reward
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+REWARD DATA
+=========================================
+*/
+
+let points = 250;
+
+
+let history = [
+
+  {
+    text:"Ride Completed",
+    points:10,
+    type:"plus"
+  },
+
+  {
+    text:"5-Star Rating",
+    points:5,
+    type:"plus"
+  },
+
+  {
+    text:"Ride Completed",
+    points:10,
+    type:"plus"
+  },
+
+  {
+    text:"Welcome Bonus",
+    points:100,
+    type:"plus"
+  },
+
+  {
+    text:"Referral Bonus",
+    points:125,
+    type:"plus"
+  }
+
+];
+
+
+/*
+=========================================
+LOAD SAVED POINTS
+=========================================
+*/
+
+const savedPoints =
+  localStorage.getItem(
+    "allSamastipurRewardPoints"
+  );
+
+
+if(savedPoints){
+
+  const number =
+    parseInt(savedPoints);
+
+  if(!isNaN(number)){
+
+    points = number;
+
+  }
+
+}
+
+
+/*
+=========================================
+LOAD HISTORY
+=========================================
+*/
+
+const savedHistory =
+  localStorage.getItem(
+    "allSamastipurRewardHistory"
+  );
+
+
+if(savedHistory){
+
+  try{
+
+    history =
+      JSON.parse(savedHistory);
+
+  }catch(error){
+
+    console.log(
+      "Reward history unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+SAVE
+=========================================
+*/
+
+function saveRewards(){
+
+  localStorage.setItem(
+
+    "allSamastipurRewardPoints",
+
+    points
+
+  );
+
+
+  localStorage.setItem(
+
+    "allSamastipurRewardHistory",
+
+    JSON.stringify(history)
+
+  );
+
+}
+
+
+/*
+=========================================
+UPDATE DISPLAY
+=========================================
+*/
+
+function updateRewards(){
+
+
+  document.getElementById(
+    "points"
+  ).innerText =
+    points;
+
+
+  /*
+  Next target
+  */
+
+  let target = 500;
+
+
+  if(points >= 500){
+
+    target = 1000;
+
+  }
+
+
+  if(points >= 1000){
+
+    target = 2000;
+
+  }
+
+
+  const previousTarget =
+    target === 500
+    ? 0
+    : target === 1000
+      ? 500
+      : 1000;
+
+
+  const progress =
+    Math.min(
+
+      100,
+
+      (
+        (points - previousTarget) /
+        (target - previousTarget)
+      ) * 100
+
+    );
+
+
+  document.getElementById(
+    "progressFill"
+  ).style.width =
+    Math.max(
+      0,
+      progress
+    ) + "%";
+
+
+  document.getElementById(
+    "progressText"
+  ).innerText =
+    points +
+    " / " +
+    target +
+    " Points";
+
+
+  const remaining =
+    Math.max(
+      0,
+      target - points
+    );
+
+
+  document.getElementById(
+    "remaining"
+  ).innerText =
+    remaining;
+
+
+  /*
+  Button states
+  */
+
+  document.getElementById(
+    "reward200"
+  ).disabled =
+    points < 200;
+
+
+  document.getElementById(
+    "reward500"
+  ).disabled =
+    points < 500;
+
+
+  document.getElementById(
+    "reward1000"
+  ).disabled =
+    points < 1000;
+
+}
+
+
+/*
+=========================================
+DISPLAY HISTORY
+=========================================
+*/
+
+function displayHistory(){
+
+
+  const box =
+    document.getElementById(
+      "history"
+    );
+
+
+  box.innerHTML = "";
+
+
+  history.forEach(
+    function(item){
+
+
+      const row =
+        document.createElement(
+          "div"
+        );
+
+
+      row.className =
+        "history-row";
+
+
+      const symbol =
+        item.type === "plus"
+        ? "+"
+        : "-";
+
+
+      const className =
+        item.type === "plus"
+        ? "plus"
+        : "minus";
+
+
+      row.innerHTML = `
+
+        <span>
+          ${item.text}
+        </span>
+
+        <strong
+          class="${className}"
+        >
+          ${symbol}${item.points}
+        </strong>
+
+      `;
+
+
+      box.appendChild(row);
+
+    }
+  );
+
+}
+
+
+/*
+=========================================
+REDEEM REWARD
+=========================================
+*/
+
+function redeemReward(
+  requiredPoints,
+  rewardValue
+){
+
+
+  if(points < requiredPoints){
+
+    alert(
+      "आपके पास पर्याप्त points नहीं हैं।"
+    );
+
+    return;
+
+  }
+
+
+  const confirmRedeem =
+    confirm(
+
+      "क्या आप " +
+      requiredPoints +
+      " points से ₹" +
+      rewardValue +
+      " coupon redeem करना चाहते हैं?"
+
+    );
+
+
+  if(!confirmRedeem){
+
+    return;
+
+  }
+
+
+  /*
+  Deduct points
+  */
+
+  points -=
+    requiredPoints;
+
+
+  /*
+  Add history
+  */
+
+  history.unshift({
+
+    text:
+      "₹" +
+      rewardValue +
+      " Reward Redeemed",
+
+    points:
+      requiredPoints,
+
+    type:
+      "minus"
+
+  });
+
+
+  saveRewards();
+
+  updateRewards();
+
+  displayHistory();
+
+
+  /*
+  Generate coupon
+  */
+
+  const coupon =
+    "ASM" +
+    Math.floor(
+      100000 +
+      Math.random() *
+      900000
+    );
+
+
+  showMessage(
+
+    "🎉 Reward Redeemed! Coupon Code: " +
+    coupon
+
+  );
+
+}
+
+
+/*
+=========================================
+MESSAGE
+=========================================
+*/
+
+function showMessage(text){
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.innerText =
+    text;
+
+
+  message.style.display =
+    "block";
+
+
+  setTimeout(
+
+    function(){
+
+      message.style.display =
+        "none";
+
+    },
+
+    4000
+
+  );
+
+}
+
+
+/*
+=========================================
+START
+=========================================
+*/
+
+saveRewards();
+
+updateRewards();
+
+displayHistory();
+
+</script>
+
+
+</body>
+
+</html>
