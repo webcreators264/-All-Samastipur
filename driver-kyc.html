@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Driver KYC | All Samastipur
+</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:850px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.card{
+  background:#fff;
+  padding:22px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-bottom:18px;
+}
+
+.status-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  background:#fff;
+  padding:20px;
+  border-radius:16px;
+  margin-bottom:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.status-left{
+  display:flex;
+  align-items:center;
+  gap:13px;
+}
+
+.status-icon{
+  width:50px;
+  height:50px;
+  background:#fff8e1;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:25px;
+}
+
+.status-badge{
+  background:#fff8e1;
+  color:#926b00;
+  padding:8px 12px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.status-badge.verified{
+  background:#ecfdf3;
+  color:#166534;
+}
+
+.status-badge.rejected{
+  background:#fef2f2;
+  color:#991b1b;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.field{
+  margin-bottom:5px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  font-size:14px;
+  margin-bottom:7px;
+}
+
+input,
+select{
+  width:100%;
+  padding:13px;
+  border:1px solid #d0d5dd;
+  border-radius:9px;
+  outline:none;
+  font-size:14px;
+  background:#fff;
+}
+
+input:focus,
+select:focus{
+  border-color:#0756d9;
+}
+
+.document{
+  border:1px solid #e4e7ec;
+  border-radius:12px;
+  padding:17px;
+  margin-bottom:12px;
+}
+
+.document-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.document-title{
+  font-weight:bold;
+}
+
+.document-status{
+  background:#f2f4f7;
+  color:#667085;
+  padding:5px 9px;
+  border-radius:20px;
+  font-size:11px;
+}
+
+.document-status.uploaded{
+  background:#ecfdf3;
+  color:#166534;
+}
+
+.document p{
+  color:#667085;
+  font-size:12px;
+  line-height:1.5;
+  margin-bottom:10px;
+}
+
+.file-input{
+  font-size:13px;
+  padding:8px;
+}
+
+.btn{
+  border:0;
+  background:#0756d9;
+  color:#fff;
+  padding:13px 18px;
+  border-radius:9px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.btn-full{
+  width:100%;
+}
+
+.btn-secondary{
+  background:#fff;
+  color:#0756d9;
+  border:1px solid #0756d9;
+}
+
+.message{
+  display:none;
+  padding:14px;
+  border-radius:10px;
+  margin-bottom:18px;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+.success{
+  background:#ecfdf3;
+  color:#166534;
+}
+
+.error{
+  background:#fef2f2;
+  color:#991b1b;
+}
+
+.check-list{
+  display:grid;
+  gap:10px;
+}
+
+.check{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:13px;
+  background:#f8fafc;
+  border-radius:9px;
+  font-size:14px;
+}
+
+.check-ok{
+  color:#16a34a;
+  font-weight:bold;
+}
+
+.check-pending{
+  color:#d97706;
+  font-weight:bold;
+}
+
+.note{
+  background:#fff8e1;
+  color:#7a5b00;
+  padding:14px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.6;
+}
+
+footer{
+  text-align:center;
+  color:#667085;
+  padding:30px;
+}
+
+@media(max-width:650px){
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .status-card{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    🛡️ Driver KYC
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      🛡️ Driver KYC Verification
+    </h1>
+
+    <p>
+      अपनी details और documents submit करके verification complete करें।
+    </p>
+
+  </div>
+
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- STATUS -->
+
+  <div class="status-card">
+
+    <div class="status-left">
+
+      <div class="status-icon">
+        🛡️
+      </div>
+
+      <div>
+
+        <strong>
+          KYC Verification
+        </strong>
+
+        <p
+          style="
+            color:#667085;
+            font-size:12px;
+            margin-top:4px;
+          "
+        >
+          आपका verification status
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div
+      class="status-badge"
+      id="kycStatus"
+    >
+      ⏳ Pending
+    </div>
+
+  </div>
+
+
+  <!-- PERSONAL DETAILS -->
+
+  <div class="card">
+
+    <h2>
+      👤 Personal Details
+    </h2>
+
+
+    <div class="form-grid">
+
+
+      <div class="field">
+
+        <label>
+          Full Name
+        </label>
+
+        <input
+          type="text"
+          id="fullName"
+          placeholder="पूरा नाम"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Mobile Number
+        </label>
+
+        <input
+          type="tel"
+          id="mobile"
+          maxlength="10"
+          placeholder="10 digit mobile number"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Date of Birth
+        </label>
+
+        <input
+          type="date"
+          id="dob"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Gender
+        </label>
+
+        <select id="gender">
+
+          <option value="">
+            Select Gender
+          </option>
+
+          <option>
+            Male
+          </option>
+
+          <option>
+            Female
+          </option>
+
+          <option>
+            Other
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div
+        class="field"
+        style="grid-column:1/-1;"
+      >
+
+        <label>
+          Address
+        </label>
+
+        <input
+          type="text"
+          id="address"
+          placeholder="पूरा address"
+        >
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- VEHICLE -->
+
+  <div class="card">
+
+    <h2>
+      🛺 Vehicle Details
+    </h2>
+
+
+    <div class="form-grid">
+
+
+      <div class="field">
+
+        <label>
+          Vehicle Type
+        </label>
+
+        <select id="vehicleType">
+
+          <option value="">
+            Select Vehicle
+          </option>
+
+          <option>
+            Auto Rickshaw
+          </option>
+
+          <option>
+            E-Rickshaw
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Vehicle Number
+        </label>
+
+        <input
+          type="text"
+          id="vehicleNumber"
+          placeholder="BR-XX-0000"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Vehicle Model
+        </label>
+
+        <input
+          type="text"
+          id="vehicleModel"
+          placeholder="Vehicle model"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Vehicle Color
+        </label>
+
+        <input
+          type="text"
+          id="vehicleColor"
+          placeholder="Vehicle color"
+        >
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- DOCUMENTS -->
+
+  <div class="card">
+
+    <h2>
+      📄 Documents
+    </h2>
+
+
+    <!-- DRIVING LICENSE -->
+
+    <div class="document">
+
+      <div class="document-top">
+
+        <div class="document-title">
+          🪪 Driving Licence
+        </div>
+
+        <div
+          class="document-status"
+          id="dlStatus"
+        >
+          Not Uploaded
+        </div>
+
+      </div>
+
+      <p>
+        Valid Driving Licence की clear image/PDF upload करें।
+      </p>
+
+      <input
+        type="file"
+        id="dlFile"
+        class="file-input"
+        accept="image/*,.pdf"
+        onchange="fileSelected('dlFile','dlStatus')"
+      >
+
+    </div>
+
+
+    <!-- RC -->
+
+    <div class="document">
+
+      <div class="document-top">
+
+        <div class="document-title">
+          🚗 Vehicle RC
+        </div>
+
+        <div
+          class="document-status"
+          id="rcStatus"
+        >
+          Not Uploaded
+        </div>
+
+      </div>
+
+      <p>
+        Vehicle Registration Certificate की clear copy upload करें।
+      </p>
+
+      <input
+        type="file"
+        id="rcFile"
+        class="file-input"
+        accept="image/*,.pdf"
+        onchange="fileSelected('rcFile','rcStatus')"
+      >
+
+    </div>
+
+
+    <!-- ID -->
+
+    <div class="document">
+
+      <div class="document-top">
+
+        <div class="document-title">
+          🪪 Identity Proof
+        </div>
+
+        <div
+          class="document-status"
+          id="idStatus"
+        >
+          Not Uploaded
+        </div>
+
+      </div>
+
+      <p>
+        Government-approved identity proof की copy upload करें।
+      </p>
+
+      <input
+        type="file"
+        id="idFile"
+        class="file-input"
+        accept="image/*,.pdf"
+        onchange="fileSelected('idFile','idStatus')"
+      >
+
+    </div>
+
+
+    <!-- PHOTO -->
+
+    <div class="document">
+
+      <div class="document-top">
+
+        <div class="document-title">
+          📸 Driver Photo
+        </div>
+
+        <div
+          class="document-status"
+          id="photoStatus"
+        >
+          Not Uploaded
+        </div>
+
+      </div>
+
+      <p>
+        Recent passport-size photo upload करें।
+      </p>
+
+      <input
+        type="file"
+        id="photoFile"
+        class="file-input"
+        accept="image/*"
+        onchange="fileSelected('photoFile','photoStatus')"
+      >
+
+    </div>
+
+
+  </div>
+
+
+  <!-- VERIFICATION CHECKLIST -->
+
+  <div class="card">
+
+    <h2>
+      ✅ Verification Checklist
+    </h2>
+
+
+    <div class="check-list">
+
+
+      <div class="check">
+
+        <span>
+          Personal Details
+        </span>
+
+        <span
+          id="personalCheck"
+          class="check-pending"
+        >
+          ⏳ Pending
+        </span>
+
+      </div>
+
+
+      <div class="check">
+
+        <span>
+          Vehicle Details
+        </span>
+
+        <span
+          id="vehicleCheck"
+          class="check-pending"
+        >
+          ⏳ Pending
+        </span>
+
+      </div>
+
+
+      <div class="check">
+
+        <span>
+          Driving Licence
+        </span>
+
+        <span
+          id="dlCheck"
+          class="check-pending"
+        >
+          ⏳ Pending
+        </span>
+
+      </div>
+
+
+      <div class="check">
+
+        <span>
+          Vehicle RC
+        </span>
+
+        <span
+          id="rcCheck"
+          class="check-pending"
+        >
+          ⏳ Pending
+        </span>
+
+      </div>
+
+
+      <div class="check">
+
+        <span>
+          Identity Proof
+        </span>
+
+        <span
+          id="idCheck"
+          class="check-pending"
+        >
+          ⏳ Pending
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- SUBMIT -->
+
+  <div class="card">
+
+    <h2>
+      📤 Submit KYC
+    </h2>
+
+    <p
+      style="
+        color:#667085;
+        font-size:13px;
+        line-height:1.6;
+        margin-bottom:10px;
+      "
+    >
+      Submit करने के बाद admin documents review करेगा।
+      Verification approve होने के बाद driver rides accept कर सकेगा।
+    </p>
+
+
+    <button
+      class="btn btn-full"
+      onclick="submitKYC()"
+    >
+      🛡️ Submit KYC for Verification
+    </button>
+
+  </div>
+
+
+  <div class="note">
+
+    🔐 <strong>Security:</strong>
+    Demo version में files केवल browser selection तक रहती हैं।
+    किसी real app में Aadhaar, PAN, licence या अन्य identity
+    documents को localStorage में store नहीं करना चाहिए।
+    Secure backend, encrypted storage, access control और
+    proper document-verification process इस्तेमाल करें।
+
+  </div>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Safe Drivers • Verified Rides
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+KYC DATA
+=========================================
+*/
+
+let kycData = {
+
+  status:"Pending",
+
+  fullName:"",
+
+  mobile:"",
+
+  dob:"",
+
+  gender:"",
+
+  address:"",
+
+  vehicleType:"",
+
+  vehicleNumber:"",
+
+  vehicleModel:"",
+
+  vehicleColor:"",
+
+  dlUploaded:false,
+
+  rcUploaded:false,
+
+  idUploaded:false,
+
+  photoUploaded:false
+
+};
+
+
+/*
+=========================================
+LOAD SAVED DATA
+=========================================
+*/
+
+const savedKYC =
+  localStorage.getItem(
+    "allSamastipurKYC"
+  );
+
+
+if(savedKYC){
+
+  try{
+
+    kycData =
+      JSON.parse(savedKYC);
+
+  }catch(error){
+
+    console.log(
+      "KYC data unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+LOAD FORM
+=========================================
+*/
+
+function loadForm(){
+
+
+  document.getElementById(
+    "fullName"
+  ).value =
+    kycData.fullName || "";
+
+
+  document.getElementById(
+    "mobile"
+  ).value =
+    kycData.mobile || "";
+
+
+  document.getElementById(
+    "dob"
+  ).value =
+    kycData.dob || "";
+
+
+  document.getElementById(
+    "gender"
+  ).value =
+    kycData.gender || "";
+
+
+  document.getElementById(
+    "address"
+  ).value =
+    kycData.address || "";
+
+
+  document.getElementById(
+    "vehicleType"
+  ).value =
+    kycData.vehicleType || "";
+
+
+  document.getElementById(
+    "vehicleNumber"
+  ).value =
+    kycData.vehicleNumber || "";
+
+
+  document.getElementById(
+    "vehicleModel"
+  ).value =
+    kycData.vehicleModel || "";
+
+
+  document.getElementById(
+    "vehicleColor"
+  ).value =
+    kycData.vehicleColor || "";
+
+
+  updateStatus();
+
+}
+
+
+/*
+=========================================
+FILE SELECTED
+=========================================
+*/
+
+function fileSelected(
+  fileId,
+  statusId
+){
+
+
+  const file =
+    document.getElementById(
+      fileId
+    ).files[0];
+
+
+  const status =
+    document.getElementById(
+      statusId
+    );
+
+
+  if(!file){
+
+    return;
+
+  }
+
+
+  status.innerText =
+    "✓ Selected";
+
+
+  status.classList.add(
+    "uploaded"
+  );
+
+
+  if(fileId === "dlFile"){
+
+    kycData.dlUploaded =
+      true;
+
+  }
+
+
+  if(fileId === "rcFile"){
+
+    kycData.rcUploaded =
+      true;
+
+  }
+
+
+  if(fileId === "idFile"){
+
+    kycData.idUploaded =
+      true;
+
+  }
+
+
+  if(fileId === "photoFile"){
+
+    kycData.photoUploaded =
+      true;
+
+  }
+
+
+  updateStatus();
+
+}
+
+
+/*
+=========================================
+UPDATE CHECKLIST
+=========================================
+*/
+
+function updateStatus(){
+
+
+  const personalComplete =
+
+    kycData.fullName &&
+    kycData.mobile &&
+    kycData.dob &&
+    kycData.gender &&
+    kycData.address;
+
+
+  const vehicleComplete =
+
+    kycData.vehicleType &&
+    kycData.vehicleNumber &&
+    kycData.vehicleModel &&
+    kycData.vehicleColor;
+
+
+  setCheck(
+    "personalCheck",
+    personalComplete
+  );
+
+
+  setCheck(
+    "vehicleCheck",
+    vehicleComplete
+  );
+
+
+  setCheck(
+    "dlCheck",
+    kycData.dlUploaded
+  );
+
+
+  setCheck(
+    "rcCheck",
+    kycData.rcUploaded
+  );
+
+
+  setCheck(
+    "idCheck",
+    kycData.idUploaded
+  );
+
+
+  /*
+  Status
+  */
+
+  const status =
+    document.getElementById(
+      "kycStatus"
+    );
+
+
+  status.className =
+    "status-badge";
+
+
+  if(
+    kycData.status ===
+    "Verified"
+  ){
+
+    status.innerText =
+      "✓ Verified";
+
+    status.classList.add(
+      "verified"
+    );
+
+  }
+  else if(
+    kycData.status ===
+    "Rejected"
+  ){
+
+    status.innerText =
+      "✕ Rejected";
+
+    status.classList.add(
+      "rejected"
+    );
+
+  }
+  else if(
+    kycData.status ===
+    "Submitted"
+  ){
+
+    status.innerText =
+      "⏳ Under Review";
+
+  }
+  else{
+
+    status.innerText =
+      "⏳ Pending";
+
+  }
+
+}
+
+
+/*
+=========================================
+CHECK ITEM
+=========================================
+*/
+
+function setCheck(
+  elementId,
+  complete
+){
+
+  const element =
+    document.getElementById(
+      elementId
+    );
+
+
+  if(complete){
+
+    element.innerText =
+      "✓ Complete";
+
+    element.className =
+      "check-ok";
+
+  }else{
+
+    element.innerText =
+      "⏳ Pending";
+
+    element.className =
+      "check-pending";
+
+  }
+
+}
+
+
+/*
+=========================================
+SUBMIT KYC
+=========================================
+*/
+
+function submitKYC(){
+
+
+  /*
+  Read fields
+  */
+
+  kycData.fullName =
+    document.getElementById(
+      "fullName"
+    ).value.trim();
+
+
+  kycData.mobile =
+    document.getElementById(
+      "mobile"
+    ).value.trim();
+
+
+  kycData.dob =
+    document.getElementById(
+      "dob"
+    ).value;
+
+
+  kycData.gender =
+    document.getElementById(
+      "gender"
+    ).value;
+
+
+  kycData.address =
+    document.getElementById(
+      "address"
+    ).value.trim();
+
+
+  kycData.vehicleType =
+    document.getElementById(
+      "vehicleType"
+    ).value;
+
+
+  kycData.vehicleNumber =
+    document.getElementById(
+      "vehicleNumber"
+    ).value.trim()
+    .toUpperCase();
+
+
+  kycData.vehicleModel =
+    document.getElementById(
+      "vehicleModel"
+    ).value.trim();
+
+
+  kycData.vehicleColor =
+    document.getElementById(
+      "vehicleColor"
+    ).value.trim();
+
+
+  /*
+  Basic validation
+  */
+
+  if(
+    !kycData.fullName ||
+    !kycData.mobile ||
+    !kycData.dob ||
+    !kycData.gender ||
+    !kycData.address
+  ){
+
+    showMessage(
+      "⚠️ सभी personal details भरें।",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !/^[0-9]{10}$/.test(
+      kycData.mobile
+    )
+  ){
+
+    showMessage(
+      "⚠️ Mobile number 10 digits का होना चाहिए।",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !kycData.vehicleType ||
+    !kycData.vehicleNumber ||
+    !kycData.vehicleModel ||
+    !kycData.vehicleColor
+  ){
+
+    showMessage(
+      "⚠️ सभी vehicle details भरें।",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !kycData.dlUploaded ||
+    !kycData.rcUploaded ||
+    !kycData.idUploaded
+  ){
+
+    showMessage(
+      "⚠️ Driving Licence, RC और Identity Proof select करें।",
+      true
+    );
+
+    return;
+
+  }
+
+
+  /*
+  Demo submit
+  */
+
+  kycData.status =
+    "Submitted";
+
+
+  localStorage.setItem(
+
+    "allSamastipurKYC",
+
+    JSON.stringify(
+      kycData
+    )
+
+  );
+
+
+  updateStatus();
+
+
+  showMessage(
+    "🎉 KYC successfully submitted! Admin verification के बाद status update होगा।"
+  );
+
+}
+
+
+/*
+=========================================
+MESSAGE
+=========================================
+*/
+
+function showMessage(
+  text,
+  isError=false
+){
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.innerText =
+    text;
+
+
+  message.className =
+    "message " +
+    (
+      isError
+      ? "error"
+      : "success"
+    );
+
+
+  message.style.display =
+    "block";
+
+
+  setTimeout(
+
+    function(){
+
+      message.style.display =
+        "none";
+
+    },
+
+    4500
+
+  );
+
+}
+
+
+/*
+=========================================
+START
+=========================================
+*/
+
+loadForm();
+
+</script>
+
+
+</body>
+
+</html>
