@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Rating & Review | All Samastipur
+</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:800px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.card{
+  background:#fff;
+  padding:24px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+.driver{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding-bottom:20px;
+  border-bottom:1px solid #e4e7ec;
+}
+
+.driver-avatar{
+  width:65px;
+  height:65px;
+  border-radius:50%;
+  background:#eaf3ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:32px;
+}
+
+.driver-name{
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:5px;
+}
+
+.driver-info{
+  color:#667085;
+  font-size:13px;
+}
+
+.booking{
+  margin-top:15px;
+  background:#f8fafc;
+  padding:13px;
+  border-radius:10px;
+  font-size:13px;
+}
+
+.rating-title{
+  text-align:center;
+  margin:22px 0 10px;
+}
+
+.stars{
+  display:flex;
+  justify-content:center;
+  gap:5px;
+  margin:15px 0;
+}
+
+.star{
+  font-size:43px;
+  color:#d0d5dd;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.star.selected{
+  color:#f59e0b;
+}
+
+.rating-text{
+  text-align:center;
+  color:#667085;
+  min-height:20px;
+  font-size:14px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin:18px 0 7px;
+}
+
+textarea{
+  width:100%;
+  min-height:120px;
+  resize:vertical;
+  border:1px solid #d9dee8;
+  border-radius:10px;
+  padding:13px;
+  font-family:Arial,sans-serif;
+  font-size:15px;
+  outline:none;
+}
+
+textarea:focus{
+  border-color:#0756d9;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  background:#0756d9;
+  color:#fff;
+  padding:14px;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+.btn:disabled{
+  background:#98a2b3;
+  cursor:not-allowed;
+}
+
+.message{
+  display:none;
+  background:#ecfdf3;
+  color:#166534;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+.review{
+  padding:15px 0;
+  border-bottom:1px solid #e4e7ec;
+}
+
+.review:last-child{
+  border-bottom:0;
+}
+
+.review-top{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:7px;
+}
+
+.reviewer{
+  font-weight:bold;
+}
+
+.review-stars{
+  color:#f59e0b;
+  letter-spacing:1px;
+}
+
+.review-date{
+  color:#667085;
+  font-size:12px;
+  margin-bottom:8px;
+}
+
+.review-text{
+  color:#475467;
+  line-height:1.5;
+  font-size:14px;
+}
+
+.summary{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.summary-box{
+  background:#f8fafc;
+  padding:18px;
+  border-radius:12px;
+  text-align:center;
+}
+
+.summary-box strong{
+  display:block;
+  font-size:28px;
+  color:#0756d9;
+  margin-bottom:5px;
+}
+
+.summary-box span{
+  color:#667085;
+  font-size:13px;
+}
+
+.note{
+  background:#fff8e1;
+  color:#7a5b00;
+  padding:14px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+footer{
+  text-align:center;
+  color:#667085;
+  padding:30px;
+}
+
+@media(max-width:500px){
+
+  .star{
+    font-size:37px;
+  }
+
+  .card{
+    padding:19px;
+  }
+
+  .review-top{
+    flex-direction:column;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    ⭐ Rating & Review
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      ⭐ Rate Your Ride
+    </h1>
+
+    <p>
+      आपका feedback हमारे drivers को बेहतर बनने में मदद करता है।
+    </p>
+
+  </div>
+
+
+  <div
+    class="message"
+    id="message"
+  ></div>
+
+
+  <!-- DRIVER -->
+
+  <div class="card">
+
+    <div class="driver">
+
+      <div class="driver-avatar">
+        👨‍✈️
+      </div>
+
+      <div>
+
+        <div class="driver-name">
+          Raj Kumar
+        </div>
+
+        <div class="driver-info">
+          🛺 Auto Rickshaw • ⭐ 4.8
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="booking">
+
+      <strong>
+        Booking ID:
+      </strong>
+
+      <span id="bookingId">
+        ASM203581
+      </span>
+
+      <br><br>
+
+      <strong>
+        Route:
+      </strong>
+
+      <span>
+        Samastipur Station → Tajpur
+      </span>
+
+    </div>
+
+
+    <!-- RATING -->
+
+    <div class="rating-title">
+
+      <h2>
+        Driver को कितने ⭐ देंगे?
+      </h2>
+
+    </div>
+
+
+    <div
+      class="stars"
+      id="stars"
+    >
+
+      <span
+        class="star"
+        data-rating="1"
+        onclick="selectRating(1)"
+      >
+        ★
+      </span>
+
+      <span
+        class="star"
+        data-rating="2"
+        onclick="selectRating(2)"
+      >
+        ★
+      </span>
+
+      <span
+        class="star"
+        data-rating="3"
+        onclick="selectRating(3)"
+      >
+        ★
+      </span>
+
+      <span
+        class="star"
+        data-rating="4"
+        onclick="selectRating(4)"
+      >
+        ★
+      </span>
+
+      <span
+        class="star"
+        data-rating="5"
+        onclick="selectRating(5)"
+      >
+        ★
+      </span>
+
+    </div>
+
+
+    <div
+      class="rating-text"
+      id="ratingText"
+    >
+      Star select करें
+    </div>
+
+
+    <!-- REVIEW -->
+
+    <label>
+      अपना Review लिखें
+    </label>
+
+    <textarea
+      id="reviewText"
+      maxlength="300"
+      placeholder="Driver और ride के बारे में अपना feedback लिखें..."
+    ></textarea>
+
+
+    <div
+      style="
+        text-align:right;
+        color:#667085;
+        font-size:12px;
+        margin-top:5px;
+      "
+    >
+
+      <span id="charCount">
+        0
+      </span>
+      / 300
+
+    </div>
+
+
+    <button
+      class="btn"
+      id="submitBtn"
+      onclick="submitReview()"
+      disabled
+    >
+      ⭐ Submit Rating & Review
+    </button>
+
+  </div>
+
+
+  <!-- DRIVER SUMMARY -->
+
+  <div class="card">
+
+    <h2>
+      📊 Driver Rating
+    </h2>
+
+    <br>
+
+    <div class="summary">
+
+      <div class="summary-box">
+
+        <strong id="averageRating">
+          4.8
+        </strong>
+
+        <span>
+          Average Rating
+        </span>
+
+      </div>
+
+
+      <div class="summary-box">
+
+        <strong id="totalReviews">
+          124
+        </strong>
+
+        <span>
+          Total Reviews
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- REVIEWS -->
+
+  <div class="card">
+
+    <h2>
+      💬 Customer Reviews
+    </h2>
+
+    <br>
+
+    <div id="reviewsList">
+    </div>
+
+  </div>
+
+
+  <div class="note">
+
+    ⚠️ यह अभी Demo Rating System है।
+    Real ratings और reviews को secure backend/database
+    में save करना होगा। एक customer को एक completed
+    ride पर केवल एक review देने की अनुमति backend से
+    enforce करनी चाहिए।
+
+  </div>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Your Feedback Matters
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+VARIABLES
+=========================================
+*/
+
+let selectedRating = 0;
+
+
+let reviews = [
+
+  {
+    name:"Amit Kumar",
+    rating:5,
+    date:"20 Aug 2026",
+    text:"Driver बहुत अच्छे थे। Ride smooth और comfortable रही।"
+  },
+
+  {
+    name:"Priya",
+    rating:5,
+    date:"18 Aug 2026",
+    text:"समय पर pickup मिला और driver का behaviour अच्छा था।"
+  },
+
+  {
+    name:"Rahul",
+    rating:4,
+    date:"16 Aug 2026",
+    text:"Overall अच्छा experience रहा।"
+  }
+
+];
+
+
+/*
+=========================================
+LOAD SAVED REVIEWS
+=========================================
+*/
+
+const savedReviews =
+  localStorage.getItem(
+    "allSamastipurReviews"
+  );
+
+
+if(savedReviews){
+
+  try{
+
+    reviews =
+      JSON.parse(savedReviews);
+
+  }catch(error){
+
+    console.log(
+      "Reviews unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+LOAD BOOKING ID
+=========================================
+*/
+
+const savedRide =
+  localStorage.getItem(
+    "allSamastipurCurrentRide"
+  );
+
+
+if(savedRide){
+
+  try{
+
+    const ride =
+      JSON.parse(savedRide);
+
+
+    if(ride.id){
+
+      document.getElementById(
+        "bookingId"
+      ).innerText =
+        ride.id;
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "Booking ID unavailable"
+    );
+
+  }
+
+}
+
+
+/*
+=========================================
+SELECT RATING
+=========================================
+*/
+
+function selectRating(rating){
+
+  selectedRating =
+    rating;
+
+
+  const stars =
+    document.querySelectorAll(
+      ".star"
+    );
+
+
+  stars.forEach(
+    function(star){
+
+      const value =
+        parseInt(
+          star.dataset.rating
+        );
+
+
+      if(value <= rating){
+
+        star.classList.add(
+          "selected"
+        );
+
+      }else{
+
+        star.classList.remove(
+          "selected"
+        );
+
+      }
+
+    }
+  );
+
+
+  const labels = {
+
+    1:"😞 बहुत खराब",
+
+    2:"😕 खराब",
+
+    3:"🙂 ठीक-ठाक",
+
+    4:"😊 अच्छा",
+
+    5:"🤩 बहुत अच्छा!"
+
+  };
+
+
+  document.getElementById(
+    "ratingText"
+  ).innerText =
+    labels[rating];
+
+
+  document.getElementById(
+    "submitBtn"
+  ).disabled =
+    false;
+
+}
+
+
+/*
+=========================================
+CHARACTER COUNT
+=========================================
+*/
+
+document.getElementById(
+  "reviewText"
+).addEventListener(
+  "input",
+  function(){
+
+    document.getElementById(
+      "charCount"
+    ).innerText =
+      this.value.length;
+
+  }
+);
+
+
+/*
+=========================================
+SUBMIT REVIEW
+=========================================
+*/
+
+function submitReview(){
+
+
+  if(selectedRating === 0){
+
+    alert(
+      "पहले rating select करें।"
+    );
+
+    return;
+
+  }
+
+
+  const text =
+    document.getElementById(
+      "reviewText"
+    ).value.trim();
+
+
+  if(!text){
+
+    alert(
+      "कृपया अपना review लिखें।"
+    );
+
+    return;
+
+  }
+
+
+  /*
+  Create review
+  */
+
+  const newReview = {
+
+    name:"You",
+
+    rating:
+      selectedRating,
+
+    date:
+      new Date()
+        .toLocaleDateString(
+          "en-IN"
+        ),
+
+    text:
+      text
+
+  };
+
+
+  /*
+  Add review
+  */
+
+  reviews.unshift(
+    newReview
+  );
+
+
+  /*
+  Save
+  */
+
+  localStorage.setItem(
+
+    "allSamastipurReviews",
+
+    JSON.stringify(
+      reviews
+    )
+
+  );
+
+
+  /*
+  Update display
+  */
+
+  displayReviews();
+
+  calculateAverage();
+
+
+  /*
+  Reset
+  */
+
+  document.getElementById(
+    "reviewText"
+  ).value = "";
+
+
+  document.getElementById(
+    "charCount"
+  ).innerText =
+    "0";
+
+
+  document.getElementById(
+    "submitBtn"
+  ).disabled =
+    true;
+
+
+  showMessage(
+    "🎉 आपका Rating और Review successfully submit हो गया!"
+  );
+
+
+  /*
+  Scroll to reviews
+  */
+
+  setTimeout(
+
+    function(){
+
+      document.getElementById(
+        "reviewsList"
+      ).scrollIntoView({
+
+        behavior:"smooth"
+
+      });
+
+    },
+
+    500
+
+  );
+
+}
+
+
+/*
+=========================================
+DISPLAY REVIEWS
+=========================================
+*/
+
+function displayReviews(){
+
+
+  const list =
+    document.getElementById(
+      "reviewsList"
+    );
+
+
+  list.innerHTML = "";
+
+
+  reviews.forEach(
+    function(review){
+
+
+      const stars =
+        "★".repeat(
+          review.rating
+        ) +
+        "☆".repeat(
+          5 - review.rating
+        );
+
+
+      const item =
+        document.createElement(
+          "div"
+        );
+
+
+      item.className =
+        "review";
+
+
+      item.innerHTML = `
+
+        <div class="review-top">
+
+          <div class="reviewer">
+            ${escapeHTML(review.name)}
+          </div>
+
+          <div class="review-stars">
+            ${stars}
+          </div>
+
+        </div>
+
+        <div class="review-date">
+          ${review.date}
+        </div>
+
+        <div class="review-text">
+          ${escapeHTML(review.text)}
+        </div>
+
+      `;
+
+
+      list.appendChild(
+        item
+      );
+
+    }
+  );
+
+
+  document.getElementById(
+    "totalReviews"
+  ).innerText =
+    reviews.length;
+
+}
+
+
+/*
+=========================================
+CALCULATE AVERAGE
+=========================================
+*/
+
+function calculateAverage(){
+
+
+  if(reviews.length === 0){
+
+    document.getElementById(
+      "averageRating"
+    ).innerText =
+      "0.0";
+
+    return;
+
+  }
+
+
+  const total =
+    reviews.reduce(
+      function(sum,review){
+
+        return sum +
+          review.rating;
+
+      },
+      0
+    );
+
+
+  const average =
+    total /
+    reviews.length;
+
+
+  document.getElementById(
+    "averageRating"
+  ).innerText =
+    average.toFixed(1);
+
+}
+
+
+/*
+=========================================
+SECURITY HELPER
+=========================================
+*/
+
+function escapeHTML(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/*
+=========================================
+MESSAGE
+=========================================
+*/
+
+function showMessage(text){
+
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  message.innerText =
+    text;
+
+
+  message.style.display =
+    "block";
+
+
+  setTimeout(
+
+    function(){
+
+      message.style.display =
+        "none";
+
+    },
+
+    4000
+
+  );
+
+}
+
+
+/*
+=========================================
+START
+=========================================
+*/
+
+displayReviews();
+
+calculateAverage();
+
+</script>
+
+
+</body>
+
+</html>
