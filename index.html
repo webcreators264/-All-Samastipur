@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b63f6">
+
+<title>All Samastipur - Rickshaw Ride</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+}
+
+a{
+  text-decoration:none;
+}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  font-size:23px;
+  font-weight:800;
+  color:#0756d9;
+}
+
+.logo span{
+  color:#111827;
+}
+
+nav a{
+  color:#172033;
+  font-weight:600;
+  margin-left:22px;
+}
+
+.hero{
+  background:linear-gradient(135deg,#0756d9,#14a5ff);
+  color:#fff;
+  padding:70px 6%;
+}
+
+.hero-wrap{
+  max-width:1200px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:45px;
+  align-items:center;
+}
+
+.badge{
+  display:inline-block;
+  background:rgba(255,255,255,.16);
+  padding:8px 14px;
+  border-radius:30px;
+  margin-bottom:18px;
+}
+
+.hero h1{
+  font-size:52px;
+  line-height:1.08;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  color:#ffe600;
+}
+
+.hero p{
+  font-size:18px;
+  line-height:1.7;
+  margin-bottom:25px;
+}
+
+.btn{
+  display:inline-block;
+  border:0;
+  cursor:pointer;
+  padding:14px 22px;
+  border-radius:10px;
+  font-weight:700;
+  font-size:15px;
+}
+
+.btn-white{
+  background:#fff;
+  color:#0756d9;
+}
+
+.btn-blue{
+  background:#0756d9;
+  color:#fff;
+  width:100%;
+}
+
+.btn-green{
+  background:#16a34a;
+  color:#fff;
+}
+
+.booking-card{
+  background:#fff;
+  color:#172033;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 18px 45px rgba(0,0,0,.2);
+}
+
+.booking-card h2{
+  margin-bottom:8px;
+}
+
+.booking-card p{
+  color:#667085;
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+.input{
+  width:100%;
+  padding:14px;
+  border:1px solid #d9dee8;
+  border-radius:9px;
+  margin-bottom:12px;
+  font-size:15px;
+  outline:none;
+}
+
+.input:focus{
+  border-color:#0756d9;
+}
+
+section{
+  padding:60px 6%;
+}
+
+.container{
+  max-width:1200px;
+  margin:auto;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:35px;
+}
+
+.title h2{
+  font-size:32px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.features{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.feature{
+  background:#fff;
+  padding:25px 20px;
+  border-radius:15px;
+  text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.icon{
+  font-size:38px;
+  margin-bottom:13px;
+}
+
+.feature h3{
+  margin-bottom:8px;
+}
+
+.feature p{
+  color:#667085;
+  line-height:1.5;
+  font-size:14px;
+}
+
+.areas{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.area{
+  background:#fff;
+  padding:17px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:600;
+  border:1px solid #e5e7eb;
+}
+
+.driver-section{
+  background:#eaf3ff;
+}
+
+.driver-box{
+  max-width:850px;
+  margin:auto;
+  background:#fff;
+  padding:38px 25px;
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+}
+
+.driver-box h2{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.driver-box p{
+  color:#667085;
+  line-height:1.6;
+  margin-bottom:20px;
+}
+
+.contact{
+  text-align:center;
+}
+
+.contact-box{
+  background:#fff;
+  max-width:600px;
+  margin:auto;
+  padding:30px;
+  border-radius:18px;
+}
+
+.contact-box p{
+  margin:10px 0;
+  color:#667085;
+}
+
+footer{
+  background:#07111f;
+  color:#fff;
+  text-align:center;
+  padding:35px 15px;
+}
+
+footer p{
+  color:#b8c2d1;
+  margin-top:8px;
+}
+
+.whatsapp{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:58px;
+  height:58px;
+  background:#25d366;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:28px;
+  box-shadow:0 5px 20px rgba(0,0,0,.25);
+  z-index:2000;
+}
+
+@media(max-width:850px){
+
+  nav{
+    display:none;
+  }
+
+  .hero-wrap{
+    grid-template-columns:1fr;
+  }
+
+  .hero h1{
+    font-size:40px;
+  }
+
+  .features{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .areas{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media(max-width:500px){
+
+  .hero{
+    padding:48px 5%;
+  }
+
+  .hero h1{
+    font-size:34px;
+  }
+
+  section{
+    padding:48px 5%;
+  }
+
+  .features,
+  .areas{
+    grid-template-columns:1fr;
+  }
+
+  .logo{
+    font-size:19px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+  <div class="logo">
+    🛺 All <span>Samastipur</span>
+  </div>
+
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#booking">Book Ride</a>
+    <a href="#features">Features</a>
+    <a href="#areas">Areas</a>
+    <a href="#driver">Driver Join</a>
+  </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+  <div class="hero-wrap">
+
+    <div>
+
+      <div class="badge">
+        🛺 Samastipur Local Ride Service
+      </div>
+
+      <h1>
+        आपकी Ride,<br>
+        <span>आपके Samastipur</span> में!
+      </h1>
+
+      <p>
+        घर बैठे ऑटो/रिक्शा बुक करें।
+        Pickup और Drop डालें और अपनी Ride
+        के लिए Request भेजें।
+      </p>
+
+      <a href="#booking" class="btn btn-white">
+        🛺 Ride Now
+      </a>
+
+    </div>
+
+
+    <!-- QUICK BOOKING -->
+
+    <div class="booking-card" id="booking">
+
+      <h2>🛺 Quick Ride Booking</h2>
+
+      <p>
+        अभी Pickup और Drop डालकर शुरुआत करें।
+      </p>
+
+      <input
+        type="text"
+        id="pickup"
+        class="input"
+        placeholder="📍 Pickup Location"
+      >
+
+      <input
+        type="text"
+        id="drop"
+        class="input"
+        placeholder="📍 Drop Location"
+      >
+
+      <button
+        class="btn btn-blue"
+        onclick="bookRide()"
+      >
+        Find Ride
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOUR FEATURES -->
+
+<section id="features">
+
+  <div class="container">
+
+    <div class="title">
+
+      <h2>हमारे मुख्य फीचर्स</h2>
+
+      <p>
+        आगे हम इन सभी फीचर्स को Live System से जोड़ेंगे
+      </p>
+
+    </div>
+
+
+    <div class="features">
+
+      <div class="feature">
+
+        <div class="icon">🛺</div>
+
+        <h3>Ride Booking</h3>
+
+        <p>
+          Customer अपने मोबाइल से Ride Request भेज सकेगा।
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="icon">📍</div>
+
+        <h3>Live Tracking</h3>
+
+        <p>
+          Driver की Live Location Customer देख सकेगा।
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="icon">💰</div>
+
+        <h3>Fare Estimate</h3>
+
+        <p>
+          Ride शुरू करने से पहले अनुमानित किराया दिखाई देगा।
+        </p>
+
+      </div>
+
+
+      <div class="feature">
+
+        <div class="icon">⭐</div>
+
+        <h3>Rating & Review</h3>
+
+        <p>
+          Ride के बाद Customer Driver को Rating दे सकेगा।
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SERVICE AREAS -->
+
+<section id="areas">
+
+  <div class="container">
+
+    <div class="title">
+
+      <h2>📍 Service Areas</h2>
+
+      <p>
+        शुरुआत Samastipur से होगी
+      </p>
+
+    </div>
+
+
+    <div class="areas">
+
+      <div class="area">Samastipur City</div>
+      <div class="area">Samastipur Station</div>
+      <div class="area">Tajpur</div>
+      <div class="area">Rosera</div>
+      <div class="area">Dalsinghsarai</div>
+      <div class="area">Warisnagar</div>
+      <div class="area">Morwa</div>
+      <div class="area">Pusa</div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- DRIVER JOIN -->
+
+<section class="driver-section" id="driver">
+
+  <div class="driver-box">
+
+    <h2>👨‍✈️ Driver बनकर जुड़ें</h2>
+
+    <p>
+      All Samastipur के साथ जुड़ें।
+      Customer की Ride Request प्राप्त करें,
+      Ride पूरी करें और Reward Points कमाएँ।
+    </p>
+
+    <button
+      class="btn btn-green"
+      onclick="driverJoin()"
+    >
+      Join as Driver
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section class="contact">
+
+  <div class="container">
+
+    <div class="title">
+
+      <h2>📞 Contact</h2>
+
+      <p>
+        Ride या Driver Registration के लिए संपर्क करें
+      </p>
+
+    </div>
+
+    <div class="contact-box">
+
+      <p>🛺 <b>All Samastipur</b></p>
+
+      <p>📱 Customer Support Available</p>
+
+      <a
+        href="https://wa.me/917494005371"
+        target="_blank"
+        class="btn btn-green"
+      >
+        WhatsApp Support
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <h3>🛺 All Samastipur</h3>
+
+  <p>
+    Samastipur का अपना Local Ride Booking Platform
+  </p>
+
+  <p>
+    © 2026 All Samastipur • All Rights Reserved
+  </p>
+
+</footer>
+
+
+<!-- FLOATING WHATSAPP -->
+
+<a
+  href="https://wa.me/917494005371"
+  target="_blank"
+  class="whatsapp"
+>
+  💬
+</a>
+
+
+<script>
+
+function bookRide(){
+
+  const pickup =
+    document.getElementById("pickup").value.trim();
+
+  const drop =
+    document.getElementById("drop").value.trim();
+
+
+  if(pickup === "" || drop === ""){
+
+    alert(
+      "कृपया Pickup और Drop Location भरें।"
+    );
+
+    return;
+  }
+
+
+  alert(
+    "Ride Request तैयार है!\n\n" +
+    "Pickup: " + pickup +
+    "\nDrop: " + drop +
+    "\n\n" +
+    "अगले चरण में इसे Customer + Driver Live Booking System से जोड़ा जाएगा।"
+  );
+
+}
+
+
+function driverJoin(){
+
+  alert(
+    "Driver Registration जल्द जोड़ा जाएगा।"
+  );
+
+}
+
+</script>
+
+</body>
+</html>
