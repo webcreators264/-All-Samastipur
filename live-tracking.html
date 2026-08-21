@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+All Samastipur - Live Driver Tracking
+</title>
+
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:25px 18px;
+}
+
+.title{
+  margin-bottom:20px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+.map{
+  width:100%;
+  height:480px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#e5e7eb;
+}
+
+.status{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:14px;
+  background:#ecfdf3;
+  color:#166534;
+  border-radius:10px;
+  margin-bottom:15px;
+  font-weight:bold;
+}
+
+.dot{
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:#16a34a;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin-top:15px;
+}
+
+.info{
+  background:#f8fafc;
+  padding:15px;
+  border-radius:10px;
+}
+
+.info span{
+  display:block;
+  color:#667085;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.info strong{
+  font-size:16px;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:15px;
+}
+
+.btn{
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#0756d9;
+  color:#fff;
+  font-weight:bold;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.btn.off{
+  background:#667085;
+}
+
+.btn.green{
+  background:#16a34a;
+}
+
+.notice{
+  padding:14px;
+  background:#eef6ff;
+  border-left:4px solid #0756d9;
+  border-radius:8px;
+  color:#475467;
+  font-size:13px;
+  line-height:1.5;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#667085;
+}
+
+@media(max-width:700px){
+
+  .title h1{
+    font-size:25px;
+  }
+
+  .map{
+    height:400px;
+  }
+
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .buttons{
+    grid-template-columns:1fr;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    📍 Live Tracking
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      🛺 Driver Live Location
+    </h1>
+
+    <p>
+      Driver की current location और ride status देखें।
+    </p>
+
+  </div>
+
+
+  <div class="card">
+
+
+    <!-- STATUS -->
+
+    <div class="status">
+
+      <div
+        class="dot"
+        id="statusDot"
+      ></div>
+
+      <span id="statusText">
+        GPS Location तैयार है
+      </span>
+
+    </div>
+
+
+    <!-- MAP -->
+
+    <div
+      id="map"
+      class="map"
+    ></div>
+
+
+    <!-- INFORMATION -->
+
+    <div class="info-grid">
+
+
+      <div class="info">
+
+        <span>
+          📍 Latitude
+        </span>
+
+        <strong id="latitude">
+          Waiting...
+        </strong>
+
+      </div>
+
+
+      <div class="info">
+
+        <span>
+          📍 Longitude
+        </span>
+
+        <strong id="longitude">
+          Waiting...
+        </strong>
+
+      </div>
+
+
+      <div class="info">
+
+        <span>
+          🚗 Accuracy
+        </span>
+
+        <strong id="accuracy">
+          Waiting...
+        </strong>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="buttons">
+
+      <button
+        class="btn green"
+        id="locationButton"
+        onclick="startTracking()"
+      >
+        📍 Start Live Location
+      </button>
+
+
+      <button
+        class="btn off"
+        onclick="stopTracking()"
+      >
+        ⛔ Stop Tracking
+      </button>
+
+    </div>
+
+
+    <div
+      class="notice"
+      style="margin-top:15px;"
+    >
+
+      ℹ️ Driver को अपने फोन में
+      Location/GPS permission देनी होगी।
+      यह demo browser GPS tracking है।
+      Real customer और driver के बीच live
+      location synchronization के लिए backend
+      connection अगले चरणों में जोड़ा जाएगा।
+
+    </div>
+
+
+  </div>
+
+
+  <!-- RIDE INFO -->
+
+  <div class="card">
+
+    <h2 style="margin-bottom:15px;">
+      🚕 Current Ride
+    </h2>
+
+
+    <div class="info-grid">
+
+      <div class="info">
+
+        <span>
+          Booking ID
+        </span>
+
+        <strong id="bookingId">
+          ASM-DEMO
+        </strong>
+
+      </div>
+
+
+      <div class="info">
+
+        <span>
+          Pickup
+        </span>
+
+        <strong>
+          Samastipur Station
+        </strong>
+
+      </div>
+
+
+      <div class="info">
+
+        <span>
+          Drop
+        </span>
+
+        <strong>
+          Tajpur
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Safe • Simple • Local Ride
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+GLOBAL VARIABLES
+=========================================
+*/
+
+let map;
+
+let driverMarker;
+
+let accuracyCircle;
+
+let watchId = null;
+
+
+/*
+=========================================
+SAMASTIPUR DEFAULT LOCATION
+=========================================
+*/
+
+const defaultLocation = {
+
+  lat:25.8629,
+
+  lng:85.7810
+
+};
+
+
+/*
+=========================================
+INITIALIZE MAP
+=========================================
+*/
+
+function initMap(){
+
+  map =
+    new google.maps.Map(
+
+      document.getElementById("map"),
+
+      {
+
+        center:defaultLocation,
+
+        zoom:14,
+
+        mapTypeControl:false,
+
+        streetViewControl:false,
+
+        fullscreenControl:true
+
+      }
+
+    );
+
+
+  /*
+  Driver Marker
+  */
+
+  driverMarker =
+    new google.maps.Marker({
+
+      position:defaultLocation,
+
+      map:map,
+
+      title:"Driver Location",
+
+      label:"🛺"
+
+    });
+
+
+  /*
+  Accuracy Circle
+  */
+
+  accuracyCircle =
+    new google.maps.Circle({
+
+      map:map,
+
+      center:defaultLocation,
+
+      radius:50,
+
+      fillOpacity:0.15,
+
+      strokeOpacity:0.5
+
+    });
+
+}
+
+
+/*
+=========================================
+START GPS TRACKING
+=========================================
+*/
+
+function startTracking(){
+
+
+  if(!navigator.geolocation){
+
+    alert(
+      "आपके browser में GPS Location support नहीं है।"
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "statusText"
+  ).innerText =
+    "🟢 Live GPS Tracking चालू है";
+
+
+  document.getElementById(
+    "statusDot"
+  ).style.background =
+    "#16a34a";
+
+
+  /*
+  Browser GPS watch
+  */
+
+  watchId =
+    navigator.geolocation.watchPosition(
+
+      updateLocation,
+
+      locationError,
+
+      {
+
+        enableHighAccuracy:true,
+
+        maximumAge:5000,
+
+        timeout:10000
+
+      }
+
+    );
+
+}
+
+
+/*
+=========================================
+UPDATE LOCATION
+=========================================
+*/
+
+function updateLocation(position){
+
+
+  const lat =
+    position.coords.latitude;
+
+
+  const lng =
+    position.coords.longitude;
+
+
+  const accuracy =
+    position.coords.accuracy;
+
+
+  /*
+  Screen information
+  */
+
+  document.getElementById(
+    "latitude"
+  ).innerText =
+    lat.toFixed(6);
+
+
+  document.getElementById(
+    "longitude"
+  ).innerText =
+    lng.toFixed(6);
+
+
+  document.getElementById(
+    "accuracy"
+  ).innerText =
+    Math.round(accuracy) + " meters";
+
+
+  /*
+  New GPS position
+  */
+
+  const newPosition = {
+
+    lat:lat,
+
+    lng:lng
+
+  };
+
+
+  /*
+  Move driver marker
+  */
+
+  if(driverMarker){
+
+    driverMarker.setPosition(
+      newPosition
+    );
+
+  }
+
+
+  /*
+  Move accuracy circle
+  */
+
+  if(accuracyCircle){
+
+    accuracyCircle.setCenter(
+      newPosition
+    );
+
+    accuracyCircle.setRadius(
+      accuracy
+    );
+
+  }
+
+
+  /*
+  Move map
+  */
+
+  if(map){
+
+    map.panTo(
+      newPosition
+    );
+
+  }
+
+
+  /*
+  Save latest location locally.
+  Later this will be sent to backend.
+  */
+
+  localStorage.setItem(
+
+    "allSamastipurDriverLocation",
+
+    JSON.stringify({
+
+      latitude:lat,
+
+      longitude:lng,
+
+      accuracy:accuracy,
+
+      time:
+        new Date().toISOString()
+
+    })
+
+  );
+
+}
+
+
+/*
+=========================================
+GPS ERROR
+=========================================
+*/
+
+function locationError(error){
+
+  let message =
+    "GPS Location नहीं मिल पाई।";
+
+
+  if(error.code === 1){
+
+    message =
+      "Location permission allow करें।";
+
+  }
+
+
+  if(error.code === 2){
+
+    message =
+      "Location unavailable है।";
+
+  }
+
+
+  if(error.code === 3){
+
+    message =
+      "GPS request timeout हो गई।";
+
+  }
+
+
+  document.getElementById(
+    "statusText"
+  ).innerText =
+    "🔴 " + message;
+
+
+  document.getElementById(
+    "statusDot"
+  ).style.background =
+    "#dc2626";
+
+
+  alert(message);
+
+}
+
+
+/*
+=========================================
+STOP TRACKING
+=========================================
+*/
+
+function stopTracking(){
+
+
+  if(watchId !== null){
+
+    navigator.geolocation.clearWatch(
+      watchId
+    );
+
+    watchId = null;
+
+  }
+
+
+  document.getElementById(
+    "statusText"
+  ).innerText =
+    "⚪ Live Tracking बंद है";
+
+
+  document.getElementById(
+    "statusDot"
+  ).style.background =
+    "#667085";
+
+}
+
+
+/*
+=========================================
+LOAD BOOKING
+=========================================
+*/
+
+const savedBooking =
+  localStorage.getItem(
+    "allSamastipurCurrentRide"
+  );
+
+
+if(savedBooking){
+
+  try{
+
+    const booking =
+      JSON.parse(savedBooking);
+
+
+    if(booking.id){
+
+      document.getElementById(
+        "bookingId"
+      ).innerText =
+        booking.id;
+
+    }
+
+  }catch(error){
+
+    console.log(
+      "Booking unavailable"
+    );
+
+  }
+
+}
+
+</script>
+
+
+<!--
+=========================================
+GOOGLE MAPS
+=========================================
+
+YOUR_GOOGLE_MAPS_API_KEY को
+अपनी Google Maps API Key से replace करें।
+
+=========================================
+-->
+
+<script
+  async
+  defer
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap">
+</script>
+
+
+</body>
+
+</html>
