@@ -22,7 +22,196 @@ All Samastipur - Live Driver Tracking
   padding:0;
   box-sizing:border-box;
 }
+<!-- ==========================================
+     ALL SAMASTIPUR
+     CODE 35 - CUSTOMER LIVE DRIVER LOCATION
+========================================== -->
 
+<script type="module">
+
+import {
+  database,
+  ref,
+  onValue
+} from "./firebase-config.js";
+
+
+// ------------------------------------------
+// Get Current Ride
+// ------------------------------------------
+
+const savedRide =
+  localStorage.getItem(
+    "allSamastipurCurrentRide"
+  );
+
+
+if (!savedRide) {
+
+  console.log(
+    "No current ride found."
+  );
+
+} else {
+
+  const ride =
+    JSON.parse(savedRide);
+
+
+  const rideId =
+    ride.rideId;
+
+
+  if (!rideId) {
+
+    console.error(
+      "Ride ID missing."
+    );
+
+  } else {
+
+
+    // --------------------------------------
+    // Firebase Ride Reference
+    // --------------------------------------
+
+    const rideRef =
+      ref(
+        database,
+        "rides/" + rideId
+      );
+
+
+    // --------------------------------------
+    // Live Driver Location
+    // --------------------------------------
+
+    onValue(
+      rideRef,
+      function(snapshot) {
+
+        if (!snapshot.exists()) {
+
+          console.log(
+            "Ride not found."
+          );
+
+          return;
+
+        }
+
+
+        const data =
+          snapshot.val();
+
+
+        const location =
+          data.driverLocation;
+
+
+        if (
+          !location ||
+          location.latitude === null ||
+          location.longitude === null
+        ) {
+
+          console.log(
+            "📍 Driver location अभी available नहीं है."
+          );
+
+          return;
+
+        }
+
+
+        const latitude =
+          Number(
+            location.latitude
+          );
+
+
+        const longitude =
+          Number(
+            location.longitude
+          );
+
+
+        console.log(
+          "🚕 Driver Live Location:",
+          latitude,
+          longitude
+        );
+
+
+        // ----------------------------------
+        // Send Location To Map
+        // ----------------------------------
+
+        window.dispatchEvent(
+
+          new CustomEvent(
+            "allSamastipurDriverLocation",
+            {
+
+              detail: {
+
+                latitude:
+                  latitude,
+
+                longitude:
+                  longitude,
+
+                updatedAt:
+                  location.updatedAt ||
+                  Date.now()
+
+              }
+
+            }
+
+          )
+
+        );
+
+
+        // ----------------------------------
+        // Save Latest Location
+        // ----------------------------------
+
+        localStorage.setItem(
+
+          "allSamastipurDriverLocation",
+
+          JSON.stringify({
+
+            latitude:
+              latitude,
+
+            longitude:
+              longitude,
+
+            updatedAt:
+              location.updatedAt ||
+              Date.now()
+
+          })
+
+        );
+
+      }
+
+    );
+
+  }
+
+}
+
+
+console.log(
+  "✅ Customer Live Driver Location Connected!"
+);
+
+</script>
 body{
   font-family:Arial,sans-serif;
   background:#f4f7fb;
