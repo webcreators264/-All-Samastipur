@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#0756d9">
+
+<title>
+Fare Calculator | All Samastipur
+</title>
+
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:850px;
+  margin:auto;
+  padding:30px 18px;
+}
+
+.title{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.title h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.title p{
+  color:#667085;
+}
+
+.card{
+  background:#fff;
+  padding:25px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.06);
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:7px;
+  color:#344054;
+}
+
+input,
+select{
+  width:100%;
+  padding:14px;
+  border:1px solid #d9dee8;
+  border-radius:9px;
+  font-size:15px;
+  margin-bottom:16px;
+  outline:none;
+  background:#fff;
+}
+
+input:focus,
+select:focus{
+  border-color:#0756d9;
+}
+
+.btn{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#0756d9;
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+.result{
+  display:none;
+  margin-top:20px;
+}
+
+.route{
+  background:#f8fafc;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:15px;
+}
+
+.route-row{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  padding:8px 0;
+}
+
+.route-row span{
+  color:#667085;
+}
+
+.breakdown{
+  border:1px solid #e4e7ec;
+  border-radius:12px;
+  overflow:hidden;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  padding:13px 15px;
+  border-bottom:1px solid #e4e7ec;
+}
+
+.row:last-child{
+  border-bottom:0;
+}
+
+.total{
+  background:#eaf3ff;
+  color:#0756d9;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.note{
+  background:#fff8e1;
+  color:#7a5b00;
+  padding:14px;
+  border-radius:9px;
+  margin-top:15px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.confirm{
+  display:none;
+  margin-top:15px;
+}
+
+.success{
+  display:none;
+  background:#ecfdf3;
+  color:#166534;
+  padding:18px;
+  border-radius:12px;
+  margin-top:15px;
+  line-height:1.6;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#667085;
+}
+
+@media(max-width:600px){
+
+  .title h1{
+    font-size:25px;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    💰 Fare
+  </div>
+
+</header>
+
+
+<div class="container">
+
+
+  <div class="title">
+
+    <h1>
+      💰 Fare Calculator
+    </h1>
+
+    <p>
+      अपनी Ride का estimated fare जानें।
+    </p>
+
+  </div>
+
+
+  <!-- CALCULATOR -->
+
+  <div class="card">
+
+    <h2>
+      🛺 Ride Details
+    </h2>
+
+
+    <label>
+      Pickup Location
+    </label>
+
+    <input
+      type="text"
+      id="pickup"
+      placeholder="जैसे: Samastipur Station"
+    >
+
+
+    <label>
+      Drop Location
+    </label>
+
+    <input
+      type="text"
+      id="drop"
+      placeholder="जैसे: Tajpur"
+    >
+
+
+    <label>
+      Ride Type
+    </label>
+
+    <select id="rideType">
+
+      <option value="auto">
+        🛺 Auto Rickshaw
+      </option>
+
+      <option value="erickshaw">
+        🔋 E-Rickshaw
+      </option>
+
+    </select>
+
+
+    <label>
+      Distance (KM)
+    </label>
+
+    <input
+      type="number"
+      id="distance"
+      placeholder="जैसे: 8"
+      min="1"
+      step="0.1"
+    >
+
+
+    <label>
+      Passengers
+    </label>
+
+    <select id="passengers">
+
+      <option value="1">
+        1 Passenger
+      </option>
+
+      <option value="2">
+        2 Passengers
+      </option>
+
+      <option value="3">
+        3 Passengers
+      </option>
+
+      <option value="4">
+        4 Passengers
+      </option>
+
+    </select>
+
+
+    <button
+      class="btn"
+      onclick="calculateFare()"
+    >
+      💰 Calculate Fare
+    </button>
+
+
+    <!-- RESULT -->
+
+    <div
+      class="result"
+      id="result"
+    >
+
+      <div class="route">
+
+        <div class="route-row">
+
+          <span>
+            📍 Pickup
+          </span>
+
+          <strong id="showPickup">
+            --
+          </strong>
+
+        </div>
+
+
+        <div class="route-row">
+
+          <span>
+            🏁 Drop
+          </span>
+
+          <strong id="showDrop">
+            --
+          </strong>
+
+        </div>
+
+
+        <div class="route-row">
+
+          <span>
+            📏 Distance
+          </span>
+
+          <strong id="showDistance">
+            --
+          </strong>
+
+        </div>
+
+      </div>
+
+
+      <h3 style="margin-bottom:12px;">
+        Fare Breakdown
+      </h3>
+
+
+      <div class="breakdown">
+
+
+        <div class="row">
+
+          <span>
+            Base Fare
+          </span>
+
+          <strong id="baseFare">
+            ₹30
+          </strong>
+
+        </div>
+
+
+        <div class="row">
+
+          <span>
+            Distance Charge
+          </span>
+
+          <strong id="distanceFare">
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div class="row">
+
+          <span>
+            Passenger Charge
+          </span>
+
+          <strong id="passengerFare">
+            ₹0
+          </strong>
+
+        </div>
+
+
+        <div class="row">
+
+          <span>
+            Service Charge
+          </span>
+
+          <strong id="serviceFare">
+            ₹5
+          </strong>
+
+        </div>
+
+
+        <div class="row total">
+
+          <span>
+            Total Estimated Fare
+          </span>
+
+          <span id="totalFare">
+            ₹0
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="note">
+
+        ⚠️ यह estimated fare है।
+        Actual fare distance, traffic,
+        waiting time और platform rules
+        के अनुसार बदल सकता है।
+
+      </div>
+
+
+      <div class="confirm">
+
+        <button
+          class="btn"
+          onclick="confirmRide()"
+        >
+          🛺 Continue & Book Ride
+        </button>
+
+      </div>
+
+
+      <div
+        class="success"
+        id="success"
+      >
+
+        <strong>
+          ✅ Fare Saved Successfully!
+        </strong>
+
+        <br>
+
+        आपकी Ride Booking के लिए तैयार है।
+
+        <br>
+
+        Estimated Fare:
+        <strong id="savedFare">
+          ₹0
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RATE CARD -->
+
+  <div class="card">
+
+    <h2>
+      📋 Demo Rate Card
+    </h2>
+
+    <div class="breakdown">
+
+      <div class="row">
+
+        <span>
+          🛺 Auto Base Fare
+        </span>
+
+        <strong>
+          ₹30
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          Auto Per KM
+        </span>
+
+        <strong>
+          ₹12/km
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          🔋 E-Rickshaw Base
+        </span>
+
+        <strong>
+          ₹25
+        </strong>
+
+      </div>
+
+
+      <div class="row">
+
+        <span>
+          E-Rickshaw Per KM
+        </span>
+
+        <strong>
+          ₹10/km
+        </strong>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Simple • Transparent • Local
+  </small>
+
+</footer>
+
+
+<script>
+
+
+/*
+=========================================
+FARE SETTINGS
+=========================================
+*/
+
+const rates = {
+
+  auto:{
+
+    base:30,
+
+    perKm:12
+
+  },
+
+  erickshaw:{
+
+    base:25,
+
+    perKm:10
+
+  }
+
+};
+
+
+/*
+=========================================
+CALCULATE FARE
+=========================================
+*/
+
+function calculateFare(){
+
+
+  const pickup =
+    document.getElementById(
+      "pickup"
+    ).value.trim();
+
+
+  const drop =
+    document.getElementById(
+      "drop"
+    ).value.trim();
+
+
+  const distance =
+    parseFloat(
+      document.getElementById(
+        "distance"
+      ).value
+    );
+
+
+  const rideType =
+    document.getElementById(
+      "rideType"
+    ).value;
+
+
+  const passengers =
+    parseInt(
+      document.getElementById(
+        "passengers"
+      ).value
+    );
+
+
+  /*
+  Validation
+  */
+
+  if(!pickup){
+
+    alert(
+      "Pickup Location डालें।"
+    );
+
+    return;
+
+  }
+
+
+  if(!drop){
+
+    alert(
+      "Drop Location डालें।"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    isNaN(distance) ||
+    distance <= 0
+  ){
+
+    alert(
+      "Valid Distance डालें।"
+    );
+
+    return;
+
+  }
+
+
+  /*
+  Rate select
+  */
+
+  const rate =
+    rates[rideType];
+
+
+  /*
+  Distance charge
+  */
+
+  const distanceCharge =
+    distance * rate.perKm;
+
+
+  /*
+  Passenger charge
+
+  First passenger free.
+  हर additional passenger
+  पर ₹10 demo charge.
+  */
+
+  const passengerCharge =
+    passengers > 1
+    ? (passengers - 1) * 10
+    : 0;
+
+
+  /*
+  Service charge
+  */
+
+  const serviceCharge = 5;
+
+
+  /*
+  Total
+  */
+
+  const total =
+    rate.base +
+    distanceCharge +
+    passengerCharge +
+    serviceCharge;
+
+
+  /*
+  Display
+  */
+
+  document.getElementById(
+    "showPickup"
+  ).innerText =
+    pickup;
+
+
+  document.getElementById(
+    "showDrop"
+  ).innerText =
+    drop;
+
+
+  document.getElementById(
+    "showDistance"
+  ).innerText =
+    distance + " KM";
+
+
+  document.getElementById(
+    "baseFare"
+  ).innerText =
+    "₹" + rate.base.toFixed(0);
+
+
+  document.getElementById(
+    "distanceFare"
+  ).innerText =
+    "₹" + distanceCharge.toFixed(0);
+
+
+  document.getElementById(
+    "passengerFare"
+  ).innerText =
+    "₹" + passengerCharge.toFixed(0);
+
+
+  document.getElementById(
+    "serviceFare"
+  ).innerText =
+    "₹" + serviceCharge;
+
+
+  document.getElementById(
+    "totalFare"
+  ).innerText =
+    "₹" + total.toFixed(0);
+
+
+  /*
+  Save fare
+  */
+
+  localStorage.setItem(
+
+    "allSamastipurFare",
+
+    JSON.stringify({
+
+      pickup:pickup,
+
+      drop:drop,
+
+      distance:distance,
+
+      rideType:rideType,
+
+      passengers:passengers,
+
+      totalFare:total,
+
+      time:
+        new Date().toISOString()
+
+    })
+
+  );
+
+
+  /*
+  Show result
+  */
+
+  document.getElementById(
+    "result"
+  ).style.display =
+    "block";
+
+
+  document.querySelector(
+    ".confirm"
+  ).style.display =
+    "block";
+
+
+  document.getElementById(
+    "success"
+  ).style.display =
+    "none";
+
+
+  /*
+  Scroll to result
+  */
+
+  document.getElementById(
+    "result"
+  ).scrollIntoView({
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+/*
+=========================================
+CONFIRM RIDE
+=========================================
+*/
+
+function confirmRide(){
+
+
+  const saved =
+    localStorage.getItem(
+      "allSamastipurFare"
+    );
+
+
+  if(!saved){
+
+    alert(
+      "पहले Fare Calculate करें।"
+    );
+
+    return;
+
+  }
+
+
+  const data =
+    JSON.parse(saved);
+
+
+  document.getElementById(
+    "savedFare"
+  ).innerText =
+    "₹" +
+    data.totalFare.toFixed(0);
+
+
+  document.getElementById(
+    "success"
+  ).style.display =
+    "block";
+
+
+  alert(
+    "✅ Fare Confirm हो गया!\n\n" +
+    "Estimated Fare: ₹" +
+    data.totalFare.toFixed(0)
+  );
+
+}
+
+
+/*
+=========================================
+LOAD SAVED FARE
+=========================================
+*/
+
+const savedFare =
+  localStorage.getItem(
+    "allSamastipurFare"
+  );
+
+
+if(savedFare){
+
+  try{
+
+    const data =
+      JSON.parse(savedFare);
+
+
+    document.getElementById(
+      "pickup"
+    ).value =
+      data.pickup || "";
+
+
+    document.getElementById(
+      "drop"
+    ).value =
+      data.drop || "";
+
+
+    document.getElementById(
+      "distance"
+    ).value =
+      data.distance || "";
+
+
+  }catch(error){
+
+    console.log(
+      "Saved fare unavailable"
+    );
+
+  }
+
+}
+
+</script>
+
+
+</body>
+
+</html>
