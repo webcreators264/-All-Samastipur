@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -12,6 +11,25 @@
 
   <title>All Samastipur - Firebase Test</title>
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 25px;
+      text-align: center;
+    }
+
+    button {
+      padding: 15px 25px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      word-break: break-word;
+    }
+  </style>
 </head>
 
 <body>
@@ -24,84 +42,121 @@
     Create Test Ride
   </button>
 
-  <p id="result"></p>
+  <div id="result">
+    Ready...
+  </div>
 
 
   <script type="module">
-
-    import {
-      bookRide
-    } from "./ride-booking.js";
-
-
-    const button =
-      document.getElementById("testRide");
 
     const result =
       document.getElementById("result");
 
 
-    button.addEventListener(
-      "click",
-      async function () {
+    // Step 1: Check JavaScript
 
-        result.innerText =
-          "Booking...";
+    result.innerText =
+      "JavaScript Loaded...";
 
 
-        try {
+    try {
 
-          const ride =
-            await bookRide({
+      // Step 2: Load booking system
 
-              customerName:
-                "Test Customer",
-
-              customerMobile:
-                "9999999999",
-
-              pickup:
-                "Samastipur Junction",
-
-              drop:
-                "Mithapur",
-
-              rideType:
-                "Auto Rickshaw",
-
-              passengers:
-                1,
-
-              fare:
-                50
-
-            });
+      const module =
+        await import("./ride-booking.js");
 
 
-          result.innerText =
-            "✅ Booking Successful! " +
-            "Booking ID: " +
-            ride.bookingId;
+      result.innerText =
+        "Firebase booking module loaded...";
 
 
-          console.log(
-            "Firebase Ride:",
-            ride
-          );
+      const bookRide =
+        module.bookRide;
 
 
-        } catch (error) {
+      if (!bookRide) {
 
-          console.error(error);
-
-          result.innerText =
-            "❌ Booking Failed: " +
-            error.message;
-
-        }
+        throw new Error(
+          "bookRide function नहीं मिली"
+        );
 
       }
-    );
+
+
+      // Step 3: Button
+
+      document
+        .getElementById("testRide")
+        .addEventListener(
+          "click",
+          async function () {
+
+            result.innerText =
+              "⏳ Firebase में booking भेजी जा रही है...";
+
+
+            try {
+
+              const ride =
+                await bookRide({
+
+                  customerName:
+                    "Test Customer",
+
+                  customerMobile:
+                    "9999999999",
+
+                  pickup:
+                    "Samastipur Junction",
+
+                  drop:
+                    "Mithapur",
+
+                  rideType:
+                    "Auto Rickshaw",
+
+                  passengers:
+                    1,
+
+                  fare:
+                    50
+
+                });
+
+
+              result.innerText =
+                "✅ SUCCESS!\n\n" +
+                "Booking ID: " +
+                ride.bookingId +
+                "\n\n" +
+                "Ride ID: " +
+                ride.rideId;
+
+
+            } catch (error) {
+
+              console.error(error);
+
+              result.innerText =
+                "❌ FIREBASE ERROR\n\n" +
+                error.message;
+
+            }
+
+          }
+        );
+
+
+    } catch (error) {
+
+      console.error(error);
+
+      result.innerText =
+        "❌ JAVASCRIPT / FIREBASE LOAD ERROR\n\n" +
+        error.message;
+
+    }
 
   </script>
 
