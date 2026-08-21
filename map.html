@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0756d9">
+
+<title>Live Map | All Samastipur</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#172033;
+}
+
+header{
+  background:#fff;
+  padding:15px 6%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.08);
+}
+
+.logo{
+  color:#0756d9;
+  font-size:22px;
+  font-weight:800;
+}
+
+.badge{
+  background:#eaf3ff;
+  color:#0756d9;
+  padding:9px 13px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:25px 18px;
+}
+
+h1{
+  margin-bottom:8px;
+}
+
+.subtitle{
+  color:#667085;
+  margin-bottom:20px;
+}
+
+.card{
+  background:#fff;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+.map{
+  width:100%;
+  height:500px;
+  border-radius:14px;
+  overflow:hidden;
+  background:#e5e7eb;
+}
+
+.controls{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-bottom:15px;
+}
+
+input{
+  width:100%;
+  padding:13px;
+  border:1px solid #d9dee8;
+  border-radius:9px;
+  font-size:15px;
+}
+
+.btn{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:9px;
+  background:#0756d9;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:12px;
+}
+
+.info{
+  margin-top:15px;
+  padding:15px;
+  background:#eef6ff;
+  border-radius:10px;
+  line-height:1.7;
+}
+
+.driver-status{
+  margin-top:15px;
+  padding:14px;
+  background:#ecfdf3;
+  color:#166534;
+  border-radius:10px;
+  font-weight:bold;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  color:#667085;
+}
+
+@media(max-width:700px){
+
+  .controls{
+    grid-template-columns:1fr;
+  }
+
+  .map{
+    height:400px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<header>
+
+  <div class="logo">
+    🛺 All Samastipur
+  </div>
+
+  <div class="badge">
+    📍 Live Map
+  </div>
+
+</header>
+
+
+<div class="container">
+
+  <h1>
+    📍 Ride Map
+  </h1>
+
+  <p class="subtitle">
+    Pickup, Drop और Driver Location देखें।
+  </p>
+
+
+  <div class="card">
+
+
+    <div class="controls">
+
+      <input
+        type="text"
+        id="pickup"
+        placeholder="Pickup Location"
+        value="Samastipur Station"
+      >
+
+      <input
+        type="text"
+        id="drop"
+        placeholder="Drop Location"
+        value="Tajpur"
+      >
+
+    </div>
+
+
+    <button
+      class="btn"
+      onclick="showRoute()"
+    >
+      🗺️ Show Route
+    </button>
+
+
+    <div
+      id="map"
+      class="map"
+      style="margin-top:15px;"
+    ></div>
+
+
+    <div class="info">
+
+      <strong>
+        📍 Pickup:
+      </strong>
+
+      <span id="pickupText">
+        Samastipur Station
+      </span>
+
+      <br>
+
+      <strong>
+        🏁 Drop:
+      </strong>
+
+      <span id="dropText">
+        Tajpur
+      </span>
+
+    </div>
+
+
+    <div class="driver-status">
+
+      🟢 Driver Status:
+      <span id="driverStatus">
+        Searching for nearby driver...
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+
+  🛺 <b>All Samastipur</b>
+
+  <br>
+
+  <small>
+    Local Ride Booking Platform
+  </small>
+
+</footer>
+
+
+<script>
+
+/*
+=========================================
+GOOGLE MAPS CONFIGURATION
+=========================================
+
+नीचे अपनी Google Maps API Key डालें।
+
+Example:
+
+const GOOGLE_MAPS_API_KEY =
+"YOUR_REAL_API_KEY";
+
+लेकिन API key को public GitHub repository
+में डालना सुरक्षित नहीं है।
+
+Backend आने के बाद key को सुरक्षित तरीके
+से इस्तेमाल करेंगे।
+*/
+
+
+let map;
+
+let pickupMarker;
+
+let dropMarker;
+
+let driverMarker;
+
+let directionsService;
+
+let directionsRenderer;
+
+
+/*
+=========================================
+INITIALIZE MAP
+=========================================
+*/
+
+function initMap(){
+
+  /*
+    Samastipur का approximate center
+  */
+
+  const samastipur = {
+    lat: 25.8629,
+    lng: 85.7810
+  };
+
+
+  map = new google.maps.Map(
+    document.getElementById("map"),
+    {
+      center: samastipur,
+      zoom: 12,
+
+      mapTypeControl:false,
+
+      streetViewControl:false,
+
+      fullscreenControl:true
+    }
+  );
+
+
+  directionsService =
+    new google.maps.DirectionsService();
+
+
+  directionsRenderer =
+    new google.maps.DirectionsRenderer({
+      map:map
+    });
+
+
+  /*
+  Pickup Marker
+  */
+
+  pickupMarker =
+    new google.maps.Marker({
+
+      position:samastipur,
+
+      map:map,
+
+      title:"Pickup Location",
+
+      label:"P"
+
+    });
+
+
+  /*
+  Demo Drop Location
+  */
+
+  const dropLocation = {
+    lat:25.8000,
+    lng:85.7000
+  };
+
+
+  dropMarker =
+    new google.maps.Marker({
+
+      position:dropLocation,
+
+      map:map,
+
+      title:"Drop Location",
+
+      label:"D"
+
+    });
+
+
+  /*
+  Demo Driver Location
+  */
+
+  const driverLocation = {
+    lat:25.8500,
+    lng:85.7600
+  };
+
+
+  driverMarker =
+    new google.maps.Marker({
+
+      position:driverLocation,
+
+      map:map,
+
+      title:"Driver Location",
+
+      label:"🛺"
+
+    });
+
+
+  document.getElementById(
+    "driverStatus"
+  ).innerText =
+    "Driver location available";
+
+}
+
+
+/*
+=========================================
+SHOW ROUTE
+=========================================
+*/
+
+function showRoute(){
+
+  const pickup =
+    document.getElementById(
+      "pickup"
+    ).value.trim();
+
+
+  const drop =
+    document.getElementById(
+      "drop"
+    ).value.trim();
+
+
+  if(!pickup || !drop){
+
+    alert(
+      "Pickup और Drop Location डालें।"
+    );
+
+    return;
+
+  }
+
+
+  document.getElementById(
+    "pickupText"
+  ).innerText = pickup;
+
+
+  document.getElementById(
+    "dropText"
+  ).innerText = drop;
+
+
+  /*
+  Google Directions API से
+  route calculate होगा।
+  */
+
+  if(!directionsService){
+
+    alert(
+      "Google Maps अभी configure नहीं है।"
+    );
+
+    return;
+
+  }
+
+
+  directionsService.route(
+
+    {
+
+      origin:pickup,
+
+      destination:drop,
+
+      travelMode:
+        google.maps.TravelMode.DRIVING
+
+    },
+
+    function(result,status){
+
+      if(
+        status ===
+        google.maps.DirectionsStatus.OK
+      ){
+
+        directionsRenderer.setDirections(
+          result
+        );
+
+      }else{
+
+        alert(
+          "Route नहीं मिल पाया।"
+        );
+
+      }
+
+    }
+
+  );
+
+}
+
+
+/*
+=========================================
+DEMO DRIVER MOVEMENT
+=========================================
+*/
+
+function moveDriver(){
+
+  if(!driverMarker){
+
+    return;
+
+  }
+
+
+  const position =
+    driverMarker.getPosition();
+
+
+  const newLat =
+    position.lat() + 0.0005;
+
+
+  const newLng =
+    position.lng() + 0.0005;
+
+
+  driverMarker.setPosition({
+
+    lat:newLat,
+
+    lng:newLng
+
+  });
+
+}
+
+
+/*
+हर 5 सेकंड में Demo Driver
+थोड़ा move होगा।
+*/
+
+setInterval(
+  moveDriver,
+  5000
+);
+
+</script>
+
+
+<!--
+=========================================
+GOOGLE MAPS SCRIPT
+
+IMPORTANT:
+
+YOUR_GOOGLE_MAPS_API_KEY को
+अपनी वास्तविक Google Maps API Key
+से replace करना होगा।
+=========================================
+-->
+
+<script
+  async
+  defer
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap">
+</script>
+
+
+</body>
+</html>
